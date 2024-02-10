@@ -365,6 +365,28 @@ public class testingBoard{
         
         return isAwin;
     }
+
+    public static boolean winInDiagonalBackslash(int[][] board, int piece, int length){
+        int rowLen = rowCount(board);
+        int colLen = colCount(board);
+
+        for(int i = board.length -1; i >= 0; i--){
+            for(int j = board[i].length -1; j>= 0; j--){
+                System.out.println(i + " "+j);
+      
+                if( i >0 && j > 0 &&  board[i][j] == board[i-1][j-1]){
+                    if(board[i][j] == piece){
+                        System.out.println("Diagnoal " + board[i-1][j-1] + "   " + board[i][j]);
+                    }
+
+                }
+            }
+        }
+        return false;
+    
+    }
+
+        
     
     
 
@@ -386,7 +408,8 @@ public class testingBoard{
        //System.out.println(testingBoard.removeLastPlay(testingBoard.createBoard(4, 8), 3));
        //System.out.println(testingBoard.full(testingBoard.createBoard(4, 8)));
        //System.out.println(testingBoard.winInRow(board, 3,1,3));
-       System.out.println(testingBoard.winInColumn(board, 2,1,2));
+      // System.out.println(testingBoard.winInColumn(board, 2,1,2));
+       System.out.println(testingBoard.winInDiagonalBackslash(board, 1,3));
   
     }
 }

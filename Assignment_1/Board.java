@@ -230,6 +230,14 @@ public class Board {
     }
 
     public static boolean winInDiagonalBackslash(int[][] board, int piece, int length){
+        int rowLen = rowCount(board);
+        int colLen = colCount(board);
+
+        for(int i = 0; i < board.length; i++){
+            
+        }
+
+        
     
 
         return false;
