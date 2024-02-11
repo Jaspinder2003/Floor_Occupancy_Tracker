@@ -370,28 +370,58 @@ public class testingBoard{
         int rowLen = rowCount(board);
         int colLen = colCount(board);
 
-        for(int i = board.length -1; i >= 0; i--){
-            for(int j = board[i].length -1; j>= 0; j--){
-                System.out.println(i + " "+j);
-      
-                if( i >0 && j > 0 &&  board[i][j] == board[i-1][j-1]){
-                    if(board[i][j] == piece){
-                        System.out.println("Diagnoal " + board[i-1][j-1] + "   " + board[i][j]);
-                    }
+        int l;
+        int[] pieceIndex = {100};
 
+       // int[] newArray = Arrays.copyOf(existingArray, existingLength + 1);
+             /* 
+        0-1
+        1-2 
+        2-3
+        3-4
+        4-5
+        5-6
+        maximum lenght of diagonal is the lenght of board[board.length-1], if board[board.length-1] > number of rows left above it then max diagonal lenght will cap out the rows available above
+        */
+        
+        for(int i = board.length -1; i >= 0; i--){
+            System.out.println(Arrays.toString(board[i]));
+            for(int j = board[i].length-1; j >= 0; j--){
+               
+                if (board[i][j] == piece) {
+                    int k = i-1;
+                   // System.out.println("******************************" + " i is " + i + " j is "+ j);
+                    if(j+1 > i){
+                        l = i-1;
+                    }
+                    else{
+                        l = j-1;
+                    }
+                    for(;l>=0;l--){
+                   //   System.out.println("*********" + " k is " + k + " l is "+ l);
+                     System.out.println(board[k][l]); 
+                     if(board[k][l] == piece){
+
+                       
+                     }
+                  
+                      k--;};
+                       
+
+                    }
+                   
+
+                    
                 }
+
             }
-        }
+
+                 
         return false;
     
     }
 
         
-    
-    
-
-
-    
 
             
     public static void main(String[] args){
@@ -400,8 +430,12 @@ public class testingBoard{
             {0, 0, 0, 1, 0},
             {1, 0, 1, 0, 1},
             {1, 0, 1, 1, 1},
+            {1, 0, 1, 1, 1},
             {1, 0, 1, 1, 1}
         };
+  
+
+        //
 
       // System.out.println(testingBoard.canPlay(testingBoard.createBoard(4, 8), 1));
        //System.out.println(testingBoard.play(testingBoard.createBoard(4, 8), 3, 1));
