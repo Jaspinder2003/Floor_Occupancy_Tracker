@@ -161,7 +161,7 @@ public class testingBoard{
             
             return playIndex;
         }
-        */
+        
         public static int removeLastPlay(int[][] board, int column){
             int playIndex = 0;
             for(int i = 0; i<board.length; i++){
@@ -423,6 +423,115 @@ public class testingBoard{
         System.out.println(Arrays.toString(indexKeeper[0]));
         System.out.println(Arrays.toString(indexKeeper[1]));
         return isAwin;
+    }*/
+    public static boolean winInDiagonalBackwardSlash(int[][] board, int piece, int length){
+        int rows = board.length;
+        int cols = board[0].length;
+      
+        int[][] indexKeeper = new int[2][2];
+        int lengthkeeper = 0;
+ 
+        
+        boolean isAwin = false;
+   
+        for (int start = 0; start < cols; start++) {
+            for (int row = start, col = 0; col < cols && row < rows; row++, col++) {
+              //  System.out.print(row +"  "+col);
+               //System.out.print(board[row][col] + " ");
+                if(board[row][col] == piece){
+                    lengthkeeper++;
+                    
+                    if(lengthkeeper >= length){
+                    
+                    indexKeeper[1][0] = row; 
+                    indexKeeper[1][1] = col;
+                    indexKeeper[0][0] = row - (lengthkeeper - 1); 
+                    indexKeeper[0][1] = col - (lengthkeeper - 1);
+                    int startRow = row - (lengthkeeper - 1);
+                    int startCol = col - (lengthkeeper - 1);
+                    int endRow =  row;
+                    int endCol =col;
+                  
+                   // System.out.println(startRow +"  "+startCol +" " + endRow +" "+endCol);
+                    for (int i = startRow, j = startCol; i <= endRow && j <= endCol; i++, j++) {
+                       // System.out.println(i +"  "+j);
+                        if(i != 0  && j != 0 &&i != board.length-1  && j != board[0].length-1&& (board[i-1][j+1] == piece)){
+                           
+                             if((i - indexKeeper[0][1] ) +1 > length || (i - indexKeeper[1][1])+1 >=length){
+                           isAwin = true;}
+            
+                        }
+                        else if(i != 0  && j != 0 && i != board.length-1  && j != board[0].length-1  && ( board[i+1][j-1] == piece)){
+                          if((indexKeeper[0][1] - i) +1 > length || (i -indexKeeper[1][1])+1 >=length){
+                           isAwin = true;}
+                     
+                        }
+                      }
+                }}
+
+                else{
+                        lengthkeeper = 0; 
+                    }
+
+            }
+            //System.out.println();
+            lengthkeeper = 0; 
+        }
+
+
+        if (!isAwin) {
+            for (int start = 1; start < cols; start++) {
+                for (int col = start, row = 0; row < rows && col < board[0].length; row++, col++) {
+                     
+                     System.out.print(board[row][col] + " ");
+                     if(board[row][col] == piece){
+                        lengthkeeper++;
+                        if(lengthkeeper >= length){
+                    
+                        indexKeeper[1][0] = row; 
+                        indexKeeper[1][1] = col;
+                        indexKeeper[0][0] = row - (lengthkeeper - 1); 
+                        indexKeeper[0][1] = col + (lengthkeeper - 1);
+                        
+                        
+                        int startRow = row - (lengthkeeper - 1);
+                        int startCol = col - (lengthkeeper - 1);
+                        int endRow =  row;
+                        int endCol =col;
+               
+                        for (int i = startRow, j = startCol; i <= endRow && j >= endCol; i++, j--) {    System.out.println(i+ " & " +j);
+                             
+                                  if(i != 0  && j != 0 && i != board.length-1  && j != board[0].length-1 && ( board[i-1][j+1] == piece)){
+                                   
+                                       if((indexKeeper[0][1] - j) +1 > length || (j -indexKeeper[1][1])+1 >=length){
+                                     isAwin = true;}   
+                                      
+                                  }
+                              
+                                  else if(i != 0  && j != 0 && i != board.length-1  && j != board[0].length-1 && ( board[i+1][j-1] == piece)){
+                                 
+                                    if((indexKeeper[0][1] - j) +1 > length || (j -indexKeeper[1][1])+1 >=length){
+                                     isAwin = true;}
+                              
+                                  }
+                                }
+                                       
+                        }
+                    }
+                    else{
+                        lengthkeeper = 0;
+                    }
+                }
+                System.out.println();
+                 lengthkeeper = 0;
+        
+            }}
+         
+        
+    
+       
+        return isAwin;
+
     }
 
 
@@ -436,10 +545,10 @@ public class testingBoard{
         int[][] board = {
             {1, 1, 1, 1, 1},
             {1, 1, 1, 1, 0},
-            {1, 1, 0, 1, 1},
+            {1, 1, 0, 0, 1},
+            {1, 0, 1, 1, 0},
             {1, 0, 1, 1, 1},
-            {1, 0, 1, 1, 1},
-            {1, 0, 1, 1, 1}
+            {1, 0, 0, 1, 1}
         };
   
 
@@ -451,7 +560,7 @@ public class testingBoard{
        //System.out.println(testingBoard.full(testingBoard.createBoard(4, 8)));
      //  System.out.println(testingBoard.winInRow(board, 0,1,3));
       // System.out.println(testingBoard.winInColumn(board, 0,1,2));
-       //System.out.println(testingBoard.winInDiagonalBackslash(board, 1,3));
+       System.out.println(testingBoard.winInDiagonalBackwardSlash(board, 1,3));
   
     }
 
