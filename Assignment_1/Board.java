@@ -1,7 +1,8 @@
 /**
  * CPSC 233 W24 Assignment 1 Starter to use to make Board.java
- * @author Jonathan Hudson
- * @email jwhudson@ucalgary.ca
+ * @author Navpreet Singh
+ * @email Navpreet.Singh3@ucalgary.calculation
+ * @TA Shannon H
  * @version 1.0
  */
 public class Board {

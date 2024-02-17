@@ -1,16 +1,15 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
- * CPSC 233 W24 Assignment 1 BoardTest Starter File
- * Holds a helper deep copy and example tests of deep copy
- * @author Jonathan Hudson
- * @email jwhudson@ucalgary.ca
+ * CPSC 233 W24 Assignment 1 Starter to use to make Board.java
+ * @author Navpreet Singh
+ * @email Navpreet.Singh3@ucalgary.calculation
+ * @TA Shannon H
  * @version 1.0
  */
 public class BoardTest {
@@ -654,8 +653,74 @@ public class BoardTest {
         assertFalse(Board.full(testBoard));
     }
 
+    @Test
+    public void testHint_Player1_WinningMoveInColumn2() {
+        int[][] board = {
+            {0, 0, 0, 0},
+            {0, 0, 0, 0},
+            {0, 2, 0, 2},
+            {1, 1, 1, 1}
+        };
+        int[] expected = {2, 2};
+        int[] actual = Board.hint(board, 1, 3);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testHint_Player2_WinningMoveInColumn1() {
+        int[][] board = {
+            {0, 2, 0, 0},
+            {0, 0, 2, 0},
+            {2, 2, 1, 2},
+            {1, 1, 1, 1}
+        };
+        int[] expected = {1, 0};
+        int[] actual = Board.hint(board, 2, 3);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testHint_Player1_NoWinningMove() {
+        int[][] board = {
+            {1, 2, 1, 2},
+            {2, 1, 2, 1},
+            {2, 2, 1, 2},
+            {2, 1, 1, 1}
+        };
+        int[] expected = {-1, -1};
+        int[] actual = Board.hint(board, 1, 3);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testHint_Player1_WinningMoveInColumn3() {
+        int[][] board = {
+            {1, 2, 1, 0},
+            {2, 1, 1, 1},
+            {1, 2, 2, 2},
+            {2, 1, 1, 1}
+        };
+        int[] expected = {0, 3};
+        int[] actual = Board.hint(board, 1, 3);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testHint_Player1_NoPossibleMove() {
+        int[][] board = {
+            {0, 0, 0, 0},
+            {0, 0, 0, 0},
+            {0, 2, 0, 2},
+            {1, 1, 0, 1}
+        };
+        int[] expected = {-1, -1};
+        int[] actual = Board.hint(board, 1, 3);
+        assertArrayEquals(expected, actual);
+    }
+
+
 }
-    /////////////////////////////////////////
+   
 
 
 
