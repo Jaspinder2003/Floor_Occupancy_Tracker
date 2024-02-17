@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
@@ -12,6 +13,40 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @version 1.0
  */
 public class BoardTest {
+     
+    @Test
+    public void minimumBoardSizeTest () {
+        int[][] expected = new int[4][4];
+        assertArrayEquals(expected, Board.createBoard(4, 4));
+    
+    }
+    @Test
+    public void MaximumBoardSizeTest () {
+        int[][] expected = new int[8][8];
+        assertArrayEquals(expected, Board.createBoard(8, 8));
+    
+    }
+    @Test
+    public void minimumRowMaximumColumnTest (){
+        int[][] expected = new int[4][8];
+        assertArrayEquals(expected, Board.createBoard(4, 8));
+    
+    }
+    @Test
+    public void minimumColumnMaximumRowTest () {
+        int[][] expected = new int[8][4];
+        assertArrayEquals(expected, Board.createBoard(8, 4));
+    
+    }
+    @Test
+    public void randomRowColumnSize () {
+        int[][] expected = new int[6][7];
+        assertArrayEquals(expected, Board.createBoard(6, 7));
+    
+    }
+
+    
+     
 
     /**
      * Used to make a copy of board before functions run, so that verify a function was non-destructive on board is easy

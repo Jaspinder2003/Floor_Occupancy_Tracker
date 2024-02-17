@@ -560,7 +560,10 @@ public class testingBoard{
        //System.out.println(testingBoard.full(testingBoard.createBoard(4, 8)));
      //  System.out.println(testingBoard.winInRow(board, 0,1,3));
       // System.out.println(testingBoard.winInColumn(board, 0,1,2));
-       System.out.println(testingBoard.winInDiagonalBackwardSlash(board, 1,3));
+     //  System.out.println(testingBoard.winInDiagonalBackwardSlash(board, 1,3));
+     int[][] array8x8 = new int[8][8];
+     for(int i =0; i< array8x8.length;i++ ){
+     System.out.println(Arrays.toString(array8x8[i]));}
   
     }
 
