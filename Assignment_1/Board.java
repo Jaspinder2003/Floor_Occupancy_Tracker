@@ -515,7 +515,7 @@ public class Board {
                     // Check if the simulated move results in a win
                     if (won(board, piece, winningLength)) {
                         // If win is detected, finalize the winning move
-                        removeLastPlay(board, column);
+                
                         winIndexKeeper[0] = removeLastPlay(board, column);
                         board[winIndexKeeper[0]][column] = 0;
                         winIndexKeeper[1] = column;
@@ -523,7 +523,7 @@ public class Board {
                         boolStop = false;
                     } else {
                         // If no win, undo the simulated move
-                        winIndexKeeper[0] = removeLastPlay(board, column);
+                        removeLastPlay(board, column);
                     }
                 }
             }
