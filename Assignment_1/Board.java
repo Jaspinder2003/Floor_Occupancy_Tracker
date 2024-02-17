@@ -38,15 +38,15 @@ public class Board {
             return arrayLen;}
     
     
-        public static int colCount(int [][] board){
+        public static int columnCount(int [][] board){
             int colLen = 0;
     
             for(int i = 1; i<=board[0].length; i++){colLen =  i;}
             return colLen;}
     
         public static boolean valid(int [][] board, int row, int column){
-            int rowLen = rowCount(board);
-            int colLen = colCount(board);
+            int rowLen =  board.length;
+            int colLen = board[0].length;
     
             boolean validity;
     
