@@ -589,7 +589,7 @@ public class BoardTest {
         };
         assertTrue(Board.winInDiagonalForwardSlash(testBoard,2,2));
     }
-
+    @Test
     public void testWinInDiagonalForwardslash_MultipleConsecutiveLengths_withWithoutPerpendiculars(){
         int[][] testBoard = {
             {1,1,1,1,0,1},
