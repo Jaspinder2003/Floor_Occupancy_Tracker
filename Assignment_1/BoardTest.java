@@ -679,18 +679,7 @@ public class BoardTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void testHint_Player1_NoWinningMove() {
-        int[][] board = {
-            {1, 2, 1, 2},
-            {2, 1, 2, 1},
-            {2, 2, 1, 2},
-            {2, 1, 1, 1}
-        };
-        int[] expected = {-1, -1};
-        int[] actual = Board.hint(board, 1, 3);
-        assertArrayEquals(expected, actual);
-    }
+   
 
     @Test
     public void testHint_Player1_WinningMoveInColumn3() {
@@ -701,6 +690,19 @@ public class BoardTest {
             {2, 1, 1, 1}
         };
         int[] expected = {0, 3};
+        int[] actual = Board.hint(board, 1, 3);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testHint_Player1_NoWinningMove() {
+        int[][] board = {
+            {1, 2, 1, 2},
+            {2, 1, 2, 1},
+            {2, 2, 1, 2},
+            {2, 1, 1, 1}
+        };
+        int[] expected = {-1, -1};
         int[] actual = Board.hint(board, 1, 3);
         assertArrayEquals(expected, actual);
     }
