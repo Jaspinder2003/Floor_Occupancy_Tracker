@@ -483,7 +483,7 @@ public class BoardTest {
         int[][] testBoard = {
                 {2, 1, 0, 0, 1},
                 {1, 2, 0, 0, 0},
-                {0, 0, 2, 0, 0},
+                {0, 0, 2, 0, 2},
                 {0, 0, 0, 2, 1},
                 {1, 0, 2, 0, 2},
                 {0, 0, 0, 0, 0}
@@ -541,8 +541,118 @@ public class BoardTest {
         assertTrue(Board.winInDiagonalBackslash(testBoard,1,3));
     }
     //////////////////////////////////////
-    
 
+    @Test
+    public void testWinInDiagonalForwardslashConsecutivePieces_withExtraLenght(){
+        int[][] testBoard = {
+            {0,1,1,1},
+            {0,1,1,0},
+            {0,1,1,0},
+            {1,0,1,1}
+        };
+        assertTrue(Board.winInDiagonalForwardSlash(testBoard,1,3));
+    }
+    
+    @Test
+    public void testWinInDiagonalForwardslashNonConsecutivePieces(){
+        int[][] testBoard = {
+            {2,2,1,1,2,1},
+            {1,0,1,0,1,1},
+            {2,0,0,2,1,1},
+            {1,0,1,2,2,0},
+            {2,0,1,1,2,1},
+            {2,0,2,0,2,1}
+        };
+        assertFalse(Board.winInDiagonalForwardSlash(testBoard,1,4));
+    }
+
+
+    @Test
+    public void testWinInDiagonalForwardslashConsecutivePieces_noPerpendicular(){
+        int[][] testBoard = {
+                {1, 1, 0, 0, 1},
+                {1, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0}
+        };
+        assertFalse(Board.winInDiagonalForwardSlash(testBoard,1,3));
+    }
+    
+    @Test
+    public void testWinInDiagonalForwardslashWithMultiplePerpendicularPieceTest(){
+        int[][] testBoard = {
+            {0,0,2,2,2},
+            {2,0,2,1,0},
+            {2,2,2,0,1},
+            {2,0,2,1,2}
+        };
+        assertTrue(Board.winInDiagonalForwardSlash(testBoard,2,2));
+    }
+
+    public void testWinInDiagonalForwardslash_MultipleConsecutiveLengths_withWithoutPerpendiculars(){
+        int[][] testBoard = {
+            {1,1,1,1,0,1},
+            {0,1,1,0,1,0},
+            {0,1,1,1,0,1},
+            {1,0,1,1,0,0},
+            {1,1,1,1,0,0}
+        };
+        assertTrue(Board.winInDiagonalForwardSlash(testBoard,1,3));
+    }
+
+     
+    @Test
+    public void fullBoard_a(){
+        int[][] testBoard={
+            {2,1,1,2},
+            {2,1,2,1},
+            {1,2,1,2},
+            {1,1,2,1}
+        };
+        assertTrue(Board.full(testBoard));
+    }
+    @Test
+    public void fullBoard_b(){
+        int[][] testBoard ={
+            {1,1,0,2},
+            {2,2,2,2},
+            {1,1,2,1},
+            {1,2,2,1}
+        };
+        assertFalse(Board.full(testBoard));
+    }
+    @Test
+    public void fullBoard_c(){
+        int[][] testBoard ={
+            {1,1,1,1},
+            {2,2,1,1},
+            {2,2,1,1},
+            {1,1,1,1}
+        };
+        assertTrue(Board.full(testBoard));
+    }
+    @Test
+    public void fullBoardPartial(){
+        int[][] testBoard ={
+            {0,1,1,0},
+            {1,2,1,1},
+            {1,1,2,1},
+            {1,2,1,1}
+        };
+        assertFalse(Board.full(testBoard));
+    }
+    @Test
+    public void fullEmptyBoard(){
+        int[][] testBoard ={
+            {0,0,0,0},
+            {0,0,0,0},
+            {0,0,0,0},
+            {0,0,0,0}
+        };
+        assertFalse(Board.full(testBoard));
+    }
 
 }
     /////////////////////////////////////////
@@ -555,60 +665,3 @@ public class BoardTest {
 
 
      
-
-    /**
-     * Used to make a copy of board before functions run, so that verify a function was non-destructive on board is easy
-     * @param board The board to make deep copy of
-     * @return A deep copy of given board
-     
-    public int[][] deepCopy(int[][] board) {
-        int[][] copy = new int[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            copy[i] = Arrays.copyOf(board[i], board[i].length);
-        }
-        return copy;
-    }
-
-    @Test
-    public void deepCopyTestWithoutDeepEquals() {
-        int[][] expected = new int[][]{{0, 1}};
-        int[][] actual = deepCopy(expected);
-        assertEquals(expected[0][0], actual[0][0]);
-        assertEquals(expected[0][1], actual[0][1]);
-    }
-
-
-    @Test
-    public void deepCopyTestNoChange() {
-        int[][] expected = new int[][]{{0, 1}};
-        int[][] actual = deepCopy(expected);
-        assertTrue(Arrays.deepEquals(expected, actual));
-    }
-
-    @Test
-    public void deepCopyTestChangeEntryIn2D() {
-        int[][] expected = new int[][]{{0, 1}};
-        int[][] actual = deepCopy(expected);
-        actual[0][0] = 99;
-        assertTrue(!Arrays.deepEquals(expected, actual));
-    }
-
-    @Test
-    public void deepCopyTestSet1DRefToDiffButIdenticalArray() {
-        int[][] expected = new int[][]{{0, 1}};
-        int[][] actual = deepCopy(expected);
-        actual[0] = new int[]{0,1};
-        assertTrue(Arrays.deepEquals(expected, actual));
-    }
-
-    @Test
-    public void deepCopyTestSet1DRefToDiffArray() {
-        int[][] expected = new int[][]{{0, 1}};
-        int[][] actual = deepCopy(expected);
-        actual[0] = new int[]{0,99};
-        assertTrue(!Arrays.deepEquals(expected, actual));
-    }
-
-}
-
-*/

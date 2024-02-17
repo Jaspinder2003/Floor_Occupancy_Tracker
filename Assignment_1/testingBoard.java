@@ -490,7 +490,7 @@ public class testingBoard{
                      System.out.print(board[row][col] + " ");
                      if(board[row][col] == piece){
                         lengthkeeper++;
-                        System.out.println("len is 2222 --> "+lengthkeeper);
+                      //  System.out.println("len is 2222 --> "+lengthkeeper);
                         if(lengthkeeper >= length){
                             
                     
@@ -552,7 +552,7 @@ public class testingBoard{
             {2, 1, 0, 0, 1},
             {1, 2, 0, 0, 0},
             {0, 0, 2, 0, 0},
-            {0, 2, 0, 2, 1},
+            {0, 0, 0, 2, 1},
             {1, 0, 2, 0, 2},
             {0, 0, 0, 0, 0}
         };
