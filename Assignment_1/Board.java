@@ -33,7 +33,9 @@ public class Board {
         public static int[][] createBoard(int row, int column) {
             int[][] boardArray = new int[row][column];
             for(int i = 0; i< row; i++){
-                for(int j = 0; j< column; j++){ boardArray[i][j] = 0;}}
+                for(int j = 0; j< column; j++){
+                     boardArray[i][j] = 0;}
+                    }
             return boardArray;}
     
         /**
@@ -45,7 +47,9 @@ public class Board {
         public static int rowCount(int [][] board){
             int arrayLen =0;
     
-            for(int i = 1; i<=board.length; i++){arrayLen =  i;}
+            for(int i = 1; i<=board.length; i++){
+                arrayLen =  i;
+            }
          
             return arrayLen;}
     
@@ -75,7 +79,12 @@ public class Board {
     
             boolean validity;
     
-            if((row >= 0 && column >= 0) && (row < rowLen && column < colLen) ){ validity = true;}else{validity = false;}
+            if((row >= 0 && column >= 0) && (row < rowLen && column < colLen) ){
+                 validity = true;
+                }
+                else{
+                    validity = false;
+                }
             return validity;}
     
         /**
