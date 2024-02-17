@@ -222,7 +222,332 @@ public class BoardTest {
         boolean ifValid = Board.valid(testBoard, 4, 5);
         assertTrue(ifValid);
     }
- 
+
+ //////////////////////////////////////
+
+
+    @Test
+    public void PiecePlacedAtBottom_IndexVerification() {
+        int[][] testBoard =
+       {{0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0}};
+        int index = Board.play(testBoard,2,1);
+        assertEquals(5,index);
+    }
+
+    @Test
+    public void PiecePlacedIntheMiddle_IndexVerification() {
+        int[][] testBoard =
+        {{0, 0, 0, 0},
+         {0, 0, 0, 0},
+         {0, 0, 0, 0},
+         {0, 1, 0, 0},
+         {0, 1, 0, 0}};
+
+        int index = Board.play(testBoard,1,1);;
+        assertEquals(2,index);
+    }
+
+    @Test
+    public void PiecePlacedattheTop_IndexVerification() {
+        int[][] testBoard =
+        {{0, 0, 0, 0},
+         {0, 0, 0, 1},
+         {0, 0, 0, 1},
+         {0, 0, 0, 1},
+         {0, 0, 0, 1},
+         {0, 0, 0, 1}};
+         int index = Board.play(testBoard,3,1);
+         assertEquals(0,index);
+    }
+
+    @Test
+    public void PiecePlacedAtBottom_ifArrayModified() {
+        int[][] testBoard =
+        {{0, 0, 0, 0},
+         {0, 0, 0, 0},
+         {0, 0, 0, 1},
+         {0, 0, 0, 1},
+         {0, 0, 0, 1},
+         {0, 0, 0, 1}};
+         Board.play(testBoard,2,1);
+         assertEquals(1, testBoard[5][2]);
+    }
+
+    @Test
+    public void PiecePlacedattheTop_ifArrayModified() {
+        int[][] testBoard =
+       {{0, 0, 0, 0},
+        {1, 0, 0, 0},
+        {1, 0, 0, 0},
+        {1, 0, 0, 0},
+        {1, 0, 0, 0},
+        {1, 0, 0, 0}};
+        Board.play(testBoard,2,1);
+        assertEquals(1, testBoard[5][0]);
+    }
+
+  //////////////////////////////////////////
+
+  
+  @Test
+  public void  fullBoardRemovalTest_IndexVerification() {
+      int[][] testBoard =
+     {{0, 1, 0, 0},
+      {0, 1, 0, 0},
+      {0, 2, 0, 0},
+      {0, 1, 0, 0},
+      {0, 1, 0, 0},
+      {0, 1, 0, 0}};
+      int index = Board.removeLastPlay(testBoard,1);
+      assertEquals(0,index);
+  }
+
+  @Test
+  public void partialFilledpieceRemovalTest_IndexVerification() {
+      int[][] testBoard =
+      {{0, 0, 0, 0},
+       {0, 0, 0, 0},
+       {0, 0, 1, 0},
+       {0, 1, 2, 0},
+       {0, 1, 1, 0}};
+
+      int index = Board.removeLastPlay(testBoard,2);;
+      assertEquals(2,index);
+  }
+
+  @Test
+  public void emptyboardTest_IndexVerification() {
+      int[][] testBoard =
+      {{0, 0, 0, 2},
+       {0, 0, 0, 1},
+       {0, 0, 0, 1},
+       {0, 0, 0, 1},
+       {0, 0, 0, 1},
+       {0, 0, 0, 1}};
+       int index = Board.removeLastPlay(testBoard,3);
+       assertEquals(0,index);
+  }
+
+  @Test
+  public void fullBoardRemovalTest_ifArrayModified() {
+      int[][] testBoard =
+      {{0, 0, 0, 0},
+       {0, 0, 0, 0},
+       {0, 0, 0, 1},
+       {0, 0, 0, 1},
+       {0, 0, 0, 1},
+       {0, 0, 0, 1}};
+       Board.removeLastPlay(testBoard,3);
+       assertEquals(0, testBoard[2][3]);
+  }
+
+  @Test
+  public void artialFilledpieceRemovalTest_ifArrayModified() {
+      int[][] testBoard =
+     {{1, 0, 0, 0},
+      {1, 0, 0, 0},
+      {1, 0, 0, 0},
+      {1, 0, 0, 0},
+      {1, 0, 0, 0},
+      {1, 0, 0, 0}};
+      Board.removeLastPlay(testBoard,0);
+      assertEquals(0, testBoard[0][0]);
+  }
+
+  ////////////////////////////
+
+  @Test
+    public void noConsecutivePiecesRowTest(){
+        int[][] testBoard = {
+        {0,0,0,0},
+        {0,2,1,0},
+        {0,2,1,2},
+        {1,2,1,2}};
+
+        assertFalse(Board.winInRow(testBoard,3,1,3));
+    }
+    @Test
+    public void noPerpendicularpieceRowTest(){
+        int[][] testBoard = {
+        {0,0,0,0},
+        {1,2,2,2},
+        {0,2,2,2},
+        {1,1,1,1}};
+        assertFalse(Board.winInRow(testBoard,3,1,3));
+    }
+    @Test
+    public void consectuiveWithPerpendicularPieceTest(){
+        int[][] testBoard = {
+        {2,2,2,2},
+        {0,0,0,2},
+        {2,2,2,2},
+        {1,1,1,2}};
+        assertTrue(Board.winInRow(testBoard,2,2,4));
+    }
+    @Test
+    public void InsufficientConsectuiveLenghtWithPerpendicularPiece(){
+        int[][] testBoard = {
+            {0, 0, 0, 1, 0, 0},
+            {1, 1, 1, 1, 0, 0},
+            {0, 0, 0, 1, 0, 0},
+            {0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0}};
+        assertFalse(Board.winInRow(testBoard,1,1,5));
+    }
+    
+    @Test
+    public void consectuiveWithMultiplePerpendicularPieceTest(){
+        int[][] testBoard = {
+            {0, 0, 0, 2, 0, 0},
+            {2, 2, 0, 2, 2, 2},
+            {0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 2, 0, 0},
+            {2, 2, 2, 2, 0, 0},
+            {0, 2, 0, 0, 0, 0}};
+        assertTrue(Board.winInRow(testBoard,4,2,4));
+    }
+
+///////////////////////////////////
+
+
+    @Test
+    public void WinInColumnConsecutivePieces(){
+        int[][] testBoard = {
+            {0, 0, 0, 0},
+            {1, 0, 0, 0},
+            {1, 0, 0, 0},
+            {1, 1, 0, 0},
+            {1, 0, 0, 0},
+            {1, 0, 0, 0},
+            {1, 1, 0, 0}
+        };
+        assertTrue(Board.winInColumn(testBoard,0,1,3));
+    }
+    
+    @Test
+    public void WinInColumnInsufficientPieces(){
+        int[][] testBoard = {
+            {0, 0, 1, 0},
+            {1, 0, 2, 0},
+            {1, 0, 1, 0},
+            {0, 1, 2, 1},
+            {1, 0, 1, 0},
+            {2, 0, 2, 0},
+            {1, 0, 1, 0}
+        };
+        assertFalse(Board.winInColumn(testBoard,2,1,5));
+    }
+    
+    @Test
+    public void WinInColumnConsecutivePiecesNoPerpendicular(){
+        int[][] testBoard = {
+            {2,1,0,2},
+            {2,1,0,2},
+            {2,1,0,2},
+            {2,1,2,2}
+        };
+        assertFalse(Board.winInColumn(testBoard,0,1,3));
+    }
+    @Test
+    public void WinInColumnConsectuiveWithMultiplePerpendicularPieceTest(){
+        int[][] testBoard = {
+            {0,0,2,0,2},
+            {2,0,2,2,0},
+            {2,2,2,0,0},
+            {0,0,2,0,2}
+        };
+        assertTrue(Board.winInColumn(testBoard,2,2,3));
+    }
+    @Test
+    public void WinInColumnInsufficientConsectuiveLenghtWithPerpendicularPiece(){
+        int[][] testBoard = {
+            {0,0,2,1,2},
+            {2,0,2,1,0},
+            {2,2,2,1,1},
+            {1,0,2,2,2},
+            {1,0,1,1,2}
+        };
+        assertFalse(Board.winInColumn(testBoard,3,1,5));}
+
+        ////////////////////////////////////
+
+  
+    @Test
+    public void testWinInDiagonalBackslashConsecutivePieces_withExtraLenght(){
+        int[][] testBoard = {
+                {2, 1, 0, 0, 1},
+                {1, 2, 0, 0, 0},
+                {0, 0, 2, 0, 0},
+                {0, 0, 0, 2, 1},
+                {1, 0, 2, 0, 2},
+                {0, 0, 0, 0, 0}
+        };
+        assertTrue(Board.winInDiagonalBackslash(testBoard,2,3));
+    }
+
+    @Test
+    public void testWinInDiagonalBackslashNonConsecutivePieces(){
+        int[][] testBoard = {
+                {1, 1, 0, 0, 1},
+                {1, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 1, 1},
+                {1, 0, 1, 0, 1},
+                {0, 0, 0, 0, 0}
+        };
+        assertFalse(Board.winInDiagonalBackslash(testBoard,1,3));
+    }
+    @Test
+    public void testWinInDiagonalBackslashConsecutivePieces_noPerpendicular(){
+        int[][] testBoard = {
+            {0, 0, 0, 0},
+            {2, 0, 0, 0},
+            {1, 2, 0, 0},
+            {1, 1, 2, 0},
+            {1, 0, 1, 2},
+            {1, 0, 0, 1},
+            {1, 1, 1, 0}
+        };
+        assertFalse(Board.winInDiagonalBackslash(testBoard,1,4));
+    }
+    @Test
+    public void testWinInDiagonalBackslashWithMultiplePerpendicularPieceTest(){
+        int[][] testBoard = {
+            {0, 0, 0, 0},
+            {1, 0, 0, 0},
+            {1, 0, 0, 1},
+            {1, 0, 1, 0},
+            {2, 1, 1, 0},
+            {1, 0, 1, 1},
+            {2, 1, 2, 1}
+        };
+        assertFalse(Board.winInDiagonalBackslash(testBoard,1,4));
+    }
+    @Test
+    public void testWinInDiagonalBackslash_MultipleConsecutiveLengths_withWithoutPerpendiculars(){
+        int[][] testBoard = {
+            {1,1,1,1,0,0},
+            {0,1,1,0,1,0},
+            {0,1,1,1,0,1},
+            {1,0,0,1,0,0},
+            {1,1,1,1,0,0}
+        };
+        assertTrue(Board.winInDiagonalBackslash(testBoard,1,3));
+    }
+    //////////////////////////////////////
+    
+
+
+}
+    /////////////////////////////////////////
+
+
 
  
 
@@ -235,7 +560,7 @@ public class BoardTest {
      * Used to make a copy of board before functions run, so that verify a function was non-destructive on board is easy
      * @param board The board to make deep copy of
      * @return A deep copy of given board
-     */
+     
     public int[][] deepCopy(int[][] board) {
         int[][] copy = new int[board.length][board[0].length];
         for (int i = 0; i < board.length; i++) {
@@ -286,3 +611,4 @@ public class BoardTest {
 
 }
 
+*/
