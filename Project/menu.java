@@ -64,8 +64,9 @@ class Menu {
                 System.out.println("Invalid input. Please choose from the following options.");
                 scanner.nextLine(); // Clear the buffer by reading the line
             }
-        }
-
+        }}
+        
+public static void SignIn(floorSelection,floorAreaSection){
         System.out.println("Please enter your Full Name: ");
         String Name = scanner.nextLine();
         // asks the user for the credentials like name
@@ -118,6 +119,6 @@ class Menu {
 
         }
 
-    }
+}
 
 }
