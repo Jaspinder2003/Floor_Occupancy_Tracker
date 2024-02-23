@@ -130,4 +130,35 @@ class Menu {
 
     }
 
+    public static void SignOut(int[] FloorInfo){
+        Scanner input = new Scanner(System.in);
+
+        // Asks user to enter full name.
+        System.out.println("Please enter your full name: ");
+        String Name = input.nextLine();
+
+        // Asks user to enter UCID.
+        System.out.println("Please enter your UCID: ");
+        int UCID = input.nextInt();
+
+        // Asks for space release confirmation.
+        System.out.println("Do you confirm to release the reserved space?\n1. Yes\n2. No");
+        int release = input.nextInt();
+        
+        if(release == 1){
+            // Asks for a optional feedback.
+            System.out.println("Send us a feedback. (Optional)");
+            String feedback = input.nextLine();
+
+            // Asks for final sign out confirmation.
+            System.out.println("Confirm to sign out?\n1. Yes\n2. No");
+            int confirmation = input.nextInt();
+
+            if(confirmation == 1){
+                System.out.println("You are successfully signed out?")
+            }
+        }
+
+    }
+
 }
