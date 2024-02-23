@@ -154,8 +154,9 @@ class Menu {
             System.out.println("Confirm to sign out?\n1. Yes\n2. No");
             int confirmation = input.nextInt();
 
+            // Updates the user for successful signout.
             if(confirmation == 1){
-                System.out.println("You are successfully signed out?")
+                System.out.println("You are successfully signed out.")
             }
         }
 
