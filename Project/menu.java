@@ -65,8 +65,8 @@ class Menu {
                 scanner.nextLine(); // Clear the buffer by reading the line
             }
         }}
-        
-public static void SignIn(floorSelection,floorAreaSection){
+
+public static void SignIn(int[][] FloorInfo){
         System.out.println("Please enter your Full Name: ");
         String Name = scanner.nextLine();
         // asks the user for the credentials like name
@@ -83,8 +83,7 @@ public static void SignIn(floorSelection,floorAreaSection){
         boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
         boolean stop = true; // to stop the while loop
 
-        if (floorSelection == 1 && floorAreaSection == 6 || floorSelection == 2 && floorAreaSection == 2
-                || floorSelection == 1 && floorAreaSection == 5) {
+        if (FloorInfo[0]==1&&FloorInfo[1]==6||FloorInfo[0]==2&&FloorInfo[1]==2||FloorInfo[0]==3&&FloorInfo[1]==1) {
             try {
                 System.out.println(
                         "Are you planning to use the computers at the Computer Staions\n 1.Yes\n 2. No \n 3. Exit");
