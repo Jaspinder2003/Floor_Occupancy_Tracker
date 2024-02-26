@@ -130,36 +130,103 @@ class Menu {
 
     }
 
+    
+    public static void SignIn(int[] FloorInfo){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Please enter your Full Name: ");
+            String Name = scanner.nextLine();
+            // asks the user for the credentials like name
+
+            System.out.println("Please enter your User ID");
+            int StudentID = scanner.nextInt();
+            // asks the user to enter the User ID
+
+            System.out.println("Please enter your expected duration of stay");
+            String Stay = scanner.nextLine();
+            // asks the user the expected time of stay
+
+            int ComputerAsk = 0;
+            boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
+            boolean stop = true; // to stop the while loop
+
+            if (FloorInfo[0]==1&&FloorInfo[1]==6||FloorInfo[0]==2&&FloorInfo[1]==2||FloorInfo[0]==3&&FloorInfo[1]==1) {
+                try {
+                    System.out.println(
+                            "Are you planning to use the computers at the Computer Staions\n 1.Yes\n 2. No \n 3. Exit");
+                    ComputerAsk = scanner.nextInt(); // asking for computer usage and taking the input
+
+                    while (stop) {
+                        switch (ComputerAsk) {
+                            case 1:
+                                ComputerUsage = true;// true if the user wants to use the computer
+                                stop = false;
+                                break;
+
+                            case 2:
+                                ComputerUsage = false;// stays false if the user does not intend to use the computers
+                                stop = false;
+                                break;
+
+                            case 3:
+                                stop = false;
+                                break;// if the user wants to exit the file
+
+                            default: // used to catch any other input other than 1,2,3
+                                System.out.println(
+                                        "Invalid Input. Please Choose from the following options.\n 1. Yes\n 2. No");
+                                ComputerAsk = scanner.nextInt();
+                        }
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid Input. Please Choose from the following options.\n 1. Yes\n 2. No");
+                    ComputerAsk = scanner.nextInt();
+                } // used for error catching
+
+            }
+
+    }
+
     public static void SignOut(int[] FloorInfo){
         Scanner input = new Scanner(System.in);
 
-        // Asks user to enter full name.
-        System.out.println("Please enter your full name: ");
-        String Name = input.nextLine();
+        try{
+            // Asks user to enter full name.
+            System.out.println("Please enter your full name: ");
+            String Name = input.nextLine();
 
-        // Asks user to enter UCID.
-        System.out.println("Please enter your UCID: ");
-        int UCID = input.nextInt();
+            // Asks user to enter UCID.
+            System.out.println("Please enter your UCID: ");
+            int UCID = input.nextInt();
 
-        // Asks for space release confirmation.
-        System.out.println("Do you confirm to release the reserved space?\n1. Yes\n2. No");
-        int release = input.nextInt();
-        
-        if(release == 1){
-            // Asks for a optional feedback.
-            System.out.println("Send us a feedback. (Optional)");
-            String feedback = input.nextLine();
+            // Asks for space release confirmation.
+            System.out.println("Do you confirm to release the reserved space?\n1. Yes\n2. No");
+            int release = input.nextInt();
+            
+            if(release == 1){
+                // Asks for a optional feedback.
+                System.out.println("Send us a feedback. (Optional)");
+                String feedback = input.nextLine();
 
-            // Asks for final sign out confirmation.
-            System.out.println("Confirm to sign out?\n1. Yes\n2. No");
-            int confirmation = input.nextInt();
+                // Asks for final sign out confirmation.
+                System.out.println("Confirm to sign out?\n1. Yes\n2. No");
+                int confirmation = input.nextInt();
 
-            // Updates the user for successful signout.
-            if(confirmation == 1){
-                System.out.println("You are successfully signed out.")
+                // Updates the user for successful signout.
+                if(confirmation == 1){
+                    System.out.println("You are successfully signed out.");
+                }
+                else if(confirmation == 2){
+                    System.out.println("Sign out process cancelled.");
+                }
+                else{
+                    System.out.println("Please choose only from 1 and 2.");
+                }
             }
         }
-
+        catch(InputMismatchException e){
+            System.out.println("Invalid input. Please try again.");
+            SignOut(FloorInfo);
+        }
     }
 
 }
