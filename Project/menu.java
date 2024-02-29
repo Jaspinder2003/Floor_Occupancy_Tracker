@@ -76,10 +76,12 @@ class Menu {
     public static void SignIn(Integer[] FloorInfo){
             Scanner scanner = new Scanner(System.in);
             try{
-                String Name = fill_in("your name: ");
+                Scanner input = new Scanner(System.in);
+                System.out.println("Please enter your full name: ");
+                String Name = input.nextLine();
 
-                String UCID = fill_in("your UCID: ");
-                int StudentID = Integer.valueOf(UCID);
+                System.out.println("Please enter your UCID: ");
+                int StudentID = input.nextInt();
 
                 data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new kay and value to the hashmap.
 
