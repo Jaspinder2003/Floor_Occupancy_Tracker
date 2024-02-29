@@ -3,10 +3,10 @@ import java.util.Scanner; // Import the Scanner class
 
 class Menu {
 
-   public static int[] initalMenu() {
+   public static Integer[] initalMenu() {
         // Create a Scanner object to read input
         Scanner scanner = new Scanner(System.in);
-        int[] returnArray = new int[2]; 
+        Integer[] returnArray = new Integer[2]; 
 
         // Flag to check if the correct option has been chosen
         boolean correctOptionChosen = false;
@@ -66,10 +66,8 @@ class Menu {
                 scanner.nextLine(); // Clear the buffer by reading the line
             }
         }
-
         returnArray[0] = floorSelection;
         returnArray[1] = floorAreaSection;
-
         return returnArray;
 
 
