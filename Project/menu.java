@@ -75,26 +75,21 @@ class Menu {
 
     }
 
-    public static void SignIn(int[] FloorInfo){
+    public static void SignIn(Integer[] FloorInfo){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Please enter your Full Name: ");
-            String Name = scanner.nextLine();
-            // asks the user for the credentials like name
+            try{
+                String Name = fill_in("your name: ");
 
-            System.out.println("Please enter your User ID");
-            int StudentID = scanner.nextInt();
-            // asks the user to enter the User ID
+                String UCID = fill_in("your UCID: ");
+                int StudentID = Integer.valueOf(UCID);
 
-            System.out.println("Please enter your expected duration of stay");
-            String Stay = scanner.nextLine();
-            // asks the user the expected time of stay
+                data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new kay and value to the hashmap.
 
-            int ComputerAsk = 0;
-            boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
-            boolean stop = true; // to stop the while loop
+                int ComputerAsk = 0;
+                boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
+                boolean stop = true; // to stop the while loop
 
-            if (FloorInfo[0]==1&&FloorInfo[1]==6||FloorInfo[0]==2&&FloorInfo[1]==2||FloorInfo[0]==3&&FloorInfo[1]==1) {
-                try {
+                if (FloorInfo[0]==1&&FloorInfo[1]==6||FloorInfo[0]==2&&FloorInfo[1]==2||FloorInfo[0]==3&&FloorInfo[1]==1){
                     System.out.println(
                             "Are you planning to use the computers at the Computer Staions\n 1.Yes\n 2. No \n 3. Exit");
                     ComputerAsk = scanner.nextInt(); // asking for computer usage and taking the input
@@ -116,75 +111,18 @@ class Menu {
                                 break;// if the user wants to exit the file
 
                             default: // used to catch any other input other than 1,2,3
-                                System.out.println(
-                                        "Invalid Input. Please Choose from the following options.\n 1. Yes\n 2. No");
-                                ComputerAsk = scanner.nextInt();
+                                System.out.println("Invalid input, Please try again.");
+                                SignIn(FloorInfo);
                         }
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid Input. Please Choose from the following options.\n 1. Yes\n 2. No");
-                    ComputerAsk = scanner.nextInt();
-                } // used for error catching
-
+                }
             }
+            catch (Exception e) {
+                System.out.println("Invalid input, Please try again.");
+                SignIn(FloorInfo);
+            } // used for error catching
 
-    }
-
-    
-    public static void SignIn(int[] FloorInfo){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Please enter your Full Name: ");
-            String Name = scanner.nextLine();
-            // asks the user for the credentials like name
-
-            System.out.println("Please enter your User ID");
-            int StudentID = scanner.nextInt();
-            // asks the user to enter the User ID
-
-            System.out.println("Please enter your expected duration of stay");
-            String Stay = scanner.nextLine();
-            // asks the user the expected time of stay
-
-            int ComputerAsk = 0;
-            boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
-            boolean stop = true; // to stop the while loop
-
-            if (FloorInfo[0]==1&&FloorInfo[1]==6||FloorInfo[0]==2&&FloorInfo[1]==2||FloorInfo[0]==3&&FloorInfo[1]==1) {
-                try {
-                    System.out.println(
-                            "Are you planning to use the computers at the Computer Staions\n 1.Yes\n 2. No \n 3. Exit");
-                    ComputerAsk = scanner.nextInt(); // asking for computer usage and taking the input
-
-                    while (stop) {
-                        switch (ComputerAsk) {
-                            case 1:
-                                ComputerUsage = true;// true if the user wants to use the computer
-                                stop = false;
-                                break;
-
-                            case 2:
-                                ComputerUsage = false;// stays false if the user does not intend to use the computers
-                                stop = false;
-                                break;
-
-                            case 3:
-                                stop = false;
-                                break;// if the user wants to exit the file
-
-                            default: // used to catch any other input other than 1,2,3
-                                System.out.println(
-                                        "Invalid Input. Please Choose from the following options.\n 1. Yes\n 2. No");
-                                ComputerAsk = scanner.nextInt();
-                        }
-                    }
-                } catch (InputMismatchException e) {
-                    System.out.println("Invalid Input. Please Choose from the following options.\n 1. Yes\n 2. No");
-                    ComputerAsk = scanner.nextInt();
-                } // used for error catching
-
-            }
-
-    }
+        }
 
     public static void SignOut(int[] FloorInfo){
         Scanner input = new Scanner(System.in);
