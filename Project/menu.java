@@ -119,47 +119,60 @@ class Menu {
             main(null);//Returns form to main menu, that asks for Check In/Check Out.
         }
 
-    public static void SignOut(int[] FloorInfo){
+    //Yadwinder Singh Dhaliwal
+    public static String fill_in(String statement){
         Scanner input = new Scanner(System.in);
+        System.out.println("Please enter your " + statement + ": ");
+        String input_data = input.nextLine();
+        return input_data;
+    }
+
+    public static String confirm_it(String statement){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Do you confirm " + statement + "?\n1. Yes\n2. No ");
+        String input_data = input.nextLine();
+        return input_data;
+    }
+
+    public static void SignOut(){
+        String Name = fill_in("your name");//Asks user to fill in name.
 
         try{
-            // Asks user to enter full name.
-            System.out.println("Please enter your full name: ");
-            String Name = input.nextLine();
+            int StudentID = Integer.valueOf(fill_in("your StudentID"));//Asks user to fill in student ID.
 
-            // Asks user to enter UCID.
-            System.out.println("Please enter your UCID: ");
-            int UCID = input.nextInt();
+            boolean valid_release = true;
+            if(data.floor_occupancy.containsKey(StudentID)){
+                do{
+                    String release = confirm_it("release of reserved space");
+                    if(release.equals("1")){
+                        Scanner input = new Scanner(System.in);
+                        System.out.println("Send us a feedback. (Optional)");// Asks for a optional feedback.
+                        String feedback = input.nextLine();
+                        valid_release = true;
 
-            // Asks for space release confirmation.
-            System.out.println("Do you confirm to release the reserved space?\n1. Yes\n2. No");
-            int release = input.nextInt();
-            
-            if(release == 1){
-                // Asks for a optional feedback.
-                System.out.println("Send us a feedback. (Optional)");
-                String feedback = input.nextLine();
-
-                // Asks for final sign out confirmation.
-                System.out.println("Confirm to sign out?\n1. Yes\n2. No");
-                int confirmation = input.nextInt();
-
-                // Updates the user for successful signout.
-                if(confirmation == 1){
-                    System.out.println("You are successfully signed out.");
-                }
-                else if(confirmation == 2){
-                    System.out.println("Sign out process cancelled.");
-                }
-                else{
-                    System.out.println("Please choose only from 1 and 2.");
-                }
+                        data.floor_occupancy.remove(StudentID);//removes the stored servation if confirmed to released.
+                        System.out.println("You are successfully signed out.");
+                    }
+                    else if(release.equals("2")){
+                        System.out.println("Release of reserved space cancelled. Signing out!");//if user decided to not release the space, form automatically signs out.
+                        valid_release = true;
+                    }
+                    else{
+                        System.out.println("Please choose only from 1 and 2.");//warns user about the mistake and asks to re-input.
+                        valid_release = false;
+                    }
+                }while(!valid_release);
+            }
+            else{
+                System.out.println("Sorry you don't have any reservation to release. Signing out!");//message to be displayed if reservation doesn't exist.
             }
         }
-        catch(InputMismatchException e){
+        catch(Exception e){//If any wrong data type input occurs, following code runs.
             System.out.println("Invalid input. Please try again.");
-            SignOut(FloorInfo);
+            SignOut();//Restarts the whole method if any error occurs.
         }
+
+        main(null);//Starts the main menu again.
     }
 
 }
