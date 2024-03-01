@@ -20,6 +20,17 @@ public class data {
         computer_vacancy.put("3", 75);
     }
 
+    //Yadwinder Singh Dhaliwal
+    public static Integer floor_value_finder(String num){//stores and manages availability on each floor.
+        int floor_num = floor_vacancy.get(num);
+        return floor_num;
+    }
+    //Yadwinder Singh Dhaliwal
+    public static Integer computer_value_finder(String num){//stores and manages availability on each floor.
+        int computer_num = computer_vacancy.get(num);
+        return computer_num;
+    }
+
     //Navpreet Singh
     static HashMap<Integer, String> floor_occupancy = new HashMap<Integer, String>(); //HashMap created for further usage.
     
