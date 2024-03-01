@@ -54,6 +54,7 @@ class Menu {
                         // Handle invalid floor selection
                         System.out.println(
                                 "Invalid Choice. Please Choose the correct Floor or Press 4 to exit the form.");
+                                main(null);
                         break;
                 }
             } catch (InputMismatchException e) {
