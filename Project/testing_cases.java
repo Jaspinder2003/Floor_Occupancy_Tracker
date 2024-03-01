@@ -43,6 +43,19 @@ public class testing_cases {
         assertEquals(expected[1], result[1]);
     }
 
+    @Test
+        public void testSignOutWithInvalidInput() {
+        // Prepare test environment
+        String input = "InvalidName\nNotAnInteger\n2\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertThrows(Exception.class, () -> {
+            Menu.SignOut();
+        });
+        // Add assertions here to verify the expected behavior
+        }
+
 
 }
 
