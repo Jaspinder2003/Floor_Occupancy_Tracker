@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner; // Import the Scanner class
+import java.time.LocalDateTime;
 
 class Menu {
     //Navpreet Singh
@@ -77,10 +79,10 @@ class Menu {
                 System.out.println("Please enter your UCID: ");//Asks user to input Student ID.
                 int StudentID = scanner.nextInt();
 
-                data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new key and value to the hashmap.
+                data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new kay and value to the hashmap.
                 String floor_num = Integer.toString(FloorInfo[0]);
-                int floor_ava = data.floor_value_finder(floor_num) - 1;//edits the available number of seats at the floor
-                data.floor_vacancy.put(floor_num, floor_ava);//stores teh edited data
+                int floor_ava = data.floor_value_finder(floor_num) - 1;
+                data.floor_vacancy.put(floor_num, floor_ava);
 
                 int ComputerAsk = 0;
                 boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
@@ -92,9 +94,10 @@ class Menu {
                     switch (ComputerAsk) {
                         case 1:
                             ComputerUsage = true;// true if the user wants to use the computer
+                            data.computer_add(data.computer_occupancy, StudentID, FloorInfo);//add new key and value in the hashmap.
                             String computer_num = Integer.toString(FloorInfo[0]);
-                            int computer_ava = data.computer_value_finder(computer_num) - 1;//this edits the available computers
-                            data.computer_vacancy.put(computer_num, computer_ava);//this stores the edited data
+                            int computer_ava = data.computer_value_finder(computer_num) - 1;
+                            data.computer_vacancy.put(computer_num, computer_ava);
                             break;
 
                         case 2:
@@ -118,6 +121,7 @@ class Menu {
             main(null);//Returns form to main menu, that asks for Check In/Check Out.
         }
 
+    
     //Yadwinder Singh Dhaliwal
     public static String fill_in(String statement){
         Scanner input = new Scanner(System.in);
@@ -148,8 +152,16 @@ class Menu {
                         System.out.println("Send us a feedback. (Optional)");// Asks for a optional feedback.
                         String feedback = input.nextLine();
                         valid_release = true;
-
+                        String floor_num = Integer.toString(data.floor_occupancy.get(StudentID)[0]);
+                        int floor_ava = data.floor_value_finder(floor_num) + 1;
+                        data.floor_vacancy.put(floor_num, floor_ava);
                         data.floor_occupancy.remove(StudentID);//removes the stored servation if confirmed to released.
+                        if(data.computer_vacancy.containsKey(Name)){
+                            String computer_num = Integer.toString(data.computer_occupancy.get(StudentID)[0]);
+                            int computer_ava = data.computer_value_finder(computer_num) + 1;
+                            data.computer_vacancy.put(computer_num, computer_ava);
+                            data.computer_occupancy.remove(StudentID);
+                        }
                         System.out.println("You are successfully signed out.");
                     }
                     else if(release.equals("2")){
@@ -171,7 +183,7 @@ class Menu {
             SignOut();//Restarts the whole method if any error occurs.
         }
 
-        main(null);//Starts the main menu again.
+        main(null);
     }
 
     //Jaspinder Singh Maan
@@ -196,20 +208,54 @@ class Menu {
                 int total_computer_occupancy = data.computer_occupancy.size(); //Find totals number of computers occupied in whole building, using .size() that counts number of keys in hashmap.
                 int total_computers = 30+60+75;//Used constants because they are fixed.
 
-                Integer floor_1_percent = 1 - (data.floor_vacancy.get("1")/(data.floor_value_finder("1")));//These are rough percentage of occupied spaces on each floor.
-                Integer floor_2_percent = 1 - (data.floor_vacancy.get("2")/(data.floor_value_finder("2")));
-                Integer floor_3_percent = 1 - (data.floor_vacancy.get("3"))/(data.floor_value_finder("3"));
+                Integer floor_1_percent = 1 - (data.floor_vacancy.get("1")/87);//These are rough percentage of occupied spaces on each floor.
+                Integer floor_2_percent = 1 - (data.floor_vacancy.get("2")/134);
+                Integer floor_3_percent = 1 - (data.floor_vacancy.get("3"))/(200);
                 Integer[] compare = {floor_1_percent, floor_2_percent, floor_3_percent};
                 Integer max = compare[0];
-                for(int i = 1; i < compare.length; i ++){//For finding highest percentage.
-                    if(compare[i] > max){
-                        max = compare[i];
-                    }
-                }
                 Integer mini = compare[0];
-                for(int i = 1; i < compare.length; i ++){//For finding lowest percentage.
-                    if(compare[i] < mini){
-                        mini = compare[i];
+
+                System.out.println("What further do you want to know?\n1. Busiest/Least busiest floor");
+                int Further = input.nextInt();
+
+                if(Further == 1){
+                    for(int i = 1; i < compare.length; i ++){//For finding highest percentage.
+                        if(compare[i] > max){
+                            max = compare[i];
+                        }
+                    }
+                    String busiest = "None";//These conditions with assign the floor that is busiest.
+                    if (max == compare[0]){
+                        busiest = "Floor 1";
+                    }
+                    else if (max == compare[1]){
+                        busiest = "Floor 2";
+                    }
+                    else if (max == compare[2]){
+                        busiest = "Floor 2";
+                    }
+
+                    for(int i = 1; i < compare.length; i ++){//For finding lowest percentage.
+                        if(compare[i] < mini){
+                            mini = compare[i];
+                        }
+                    }
+                    String least = "None";//These conditions with assign the floor that is least busiest.
+                    if (mini == compare[0]){
+                        least = "Floor 1";
+                    }
+                    else if (mini == compare[1]){
+                        least = "Floor 2";
+                    }
+                    else if (mini == compare[2]){
+                        least = "Floor 2";
+                    }
+                    System.out.println(data.floor_vacancy);
+                    if(compare[0] == 1 && compare[1] == 1 && compare[2] == 1){//if all the floors are vacant, the string below is displayed.
+                        System.out.println("Cannot be deduced because all floors are empty.");
+                    }
+                    else{//if answer is possible this code runs.
+                        System.out.println("The busiest floor right now is " + busiest + " and least busiest is " + least + ".");
                     }
                 }
 
@@ -217,5 +263,4 @@ class Menu {
                 main(args);
             }
     }
-
 }
