@@ -179,7 +179,7 @@ class Menu {
     public static void main(String[] args) {//Code that runs at the start of program.
 
             Scanner input = new Scanner(System.in);
-            System.out.println("Do you want to Check In or Check Out?\n1. Check In\n2. Check Out ");//Main output that asks what the user wants to do.
+            System.out.println("Do you want to Check In, Check Out or view Statistics?\n1. Check In\n2. Check Out\n3. Statistics");//Main output that asks what the user wants to do.
             int selected = input.nextInt();
 
             if(selected == 1){//If user wants to check in.
@@ -188,6 +188,11 @@ class Menu {
             }
             else if(selected == 2){//If user wants to check out.
                 SignOut();
+            }
+            //Navpreet Singh
+            else if(selected == 3){//If user wishes to view some statistics.
+                int total_occupancy = data.floor_occupancy.size();
+                int total_spaces = data.floor_value_finder("1") + data.floor_value_finder("2") + data.floor_value_finder("3");
             }
     }
 
