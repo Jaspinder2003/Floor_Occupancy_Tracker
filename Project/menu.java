@@ -112,6 +112,7 @@ class Menu {
                             SignIn(FloorInfo);
                     }
                 }
+                System.out.println("You have successfully signed in.")
             }
             catch (Exception e) {//Any kind of error results in running of this code.
                 System.out.println("Invalid input, Please try again.");
