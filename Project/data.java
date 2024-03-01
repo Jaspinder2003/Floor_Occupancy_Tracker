@@ -44,4 +44,17 @@ public class data {
         computer_filled.put(key, value);
         return computer_filled;
     }
+
+    //Jaspinder Singh Maan
+    public static ArrayList<Integer> computer_area_users = new ArrayList<>();
+
+    public static ArrayList<Integer> computer_area_add(Integer studentID){
+        computer_area_users.add(studentID);
+        return computer_area_users;
+    }
+
+    public static int computer_area_counter(){
+        int count = computer_area_users.size();
+        return count;
+    }
 }
