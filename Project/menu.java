@@ -175,4 +175,20 @@ class Menu {
         main(null);//Starts the main menu again.
     }
 
+    //Jaspinder Singh Maan
+    public static void main(String[] args) {//Code that runs at the start of program.
+
+            Scanner input = new Scanner(System.in);
+            System.out.println("Do you want to Check In or Check Out?\n1. Check In\n2. Check Out ");//Main output that asks what the user wants to do.
+            int selected = input.nextInt();
+
+            if(selected == 1){//If user wants to check in.
+                Integer[] array_used = initalMenu();
+                SignIn(array_used);
+            }
+            else if(selected == 2){//If user wants to check out.
+                SignOut();
+            }
+    }
+
 }
