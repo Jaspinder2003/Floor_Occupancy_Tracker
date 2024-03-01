@@ -98,6 +98,7 @@ class Menu {
                             String computer_num = Integer.toString(FloorInfo[0]);
                             int computer_ava = data.computer_value_finder(computer_num) - 1;
                             data.computer_vacancy.put(computer_num, computer_ava);
+                            data.computer_area_add(StudentID);
                             break;
 
                         case 2:
