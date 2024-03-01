@@ -67,55 +67,56 @@ class Menu {
 
     }
 
+    //Jaspinder Singh Maan
     public static void SignIn(Integer[] FloorInfo){
             Scanner scanner = new Scanner(System.in);
-            try{
-                Scanner input = new Scanner(System.in);
-                System.out.println("Please enter your full name: ");
-                String Name = input.nextLine();
+            try{//First it will try this part of code.
+                System.out.println("Please enter your full name: ");//Asks user to input name.
+                String Name = scanner.nextLine();
 
-                System.out.println("Please enter your UCID: ");
-                int StudentID = input.nextInt();
+                System.out.println("Please enter your UCID: ");//Asks user to input Student ID.
+                int StudentID = scanner.nextInt();
 
                 data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new kay and value to the hashmap.
+                String floor_num = Integer.toString(FloorInfo[0]);
+                int floor_ava = data.floor_value_finder(floor_num) - 1;
+                data.floor_vacancy.put(floor_num, floor_ava);
 
                 int ComputerAsk = 0;
                 boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
-                boolean stop = true; // to stop the while loop
 
                 if (FloorInfo[0]==1&&FloorInfo[1]==6||FloorInfo[0]==2&&FloorInfo[1]==2||FloorInfo[0]==3&&FloorInfo[1]==1){
-                    System.out.println(
-                            "Are you planning to use the computers at the Computer Staions\n 1.Yes\n 2. No \n 3. Exit");
+                    System.out.println("Are you planning to use the computers at the Computer Staions\n 1.Yes\n 2. No \n 3. Exit");
                     ComputerAsk = scanner.nextInt(); // asking for computer usage and taking the input
 
-                    while (stop) {
-                        switch (ComputerAsk) {
-                            case 1:
-                                ComputerUsage = true;// true if the user wants to use the computer
-                                stop = false;
-                                break;
+                    switch (ComputerAsk) {
+                        case 1:
+                            ComputerUsage = true;// true if the user wants to use the computer
+                            String computer_num = Integer.toString(FloorInfo[0]);
+                            int computer_ava = data.computer_value_finder(computer_num) - 1;
+                            data.computer_vacancy.put(computer_num, computer_ava);
+                            System.err.println(data.computer_vacancy);
+                            break;
 
-                            case 2:
-                                ComputerUsage = false;// stays false if the user does not intend to use the computers
-                                stop = false;
-                                break;
+                        case 2:
+                            ComputerUsage = false;// stays false if the user does not intend to use the computers
+                            break;
 
-                            case 3:
-                                stop = false;
-                                break;// if the user wants to exit the file
+                        case 3:
+                            break;// if the user wants to exit the file
 
-                            default: // used to catch any other input other than 1,2,3
-                                System.out.println("Invalid input, Please try again.");
-                                SignIn(FloorInfo);
-                        }
+                        default: // used to catch any other input other than 1,2,3
+                            System.out.println("Invalid input, Please try again.");
+                            SignIn(FloorInfo);
                     }
                 }
             }
-            catch (Exception e) {
+            catch (Exception e) {//Any kind of error results in running of this code.
                 System.out.println("Invalid input, Please try again.");
-                SignIn(FloorInfo);
-            } // used for error catching
+                SignIn(FloorInfo);//Causes the SignIn() method to run again from start.
+            }
 
+            main(null);//Returns form to main menu, that asks for Check In/Check Out.
         }
 
     public static void SignOut(int[] FloorInfo){
