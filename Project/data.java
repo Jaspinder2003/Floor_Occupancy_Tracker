@@ -13,6 +13,14 @@ public class data {
     }
 
     //Navpreet Singh
+    public static HashMap<String, Integer> computer_vacancy = new HashMap<String, Integer>();//stores and manages availability of computers on each floor.
+    static{
+        computer_vacancy.put("1", 30);
+        computer_vacancy.put("2", 60);
+        computer_vacancy.put("3", 75);
+    }
+
+    //Navpreet Singh
     static HashMap<Integer, String> floor_occupancy = new HashMap<Integer, String>(); //HashMap created for further usage.
     
     public static HashMap<Integer, String> floor_add(HashMap<Integer, String> floor_filled, int key, String value){ //method used to add information (key to be studentID, value as the floor-area chosen.)
