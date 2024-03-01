@@ -191,8 +191,31 @@ class Menu {
             }
             //Navpreet Singh
             else if(selected == 3){//If user wishes to view some statistics.
-                int total_occupancy = data.floor_occupancy.size();
-                int total_spaces = data.floor_value_finder("1") + data.floor_value_finder("2") + data.floor_value_finder("3");
+                int total_floor_occupancy = data.floor_occupancy.size();//Find totals number of seats occupied in whole building, using .size() that counts number of keys in hashmap.
+                int total_spaces = 87 + 134 + 200;//Used constants because they are fixed.
+                //Yadwinder Singh Dhaliwal
+                int total_computer_occupancy = data.computer_occupancy.size(); //Find totals number of computers occupied in whole building, using .size() that counts number of keys in hashmap.
+                int total_computers = 30+60+75;//Used constants because they are fixed.
+
+                Integer floor_1_percent = 1 - (data.floor_vacancy.get("1")/(data.floor_value_finder("1")));//These are rough percentage of occupied spaces on each floor.
+                Integer floor_2_percent = 1 - (data.floor_vacancy.get("2")/(data.floor_value_finder("2")));
+                Integer floor_3_percent = 1 - (data.floor_vacancy.get("3"))/(data.floor_value_finder("3"));
+                Integer[] compare = {floor_1_percent, floor_2_percent, floor_3_percent};
+                Integer max = compare[0];
+                for(int i = 1; i < compare.length; i ++){//For finding highest percentage.
+                    if(compare[i] > max){
+                        max = compare[i];
+                    }
+                }
+                Integer mini = compare[0];
+                for(int i = 1; i < compare.length; i ++){//For finding lowest percentage.
+                    if(compare[i] < mini){
+                        mini = compare[i];
+                    }
+                }
+
+
+                main(args);
             }
     }
 
