@@ -2,8 +2,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner; // Import the Scanner class
 
 class Menu {
-
-   public static Integer[] initalMenu() {
+    //Navpreet Singh
+    public static Integer[] initalMenu() {
         // Create a Scanner object to read input
         Scanner scanner = new Scanner(System.in);
         Integer[] returnArray = new Integer[2]; 
@@ -19,38 +19,32 @@ class Menu {
         // Loop until the user chooses a valid option
         while (!correctOptionChosen) {
             try {
-                // Display floor options
-                System.out.println("1. Ground Floor\n2. Second Floor\n3. Third Floor\n4. To Exit the form");
+                System.out.println("1. Ground Floor\n2. Second Floor\n3. Third Floor\n4. To Exit the form");// Display floor options
                 floorSelection = scanner.nextInt(); // Read user input for floor selection
 
-                // Switch-case to handle floor selection
-                switch (floorSelection) {
+                switch (floorSelection) {// Switch-case to handle floor selection
                     case 1:
-                        // Prompt for specific area on the 1st floor
-                        System.out.println("Please Select the Specific area you will be using on the 1st floor");
+                        System.out.println("Please Select the Specific area you will be using on the 1st floor");// Prompt for specific area on the 1st floor
                         System.out.println(
                                 "1. Study Cubicles\n2. Open Study Area\n3. Group Study Rooms\n4. Print/Copy Center\n5. Bookshelves Area\n6. Computer Stations");
                         floorAreaSection = scanner.nextInt(); // Read user input for section selection
                         correctOptionChosen = true; // Set flag to true to exit loop
                         break;
                     case 2:
-                        // Prompt for specific area on the 2nd floor
-                        System.out.println("Please Select the Specific area you will be using on the 2nd floor");
+                        System.out.println("Please Select the Specific area you will be using on the 2nd floor");// Prompt for specific area on the 2nd floor
                         System.out.println(
                                 "1. TFDL 2nd FLR East Group Study\n2. Computer Stations\n3. TFDL 2nd FLR Group and Quiet Study");
                         floorAreaSection = scanner.nextInt(); // Read user input for section selection
                         correctOptionChosen = true; // Set flag to true to exit loop
                         break;
                     case 3:
-                        // Prompt for specific area on the 3rd floor
-                        System.out.println("Please Select the Specific area you will be using on the 3rd floor");
+                        System.out.println("Please Select the Specific area you will be using on the 3rd floor");// Prompt for specific area on the 3rd floor
                         System.out.println(
                                 "1. Computer Stations\n2. Open Study Area\n3. TFDL 3rd FLR NE Corner\n4. Study Rooms\n5. Scholars Lounge");
                         floorAreaSection = scanner.nextInt(); // Read user input for section selection
                         correctOptionChosen = true; // Set flag to true to exit loop
                         break;
-                    case 4:
-                        // Exit the application
+                    case 4:                        // Exit the application
                         correctOptionChosen = true; // Set flag to true to exit loop
                         break;
 
