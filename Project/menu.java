@@ -77,10 +77,10 @@ class Menu {
                 System.out.println("Please enter your UCID: ");//Asks user to input Student ID.
                 int StudentID = scanner.nextInt();
 
-                data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new kay and value to the hashmap.
+                data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new key and value to the hashmap.
                 String floor_num = Integer.toString(FloorInfo[0]);
-                int floor_ava = data.floor_value_finder(floor_num) - 1;
-                data.floor_vacancy.put(floor_num, floor_ava);
+                int floor_ava = data.floor_value_finder(floor_num) - 1;//edits the available number of seats at the floor
+                data.floor_vacancy.put(floor_num, floor_ava);//stores teh edited data
 
                 int ComputerAsk = 0;
                 boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
@@ -93,9 +93,8 @@ class Menu {
                         case 1:
                             ComputerUsage = true;// true if the user wants to use the computer
                             String computer_num = Integer.toString(FloorInfo[0]);
-                            int computer_ava = data.computer_value_finder(computer_num) - 1;
-                            data.computer_vacancy.put(computer_num, computer_ava);
-                            System.err.println(data.computer_vacancy);
+                            int computer_ava = data.computer_value_finder(computer_num) - 1;//this edits the available computers
+                            data.computer_vacancy.put(computer_num, computer_ava);//this stores the edited data
                             break;
 
                         case 2:
