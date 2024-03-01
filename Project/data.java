@@ -38,4 +38,12 @@ public class data {
         floor_filled.put(key, value);
         return floor_filled;
     }
+
+    //Navpreet Singh
+    public static HashMap<Integer, Integer[]> computer_occupancy = new HashMap<Integer, Integer[]>(); //HashMap created for further usage.
+    
+    public static HashMap<Integer, Integer[]> computer_add(HashMap<Integer, Integer[]> computer_filled, int key, Integer[] value){ //method used to add information (key to be studentID, value as the floor and area chosen.)
+        computer_filled.put(key, value);
+        return computer_filled;
+    }
 }
