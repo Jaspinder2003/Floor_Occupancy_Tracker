@@ -61,6 +61,7 @@ public class testing_cases {
         assertEquals(expected[1], result[1]);
     }
 
+    //Yadwinder Singh Dhaliwal
     @Test
         public void testSignOutWithInvalidInput() {
         // Prepare test environment
@@ -73,6 +74,35 @@ public class testing_cases {
         });
         // Add assertions here to verify the expected behavior
         }
+    
+    @Test
+    public void testSignOutWithValidInput() {
+        // Prepare test environment
+        String input = "John Doe\n123456789\n1\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        
+        // Execute SignOut method
+        SignOut.signOut();
+        
+        // Assertions
+        // Here we can assert that the user is successfully signed out or that the reserved space is released
+        assertFalse(data.floor_occupancy.containsKey(123456789), "User should no longer have a reservation after signing out");
+    }
+
+    @Test
+    public void testSignOutWithInvalidInput() {
+        // Prepare test environment
+        String input = "InvalidName\nNotAnInteger\n2\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        assertThrows(Exception.class, () -> {
+            SignOut.signOut();
+        });
+
+        // No additional assertions needed because the expectation is that an exception is thrown
+    }
 
 
 }
