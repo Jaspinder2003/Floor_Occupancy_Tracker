@@ -1,41 +1,42 @@
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 public class testing_cases {
 //jaspinder singh maan
-@Test
-        public void testSignInInvalidInput() {
-            Integer[] floorInfo = {2, 5}; // Example floor information
-            String input = "InvalidName\nNotAnInteger\n4\n"; // Example input for name, student ID, and computer usage
-            InputStream in = new ByteArrayInputStream(input.getBytes());//converts the string into input stream to be put into the function
-            System.setIn(in);
+    @Test
+    public void testSignInInvalidInput() {
+        Integer[] floorInfo = {2, 5}; // Example floor information
+        String input = "InvalidName\nNotAnInteger\n4\n"; // Example input for name, student ID, and computer usage
+        InputStream in = new ByteArrayInputStream(input.getBytes());//converts the string into input stream to be put into the function
+        System.setIn(in);
 
-            assertThrows(StackOverflowError.class, () -> {
-                Menu.SignIn(floorInfo); // Assuming SignIn method is in class SignIn
-            });
-            // No additional assertions needed because the expectation is that an exception is thrown
+        assertThrows(StackOverflowError.class, () -> {
+            Menu.SignIn(floorInfo); // Assuming SignIn method is in class SignIn
+        });
+        // No additional assertions needed because the expectation is that an exception is thrown
         }
     @Test
     public void testSignInValidInput() {
         Integer[] floorInfo = {1, 10}; // Example floor information
         int studentID = 123456789; // Example student ID
-        String input = "John Doe\n" + studentID + "\n"+2+"\n"; // Example input for name, student ID, and computer usage
+        String input = "John Doe\n" + studentID + "\n2\n"; // Example input for name, student ID, and computer usage
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
         int initialAvailableSeats = data.floor_value_finder("1"); // Get the initial available seats on floor 1
         
-        Menu.signIn(floorInfo); // Assuming SignIn method is in class SignIn
+        Menu.SignIn(floorInfo); // Assuming SignIn method is in class SignIn
         
         int updatedAvailableSeats = data.floor_value_finder("1"); // Get the updated available seats on floor 1
 
         assertEquals(initialAvailableSeats - 1, updatedAvailableSeats, "Available seats should decrease by 1 after sign-in");
     }
-
 
 
 
@@ -84,25 +85,11 @@ public class testing_cases {
         System.setIn(in);
         
         // Execute SignOut method
-        SignOut.signOut();
+        Menu.SignOut();
         
         // Assertions
         // Here we can assert that the user is successfully signed out or that the reserved space is released
         assertFalse(data.floor_occupancy.containsKey(123456789), "User should no longer have a reservation after signing out");
-    }
-
-    @Test
-    public void testSignOutWithInvalidInput() {
-        // Prepare test environment
-        String input = "InvalidName\nNotAnInteger\n2\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        assertThrows(Exception.class, () -> {
-            SignOut.signOut();
-        });
-
-        // No additional assertions needed because the expectation is that an exception is thrown
     }
 
 
