@@ -19,6 +19,22 @@ public class testing_cases {
             });
             // No additional assertions needed because the expectation is that an exception is thrown
         }
+    @Test
+    public void testSignInValidInput() {
+        Integer[] floorInfo = {1, 10}; // Example floor information
+        int studentID = 123456789; // Example student ID
+        String input = "John Doe\n" + studentID + "\n2\n"; // Example input for name, student ID, and computer usage
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        int initialAvailableSeats = data.floor_value_finder("1"); // Get the initial available seats on floor 1
+        
+        SignIn.signIn(floorInfo); // Assuming SignIn method is in class SignIn
+        
+        int updatedAvailableSeats = data.floor_value_finder("1"); // Get the updated available seats on floor 1
+
+        assertEquals(initialAvailableSeats - 1, updatedAvailableSeats, "Available seats should decrease by 1 after sign-in");
+    }
 
 
 
