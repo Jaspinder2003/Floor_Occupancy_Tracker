@@ -1,20 +1,27 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 class Computers extends data{
     private int computers_availability;
     private String name;
     private int id;
-    public Computers(String name,int id,String floor){
-        super(name,id);
+    public Computers(String name,int id,int floor){
+        super(name,id,floor);
+        this.name=name;
+        this.id=id;
+
     }
 
-    public int getComputerAvailability(String floor,data data){
-        HashMap<String,Integer> m =data.getFloor_vacancy();
+    public int getComputerAvailability(Integer floor,data data){
+        HashMap<Integer,Integer> m =data.getFloor_vacancy();
         this.computers_availability=m.get(floor);
         return computers_availability;
     }
-    public void new_computer_ava(String floor,int computer_ava,data data){
+    public void new_computer_ava(Integer floor,int computer_ava,data data){
         data.set_computer_vacancy(floor,computer_ava);
     }
+
+
+
 
 }
