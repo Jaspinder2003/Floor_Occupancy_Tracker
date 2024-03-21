@@ -6,14 +6,6 @@ class Computers extends data{
     private int id;
     public Computers(String name,int id,String floor){
         super(name,id);
-        switch (floor){
-            case "1":
-                computers_availability=30;
-            case "2":
-                computers_availability=60;
-            case "3":
-                computers_availability=75;
-        }
     }
 
     public int getComputerAvailability(String floor,data data){
