@@ -205,64 +205,7 @@ class Menu {
             }
             //Navpreet Singh
             else if(selected == 3){//If user wishes to view some statistics.
-                int total_floor_occupancy = data.floor_occupancy.size();//Find totals number of seats occupied in whole building, using .size() that counts number of keys in hashmap.
-                int total_spaces = 87 + 134 + 200;//Used constants because they are fixed.
-                //Yadwinder Singh Dhaliwal
-                int total_computer_occupancy = data.computer_occupancy.size(); //Find totals number of computers occupied in whole building, using .size() that counts number of keys in hashmap.
-                int total_computers = 30+60+75;//Used constants because they are fixed.
-
-                Integer floor_1_percent = 1 - (data.floor_vacancy.get("1")/87);//These are rough percentage of occupied spaces on each floor.
-                Integer floor_2_percent = 1 - (data.floor_vacancy.get("2")/134);
-                Integer floor_3_percent = 1 - (data.floor_vacancy.get("3"))/(200);
-                Integer[] compare = {floor_1_percent, floor_2_percent, floor_3_percent};
-                Integer max = compare[0];
-                Integer mini = compare[0];
-
-                System.out.println("What further do you want to know?\n1. Busiest/Least busiest floor");
-                int Further = input.nextInt();
-
-                if(Further == 1){
-                    for(int i = 1; i < compare.length; i ++){//For finding highest percentage.
-                        if(compare[i] > max){
-                            max = compare[i];
-                        }
-                    }
-                    String busiest = "None";//These conditions with assign the floor that is busiest.
-                    if (max == compare[0]){
-                        busiest = "Floor 1";
-                    }
-                    else if (max == compare[1]){
-                        busiest = "Floor 2";
-                    }
-                    else if (max == compare[2]){
-                        busiest = "Floor 2";
-                    }
-
-                    for(int i = 1; i < compare.length; i ++){//For finding lowest percentage.
-                        if(compare[i] < mini){
-                            mini = compare[i];
-                        }
-                    }
-                    String least = "None";//These conditions with assign the floor that is least busiest.
-                    if (mini == compare[0]){
-                        least = "Floor 1";
-                    }
-                    else if (mini == compare[1]){
-                        least = "Floor 2";
-                    }
-                    else if (mini == compare[2]){
-                        least = "Floor 2";
-                    }
-                    System.out.println(data.floor_vacancy);
-                    if(compare[0] == 1 && compare[1] == 1 && compare[2] == 1){//if all the floors are vacant, the string below is displayed.
-                        System.out.println("Cannot be deduced because all floors are empty.");
-                    }
-                    else{//if answer is possible this code runs.
-                        System.out.println("The busiest floor right now is " + busiest + " and least busiest is " + least + ".");
-                    }
-                }
-
-
+                
                 main(args);
             }
     }

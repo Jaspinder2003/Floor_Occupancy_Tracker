@@ -24,7 +24,7 @@ public class data {
     public int getID(){
         return id;
     }
-    public HashMap<String, Integer> getFloor_vacancy() {
+    public static HashMap<String, Integer> getFloor_vacancy() {
         return floor_vacancy;
     }
     public void set_floor_vacancy(String key,int value){
