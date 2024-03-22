@@ -103,6 +103,9 @@ public class data {
         }
         floor_vacancy.put(key,value);//putting the new value in place of the given key
     }
+    /**
+     * this method sets the new value for the hashmap and is used in classes like floor
+     */
 
 
     public static HashMap<Integer, Integer> computer_vacancy = new HashMap<Integer, Integer>();//stores and manages availability of computers on each floor.
@@ -120,5 +123,9 @@ public class data {
         }
         computer_vacancy.put(key,value);//putting the value for the given key
     }
+    
+    /**
+     * this method sets the new value for the hashmap and is used in classes like Computers
+     */
 
 }
