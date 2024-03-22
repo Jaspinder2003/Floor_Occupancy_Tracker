@@ -11,7 +11,7 @@ public class SignOut extends Menu {
             data.reportList.remove(userFloor); // Remove the user's floor from the tracking set
             System.out.println("You have successfully signed out. Thank you!");
 
-            // Further logic to update floor and computer availability can be added here
+
         } else {
             System.out.println("UCID not found in the db.");
         }
