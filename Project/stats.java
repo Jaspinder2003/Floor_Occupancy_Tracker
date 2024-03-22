@@ -16,7 +16,7 @@ public class stats {
         int vacant = 0;
         switch (area) {
             case "all floors":
-                for (String floor : data.floor_vacancy.keySet()) { // Iterate through all the floors
+                for (int floor : data.floor_vacancy.keySet()) { // Iterate through all the floors
                     vacant = data.floor_vacancy.get(floor); // Get the vacancy count for the current floor
 
                     // Add the vacancy information for the current floor to the output string
@@ -24,35 +24,35 @@ public class stats {
                 }
                 break;
             case "all comps":
-            for (String floor : data.computer_vacancy.keySet()) { // Iterate through all the floors
-                vacant = data.computer_vacancy.get(floor); // Get the vacancy count for the current floor
+                for (int floor : data.computer_vacancy.keySet()) { // Iterate through all the floors
+                    vacant = data.computer_vacancy.get(floor);
 
-                // Add the vacancy information for the current floor to the output string
-                output += ("Floor" + floor + ": " + vacant + "\n") ;
-                }
-            break;
+                    // Add the vacancy information for the current floor to the output string
+                    output += ("Floor" + floor + ": " + vacant + "\n") ;
+                    }
+                break;
             case "floor1":
-                vacant = data.floor_vacancy.get("1");
+                vacant = data.floor_vacancy.get(1);
                 output += ("Floor 1: " + vacant);
                 break;
             case "floor2":
-                vacant = data.floor_vacancy.get("2");
+                vacant = data.floor_vacancy.get(2);
                 output += ("Floor 1: " + vacant);
                 break;
             case "floor3":
-                vacant = data.floor_vacancy.get("3");
+                vacant = data.floor_vacancy.get(3);
                 output += ("Floor 1: " + vacant);
                 break;
             case "comp1":
-                vacant = data.computer_vacancy.get("1");
+                vacant = data.computer_vacancy.get(1);
                 output += ("Floor 1: " + vacant);
                 break;
             case "comp2":
-                vacant = data.computer_vacancy.get("2");
+                vacant = data.computer_vacancy.get(2);
                 output += ("Floor 1: " + vacant);
                 break;
             case "comp3":
-                vacant = data.computer_vacancy.get("3");
+                vacant = data.computer_vacancy.get(3);
                 output += ("Floor 1: " + vacant);
                 break;
         }
