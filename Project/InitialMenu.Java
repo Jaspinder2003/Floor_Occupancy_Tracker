@@ -2,14 +2,16 @@ public class InitialMenu extends Menu {
 
  @Override
  public Integer[] execute() {
+        Integer[] FloorAndAreaSelection = new Integer[2]
         System.out.println("Welcome to TFDL Library!");
         System.out.println("Please Select the Floor and Area you want to use");
 
         Floor floorSelection = getFloorSelection();
         Area areaSelection = getAreaSelection(floorSelection);
+        FloorAndAreaSelection[0] = floorSelection;
+        FloorAndAreaSelection[1] = areaSelection;
 
-        // Convert enum selections to Integer[] for compatibility with existing code
-        return new Integer[] {floorSelection.ordinal(), areaSelection.ordinal()};
+        return FloorAndAreaSelection;
     }
 
   private Floor getFloorSelection() {
@@ -108,8 +110,6 @@ public class InitialMenu extends Menu {
                 return chooseAreaThirdFloor();
         }
   }
-
-
 
 }
 
