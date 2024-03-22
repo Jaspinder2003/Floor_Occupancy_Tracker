@@ -85,6 +85,11 @@ public class data {
         return count;
     }
 
+    public String toString(){
+        
+        return null;
+    }
+
     private ArrayList<data> info1= new ArrayList<>();
     private ArrayList<data> info2= new ArrayList<>();
     private ArrayList<data> info3= new ArrayList<>();

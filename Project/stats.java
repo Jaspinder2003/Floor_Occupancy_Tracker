@@ -1,36 +1,37 @@
-import java.util.HashMap;
-
 public class stats {
     /**
-     * This class contains methods for displaying vacancy information.
+     * This class is designed to handle and display vacancy information in a building. It supports querying
+     * for vacancies across different areas such as floors and computer stations.
      */
-
+    
     /**
-     * This method displays the vacancy information for a given area.
-     *
-     * @param area The area for which vacancy information is required. It can be either "all floors" or a specific floor name.
-     * @return A string containing the vacancy information for the specified area.
+     * Displays vacancy information for a specified area.
+     * 
+     * @param area Specifies the area to query. Valid options include "all floors", "all comps", or a specific 
+     * floor/computer station (e.g., "floor1", "comp1").
+     * @return A formatted string containing the number of vacancies for the specified area.
      */
     public static String show_vacancy(String area) {
-        String output = ""; // Initialize an empty string to store the vacancy information
-        int vacant = 0;
+        String output = ""; // Used to accumulate the vacancy information to be returned.
+        int vacant = 0; // Holds the vacancy count for the current area being processed.
+        
+        // Process the request based on the specified area.
         switch (area) {
             case "all floors":
-                for (int floor : data.floor_vacancy.keySet()) { // Iterate through all the floors
-                    vacant = data.floor_vacancy.get(floor); // Get the vacancy count for the current floor
-
-                    // Add the vacancy information for the current floor to the output string
-                    output += ("Floor " + floor + ": " + vacant + "\n") ;
+                // Aggregate vacancy info across all floors.
+                for (int floor : data.floor_vacancy.keySet()) {
+                    vacant = data.floor_vacancy.get(floor);
+                    output += ("Floor " + floor + ": " + vacant + "\n");
                 }
                 break;
             case "all comps":
-                for (int floor : data.computer_vacancy.keySet()) { // Iterate through all the floors
+                // Aggregate vacancy info for all computer stations.
+                for (int floor : data.computer_vacancy.keySet()) {
                     vacant = data.computer_vacancy.get(floor);
-
-                    // Add the vacancy information for the current floor to the output string
-                    output += ("Floor " + floor + ": " + vacant + "\n") ;
-                    }
+                    output += ("Floor " + floor + ": " + vacant + "\n");
+                }
                 break;
+            // The following cases handle specific floors or computer stations.
             case "floor1":
                 vacant = data.floor_vacancy.get(1);
                 output += ("Floor 1: " + vacant);
@@ -61,48 +62,70 @@ public class stats {
         return output;
     }
 
+    /**
+     * Determines the floors or computer stations with the maximum and minimum vacancies.
+     * 
+     * @param area Specifies whether to query "floors" or "computers".
+     * @return An array containing two integers, the first represents the floor/station with the maximum vacancies, 
+     * and the second with the minimum vacancies.
+     */
     public static int[] max_min(String area) {
-        int max = 0;
-        int min = 0;
-        int[] output = new int[2];
+        int max = 0; // Track the floor with the maximum vacancy.
+        int min = 0; // Track the floor with the minimum vacancy.
+
+        int max_value = Integer.MIN_VALUE; // To compare value with different floors to find maximum.
+        int min_value = Integer.MAX_VALUE; // To compare value with different floors to find minimum.
+
+        int[] output = new int[2]; // Holds the result [max, min].
+        // Switch statement to decide the operation based on the area specified
         switch (area) {
             case "floors":
+                // Initialize max and min to 0 for the 'floors' case
                 max = 0;
                 min = 0;
+                // Variable compare_value is not initialized in this snippet, it should hold the comparison value for vacancy counts
 
+                // Iterate through each floor in the data.floor_vacancy HashMap
                 for (int floor : data.floor_vacancy.keySet()) {
-                    max = floor;
-                    min = floor;
-
-                    if (data.floor_vacancy.get(max) < data.floor_vacancy.get(floor)) {
-                        max = floor;
+                    // If current floor's vacancy is higher than the last compared value, update compare_value and max floor
+                    if (max_value < data.floor_vacancy.get(floor)) {
+                        max_value = data.floor_vacancy.get(floor); // Update max to the new highest vacancy count
+                        max = floor; // Update max to the current floor
                     }
-                    if (data.floor_vacancy.get(min) > data.floor_vacancy.get(floor)) {
-                        min = floor;
+                    // If current floor's vacancy is lower than the last compared value, update min floor
+                    else if (min_value > data.floor_vacancy.get(floor)) {
+                        min_value = data.floor_vacancy.get(floor); // Update min to the new least vacancy count
+                        min = floor; // Update min to the current floor
                     }
                 }
                 break;
             case "computers":
+                // Initialize max and min to 0 for the 'computers' case
                 max = 0;
                 min = 0;
 
-                for (int floor : data.floor_vacancy.keySet()) {
-                    max = floor;
-                    min = floor;
-
-                    if (data.computer_vacancy.get(max) < data.computer_vacancy.get(floor)) {
-                        max = floor;
+                // Iterate through each floor in the data.computer_vacancy HashMap
+                for (int floor : data.computer_vacancy.keySet()) {
+                    // If current floor's computer vacancy is higher than the last compared value, update compare_value and max floor
+                    if (max_value < data.computer_vacancy.get(floor)) {
+                        max_value = data.computer_vacancy.get(floor); // Update max to the new highest computer vacancy count
+                        max = floor; // Update max to the current floor
                     }
-                    if (data.computer_vacancy.get(min) > data.computer_vacancy.get(floor)) {
-                        min = floor;
+                    // If current floor's computer vacancy is lower than the last compared value, update min floor
+                    else if (min_value > data.computer_vacancy.get(floor)) {
+                        min_value = data.floor_vacancy.get(floor); // Update min to the new least vacancy count
+                        min = floor; // Update min to the current floor
                     }
                 }
                 break;
         }
 
+        // Assign the max floor to the first element and min floor to the second element of the output array
         output[0] = max;
         output[1] = min;
 
+        // Return the output array containing the floors with the maximum and minimum vacancies
         return output;
+
     }
 }
