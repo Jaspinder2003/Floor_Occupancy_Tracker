@@ -20,7 +20,7 @@ public class stats {
                     vacant = data.floor_vacancy.get(floor); // Get the vacancy count for the current floor
 
                     // Add the vacancy information for the current floor to the output string
-                    output += ("Floor" + floor + ": " + vacant + "\n") ;
+                    output += ("Floor " + floor + ": " + vacant + "\n") ;
                 }
                 break;
             case "all comps":
@@ -28,7 +28,7 @@ public class stats {
                     vacant = data.computer_vacancy.get(floor);
 
                     // Add the vacancy information for the current floor to the output string
-                    output += ("Floor" + floor + ": " + vacant + "\n") ;
+                    output += ("Floor " + floor + ": " + vacant + "\n") ;
                     }
                 break;
             case "floor1":
@@ -37,11 +37,11 @@ public class stats {
                 break;
             case "floor2":
                 vacant = data.floor_vacancy.get(2);
-                output += ("Floor 1: " + vacant);
+                output += ("Floor 2: " + vacant);
                 break;
             case "floor3":
                 vacant = data.floor_vacancy.get(3);
-                output += ("Floor 1: " + vacant);
+                output += ("Floor 3: " + vacant);
                 break;
             case "comp1":
                 vacant = data.computer_vacancy.get(1);
@@ -49,11 +49,11 @@ public class stats {
                 break;
             case "comp2":
                 vacant = data.computer_vacancy.get(2);
-                output += ("Floor 1: " + vacant);
+                output += ("Floor 2: " + vacant);
                 break;
             case "comp3":
                 vacant = data.computer_vacancy.get(3);
-                output += ("Floor 1: " + vacant);
+                output += ("Floor 3: " + vacant);
                 break;
         }
 
