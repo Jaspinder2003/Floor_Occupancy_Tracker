@@ -128,4 +128,32 @@ public class stats {
         return output;
 
     }
+        public String formatAsGrid(ArrayList<data> names) {
+        String nm="";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < names.size(); i++) {
+
+            data data = names.get(i);
+            String[] n=data.getName().split(" ");
+            if(n.length>1){
+            char f=n[0].charAt(0);
+            String l=n[n.length-1];
+             nm=f+"."+l;//First initial.Last Name
+            } else if (n.length==1) {
+                 nm=n[0];//one length name
+            }
+            else{
+                 nm="Unknown";//no name given
+            }
+
+            sb.append("[").append(nm).append("]");
+            if ((i + 1) % 4 == 0) sb.append("\n"); // Break line after every 4 names
+            else sb.append(" "); // Add a space between names on the same line
+        }
+        return sb.toString().trim(); // Trim to remove the last space or newline
+
+    }
+/**
+ * this method is used to convert a grid into a string to better visualize the data that we have
+ */
 }
