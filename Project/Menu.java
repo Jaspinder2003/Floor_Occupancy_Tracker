@@ -39,7 +39,7 @@ public abstract class Menu {
         
         while (running) {
             System.out.println("Welcome to TFDL Library!\nHere is list of free spaces in the building;\nTotal free spaces on each floor:\n" + stats.show_vacancy("all floors") + "\nFree computer spaces on each floor;\n" + stats.show_vacancy("all comps"));
-            System.out.println("Do your want to:\n1.Check In\n2. Check Out\n3. Exit");
+            System.out.println("Do your want to:\n1.Check In\n2. Check Out\n3. Exit\n4. Load");
             int selected = input.nextInt();
             
             switch (selected) {
@@ -56,6 +56,16 @@ public abstract class Menu {
                     break;
                 case 3: // Exit
                     running = false;
+                    break;
+                case 4:
+                data.reader("ProjectDB.csv");
+
+
+                for (data f : data.getDataObjects()) {
+                    System.out.println(" ID: " + f.getID() + ", Name: " + f.getName());
+                }
+
+
                     break;
                 default:
                     System.out.println("Invalid option, please try again.");
