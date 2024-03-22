@@ -7,10 +7,10 @@ class Computers extends data{
     private int id;
     private int floor;
 
-    private static HashSet<Computers> ComputerObjects = new HashSet<Computers>(); // Set to store reported fighter spaceships
+    static HashSet<Computers> ComputerObjects = new HashSet<Computers>(); // Set to store reported fighter spaceships
 
     public Computers(String name,int id,int floor){
-        super(name,id);
+        super(name,id, floor);
         this.name=name;
         this.id=id;
         this.floor=floor;
@@ -33,10 +33,8 @@ class Computers extends data{
         this.computers_availability=m.get(floor);
         return computers_availability;
     }
-    //use this to get computer availabiliity
     public void new_computer_ava(Integer floor,int computer_ava,data data){
         data.set_computer_vacancy(floor,computer_ava);
     }
-/**
- * use this to set up new availability*/
+
 }

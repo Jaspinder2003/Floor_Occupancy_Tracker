@@ -14,35 +14,27 @@ public class SignIn extends Menu {
         int studentID = getIntegerInput();
 
         // Create a data object for the user
-        data userData = new data(name, studentID);
-                switch (floorInfo[0]){
-            case 1:
-                info1.add(userData);// adding the data object to a list
-                Collections.sort(info1,new dataidcomparator());//sorting
-                break;
-
-            case 2:
-                info2.add(userData);// adding the data object to a list
-                Collections.sort(info2,new dataidcomparator());//sorting
-                break;
-
-            case 3:
-                info3.add(userData);// adding the data object to a list
-                Collections.sort(info3,new dataidcomparator());//sorting
-                break;
-        }
+        data userData = new data(name, studentID, floorInfo[0]);
+        data.AddUser(userData);
+        data.writer(data.dataObjects, "ProjectDB.csv", "Data");
 
         // Update floor availability
         floor userFloor = new floor(name, studentID, floorInfo[0]);
-        int currentFloorAvailability = userFloor.getFloorAvailability(userData);
-        userFloor.new_flr_ava(currentFloorAvailability - 1, userData); // Assuming each sign-in reduces availability by 1
+        floor.AddUser(userFloor);
+        data.writer(floor.floorObjects, "ProjectDB.csv", "Floor");
+
+        int currentFloorAvailability = userFloor.getFloorAvailability(floorInfo[0], userData);
+        userFloor.new_flr_ava(floorInfo[0], currentFloorAvailability - 1, userData); // Assuming each sign-in reduces availability by 1
 
         // Check for computer usage and update accordingly
         if (askForComputerUsage()) {
             Computers userComputer = new Computers(name, studentID, floorInfo[0]);
-            int currentComputerAvailability = userComputer.getComputerAvailability( userData);
+            Computers.AddUser(userComputer);
+            data.writer(Computers.ComputerObjects, "ProjectDB.csv", "Computers");
+
+            int currentComputerAvailability = userComputer.getComputerAvailability(floorInfo[0], userData);
             if(currentComputerAvailability > 0){
-            userComputer.new_computer_ava(currentComputerAvailability - 1, userData); 
+            userComputer.new_computer_ava(floorInfo[0], currentComputerAvailability - 1, userData); 
             System.out.println("Computer usage has been confirmed.");}
             else{
                 System.out.println("No Computer is currently available to use.");

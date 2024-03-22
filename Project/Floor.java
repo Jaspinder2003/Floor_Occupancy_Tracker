@@ -7,15 +7,16 @@ class floor extends data{
     private int id;
     private int floor;
 
-    private static HashSet<floor> floorObjects = new HashSet<floor>(); 
+    static HashSet<floor> floorObjects = new HashSet<floor>(); 
 
 
     public floor(String name,int id,int floor){
-        super(name,id);
+        super(name,id, floor);
         this.floor=floor;
     }
 
     public Integer getFloor(){
+        System.out.println(floor);
         return floor;
     }
 
