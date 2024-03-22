@@ -5,3 +5,6 @@ class dataidcomparator implements Comparator<data> {
         return Integer.compare(D1.getID(),D2.getID());
     }
 }
+/**
+ * this comparator is used to sort array lists
+ */
