@@ -6,7 +6,7 @@ class Computers extends data{
     private String name;
     private int id;
     public Computers(String name,int id,int floor){
-        super(name,id,floor);
+        super(name,id);
         this.name=name;
         this.id=id;
 
@@ -14,6 +14,9 @@ class Computers extends data{
 
     public int getComputerAvailability(Integer floor,data data){
         HashMap<Integer,Integer> m =data.getFloor_vacancy();
+        if (!m.containsKey(floor)) {
+            throw new IllegalArgumentException("Floor does not exist.");
+        }
         this.computers_availability=m.get(floor);
         return computers_availability;
     }
