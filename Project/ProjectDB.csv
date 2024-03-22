@@ -1,2 +1,11 @@
-ID,Name,Floor
-Data,123455,navttt
+Object type,ID,Name,Floor
+Data,123455,navttt,1
+Data,23456,guy1,2
+Data,32534,guy2,1
+Data,23523,guy4,1
+Data,23526,guy5,3
+Data,23452,girl1,3
+Data,75675,girl2,3
+Data,45632,girl3,2
+Data,23522,guy7,2
+Data,23546,girl15,1
