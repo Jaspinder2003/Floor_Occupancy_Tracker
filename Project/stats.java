@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class stats {
     /**
      * This class is designed to handle and display vacancy information in a building. It supports querying
