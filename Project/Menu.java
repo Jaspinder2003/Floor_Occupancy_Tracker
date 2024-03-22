@@ -17,10 +17,6 @@ public abstract class Menu {
 
     public Menu() {
         this.scanner = new Scanner(System.in);
-            protected ArrayList<data> info1 = new ArrayList<>();//used in sorting data objects
-    protected ArrayList<data> info2 = new ArrayList<>();//used in sorting data objects
-    protected ArrayList<data> info3 = new ArrayList<>();//used in sorting data objects
-
     }
 
     protected int getIntegerInput() {
@@ -34,6 +30,41 @@ public abstract class Menu {
     }
 
     // Abstract method to be implemented by subclasses
+    // This replaces the need for a separate MenuAction interface
     public abstract Integer[] execute();
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        boolean running = true;
+        
+        while (running) {
+            System.out.println("Welcome to TFDL Library!\nHere is list of free spaces in the building;\nTotal free spaces on each floor:\n" + stats.show_vacancy("all floors") + "\nFree computer spaces on each floor;\n" + stats.show_vacancy("all comps"));
+            System.out.println("Do your want to:\n1.Check In\n2. Check Out\n3. Exit");
+            int selected = input.nextInt();
+            
+            switch (selected) {
+                case 1: // Check In
+                    InitialMenu initialMenu = new InitialMenu();
+                    Integer[] floorInfo = initialMenu.execute();
+                    SignIn signIn = new SignIn(floorInfo);
+                    signIn.execute();
+                    break;
+                case 2: // Check Out
+                  //  SignOut signOut = new SignOut();
+                   // signOut.execute();
+
+                    break;
+                case 3: // Exit
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option, please try again.");
+                    break;
+            }
+        }
+        
+        input.close();
+        System.out.println("Thank you for using the system.");
+    }
 
 }
