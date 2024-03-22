@@ -60,4 +60,41 @@ public class stats {
         // Return the output string containing vacancy information for all floors
         return output;
     }
+
+    public static void max_min(String area) {
+        switch (area) {
+            case "floors":
+                int max = 0;
+                int min = 0;
+
+                for (int floor : data.floor_vacancy.keySet()) {
+                    max = floor;
+                    min = floor;
+
+                    if (data.floor_vacancy.get(max) < data.floor_vacancy.get(floor)) {
+                        max = floor;
+                    }
+                    if (data.floor_vacancy.get(min) > data.floor_vacancy.get(floor)) {
+                        min = floor;
+                    }
+                }
+                break;
+            case "computers":
+                max = 0;
+                min = 0;
+
+                for (int floor : data.floor_vacancy.keySet()) {
+                    max = floor;
+                    min = floor;
+
+                    if (data.floor_vacancy.get(max) < data.floor_vacancy.get(floor)) {
+                        max = floor;
+                    }
+                    if (data.floor_vacancy.get(min) > data.floor_vacancy.get(floor)) {
+                        min = floor;
+                    }
+                }
+                break;
+        }
+    }
 }
