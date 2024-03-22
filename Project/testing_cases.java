@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
-
+import org.junit.Assert;
+import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -98,8 +99,30 @@ class tests {
         assertEquals(b,Grid2);
     }
 
-
+    @Test
+    public void testShowVacancyAllFloors() {
+        String expected = "Floor 1: 87\nFloor 2: 134\nFloor 3: 200\n";
+        Assert.assertEquals(expected, stats.show_vacancy("all floors"));
     }
+
+    @Test
+    public void testShowVacancyAllComps() {
+        String expected = "Floor 1: 30\nFloor 2: 60\nFloor 3: 75\n";
+        Assert.assertEquals(expected, stats.show_vacancy("all comps"));
+    }
+
+    @Test
+    public void testMaxMinFloors() {
+        int[] expected = {3, 1}; // Assuming floor 3 has the most, and floor 1 has the least vacancies
+        Assert.assertArrayEquals(expected, stats.max_min("floors"));
+    }
+
+    @Test
+    public void testMaxMinComputers() {
+        int[] expected = {3, 1}; // Assuming computer station on floor 3 has the most, and on floor 1 has the least vacancies
+        Assert.assertArrayEquals(expected, stats.max_min("computers"));
+    }
+}
 
 
 
