@@ -48,12 +48,12 @@ public class data {
     public void set_computer_vacancy(Integer key,int value){
         computer_vacancy.put(key,value);
     }
-    public static int floor_value_finder(String num){//stores and manages availability on each floor.
+    public static int floor_value_finder(int num){//stores and manages availability on each floor.
         int floor_num = floor_vacancy.get(num);
         return floor_num;
     }
 
-    public static int computer_value_finder(String num){//stores and manages availability on each floor.
+    public static int computer_value_finder(int num){//stores and manages availability on each floor.
         int computer_num = computer_vacancy.get(num);
         return computer_num;
     }

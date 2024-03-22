@@ -81,9 +81,8 @@ class Menu {
                 int StudentID = scanner.nextInt();
 
                 data.floor_add(data.floor_occupancy, StudentID, FloorInfo);//uses the add function from data.java to add new kay and value to the hashmap.
-                String floor_num = Integer.toString(FloorInfo[0]);
-                int floor_ava = data.floor_value_finder(floor_num) - 1;
-                data.floor_vacancy.put(floor_num, floor_ava);
+                int floor_ava = data.floor_value_finder(FloorInfo[0]) - 1;
+                data.floor_vacancy.put(FloorInfo[0], floor_ava);
 
                 int ComputerAsk = 0;
                 boolean ComputerUsage = false; // will use this variable in assessing the data of available seats and computers
@@ -96,9 +95,8 @@ class Menu {
                         case 1:
                             ComputerUsage = true;// true if the user wants to use the computer
                             data.computer_add(data.computer_occupancy, StudentID, FloorInfo);//add new key and value in the hashmap.
-                            String computer_num = Integer.toString(FloorInfo[0]);
-                            int computer_ava = data.computer_value_finder(computer_num) - 1;
-                            data.computer_vacancy.put(computer_num, computer_ava);
+                            int computer_ava = data.computer_value_finder(FloorInfo[0]) - 1;
+                            data.computer_vacancy.put(FloorInfo[0], computer_ava);
                             data.computer_area_add(StudentID);
                             break;
 
@@ -155,14 +153,12 @@ class Menu {
                         System.out.println("Send us a feedback. (Optional)");// Asks for a optional feedback.
                         String feedback = input.nextLine();
                         valid_release = true;
-                        String floor_num = Integer.toString(data.floor_occupancy.get(StudentID)[0]);
-                        int floor_ava = data.floor_value_finder(floor_num) + 1;
-                        data.floor_vacancy.put(floor_num, floor_ava);
+                        int floor_ava = data.floor_value_finder(data.floor_occupancy.get(StudentID)[0]) + 1;
+                        data.floor_vacancy.put(data.floor_occupancy.get(StudentID)[0], floor_ava);
                         data.floor_occupancy.remove(StudentID);//removes the stored servation if confirmed to released.
-                        if(data.computer_vacancy.containsKey(Name)){
-                            String computer_num = Integer.toString(data.computer_occupancy.get(StudentID)[0]);
-                            int computer_ava = data.computer_value_finder(computer_num) + 1;
-                            data.computer_vacancy.put(computer_num, computer_ava);
+                        if(data.computer_vacancy.containsKey(StudentID)){
+                            int computer_ava = data.computer_value_finder(data.computer_occupancy.get(StudentID)[0]) + 1;
+                            data.computer_vacancy.put(data.computer_occupancy.get(StudentID)[0], computer_ava);
                             data.computer_occupancy.remove(StudentID);
                         }
                         System.out.println("You are successfully signed out.");
