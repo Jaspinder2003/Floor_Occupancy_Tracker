@@ -61,11 +61,14 @@ public class stats {
         return output;
     }
 
-    public static void max_min(String area) {
+    public static int[] max_min(String area) {
+        int max = 0;
+        int min = 0;
+        int[] output = new int[2];
         switch (area) {
             case "floors":
-                int max = 0;
-                int min = 0;
+                max = 0;
+                min = 0;
 
                 for (int floor : data.floor_vacancy.keySet()) {
                     max = floor;
@@ -96,5 +99,10 @@ public class stats {
                 }
                 break;
         }
+
+        output[0] = max;
+        output[1] = min;
+
+        return output;
     }
 }
