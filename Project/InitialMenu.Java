@@ -5,6 +5,8 @@ public class InitialMenu extends Menu {
         Integer[] FloorAndAreaSelection = new Integer[2]
         System.out.println("Welcome to TFDL Library!");
         System.out.println("Please Select the Floor and Area you want to use");
+        System.out.println("Note: Least busiest- Floor " + stats.max_min("floors")[1] + " recommended.");
+
 
         Floor floorSelection = getFloorSelection();
         Area areaSelection = getAreaSelection(floorSelection);
