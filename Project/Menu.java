@@ -17,6 +17,10 @@ public abstract class Menu {
 
     public Menu() {
         this.scanner = new Scanner(System.in);
+            protected ArrayList<data> info1 = new ArrayList<>();//used in sorting data objects
+    protected ArrayList<data> info2 = new ArrayList<>();//used in sorting data objects
+    protected ArrayList<data> info3 = new ArrayList<>();//used in sorting data objects
+
     }
 
     protected int getIntegerInput() {
