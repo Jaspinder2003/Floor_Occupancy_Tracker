@@ -36,3 +36,26 @@ class tests {
             floor.getFloorAvailability(D1);
         }, "Expected getFloorAvailability to throw IllegalArgumentException for non-existent floor.");
     }
+
+    @org.junit.jupiter.api.Test
+    public void Comptest1() {
+        data D1=new data("hi",1234);
+        data D2=new data("hello",12345);
+        D1.set_computer_vacancy(1,23);
+        Computers computer=new Computers("hi",1234,1);
+        int a = computer.getComputerAvailability(D1);
+        computer.new_computer_ava(30,D2);
+        a=computer.getComputerAvailability(D1);
+        assertEquals(30,a);
+    }
+
+    @org.junit.jupiter.api.Test
+    public void Comptest2() {
+        data D1=new data("hi",1234);
+        D1.set_computer_vacancy(1,23);
+        Computers computer=new Computers("hi",1234,4);
+        int a = computer.getComputerAvailability(D1);
+        assertThrows(IllegalArgumentException.class, () -> {
+            computer.getComputerAvailability(D1);
+        }, "Expected getComputer availability to throw IllegalArgumentException for non-existent floor.");
+    }
