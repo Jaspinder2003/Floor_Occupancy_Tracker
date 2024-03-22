@@ -87,10 +87,10 @@ public class stats {
                     max = floor;
                     min = floor;
 
-                    if (data.floor_vacancy.get(max) < data.floor_vacancy.get(floor)) {
+                    if (data.computer_vacancy.get(max) < data.computer_vacancy.get(floor)) {
                         max = floor;
                     }
-                    if (data.floor_vacancy.get(min) > data.floor_vacancy.get(floor)) {
+                    if (data.computer_vacancy.get(min) > data.computer_vacancy.get(floor)) {
                         min = floor;
                     }
                 }
