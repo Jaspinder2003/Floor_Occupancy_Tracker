@@ -59,3 +59,24 @@ class tests {
             computer.getComputerAvailability(D1);
         }, "Expected getComputer availability to throw IllegalArgumentException for non-existent floor.");
     }
+
+    @org.junit.jupiter.api.Test
+    public void comparatorTest() {
+        data D1=new data("hi",1);
+        data D2=new data("hello",5);
+        data D3=new data("hey",6);
+        ArrayList<data> lst=new ArrayList<>();
+        lst.add(D3);
+        lst.add(D1);
+        lst.add(D2);
+        Collections.sort(lst,new dataidcomparator());
+        assertEquals(1,lst.get(0).getID());
+        assertEquals(5,lst.get(1).getID());
+        assertEquals(6,lst.get(2).getID());
+    }
+
+
+    }
+
+
+
