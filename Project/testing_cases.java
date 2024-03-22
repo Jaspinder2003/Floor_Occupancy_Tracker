@@ -75,6 +75,27 @@ class tests {
         assertEquals(6,lst.get(2).getID());
     }
 
+    @org.junit.jupiter.api.Test
+    public void gridformatTest() {
+        data D1=new data("hi",1);
+        data D2=new data("hello",3);
+        data D3=new data("hey",4);
+        data D4=new data("hmm",2);
+        ArrayList<data> name = new ArrayList<>();
+        name.add(D1);
+        name.add(D2);
+        name.add(D3);
+        name.add(D4);
+        stats formatter=new stats();
+        String Grid = formatter.formatAsGrid(name);
+        String a="[hi] [hello]\n[hey] [hmm]";
+        assertEquals(a,Grid);
+        Collections.sort(name,new dataidcomparator());
+        String Grid2=formatter.formatAsGrid(name);
+        String b="[hi] [hmm]\n[hello] [hey]";
+        assertEquals(b,Grid2);
+    }
+
 
     }
 
