@@ -50,8 +50,8 @@ public abstract class Menu {
                     signIn.execute();
                     break;
                 case 2: // Check Out
-                  //  SignOut signOut = new SignOut();
-                   // signOut.execute();
+                    SignOut signOut = new SignOut();
+                    signOut.execute();
 
                     break;
                 case 3: // Exit
