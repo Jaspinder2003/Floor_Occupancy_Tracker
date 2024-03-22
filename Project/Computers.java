@@ -33,8 +33,10 @@ class Computers extends data{
         this.computers_availability=m.get(floor);
         return computers_availability;
     }
+    //use this to get computer availabiliity
     public void new_computer_ava(Integer floor,int computer_ava,data data){
         data.set_computer_vacancy(floor,computer_ava);
     }
-
+/**
+ * use this to set up new availability*/
 }
