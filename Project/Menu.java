@@ -57,16 +57,9 @@ public abstract class Menu {
                 case 3: // Exit
                     running = false;
                     break;
-                case 4:
-                data.reader("ProjectDB.csv");
+          
 
 
-                for (data f : data.getDataObjects()) {
-                    System.out.println(" ID: " + f.getID() + ", Name: " + f.getName());
-                }
-
-
-                    break;
                 default:
                     System.out.println("Invalid option, please try again.");
                     break;
