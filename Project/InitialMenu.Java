@@ -1,20 +1,20 @@
 public class InitialMenu extends Menu {
 
- @Override
- public Integer[] execute() {
-        Integer[] FloorAndAreaSelection = new Integer[2];
-        System.out.println("Welcome to TFDL Library!");
-        System.out.println("Please Select the Floor and Area you want to use");
-        System.out.println("Note: Least busiest- Floor " + stats.max_min("floors")[1] + " recommended.");
+@Override
+public Integer[] execute() {
+    Integer[] FloorAndAreaSelection = new Integer[2];
+    System.out.println("Welcome to TFDL Library!");
+    System.out.println("Please Select the Floor and Area you want to use");
+    System.out.println("Note: Least busiest- Floor " + stats.max_min("floors")[1] + " recommended.");
 
+    Floor floorSelection = getFloorSelection();
+    Area areaSelection = getAreaSelection(floorSelection);
+ 
+    FloorAndAreaSelection[0] = floorSelection.ordinal();
+    FloorAndAreaSelection[1] = areaSelection.ordinal();
 
-        Floor floorSelection = getFloorSelection();
-        Area areaSelection = getAreaSelection(floorSelection);
-        FloorAndAreaSelection[0] = floorSelection;
-        FloorAndAreaSelection[1] = areaSelection;
-
-        return FloorAndAreaSelection;
-    }
+    return FloorAndAreaSelection;
+}
 
   private Floor getFloorSelection() {
         System.out.println("1. Ground Floor\n2. Second Floor\n3. Third Floor\n4. Exit");
@@ -22,6 +22,7 @@ public class InitialMenu extends Menu {
         switch (choice) {
             case 1:
                 return Floor.GROUND_FLOOR;
+
             case 2:
                 return Floor.SECOND_FLOOR;
             case 3:
