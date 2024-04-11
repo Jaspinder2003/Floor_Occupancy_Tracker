@@ -1,3 +1,5 @@
+package project.app.cpsc233project;
+
 import org.junit.jupiter.api.Test;
 import org.junit.Assert;
 import java.util.ArrayList;
