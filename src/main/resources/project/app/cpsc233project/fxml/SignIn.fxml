@@ -109,12 +109,12 @@
             <Label layoutX="41.0" layoutY="214.0" text="Label" />
             <Label layoutX="41.0" layoutY="231.0" text="Label" />
             <Label layoutX="41.0" layoutY="248.0" text="Label" />
-            <ComboBox layoutX="255.0" layoutY="93.0" prefWidth="150.0" />
-            <ComboBox layoutX="255.0" layoutY="157.0" prefWidth="150.0" />
+            <ComboBox layoutX="255.0" layoutY="93.0" prefWidth="150.0" fx:id="floorComboBox"/>
+            <ComboBox layoutX="255.0" layoutY="157.0" prefWidth="150.0" fx:id="areaCombobox"/>
             <Label layoutX="255.0" layoutY="72.0" text="Floor" />
             <Label layoutX="256.0" layoutY="136.0" text="Area" />
             <Label layoutX="255.0" layoutY="205.0" text="Computer" />
-            <ComboBox layoutX="255.0" layoutY="227.0" prefWidth="150.0" />
+            <ComboBox layoutX="255.0" layoutY="227.0" prefWidth="150.0" fx:id="ComputerUsage"/>
             <Button layoutX="502.0" layoutY="289.0" mnemonicParsing="false" text="Submit " />
             <Label layoutX="428.0" layoutY="72.0" text="Name" />
             <TextField layoutX="428.0" layoutY="93.0" />
