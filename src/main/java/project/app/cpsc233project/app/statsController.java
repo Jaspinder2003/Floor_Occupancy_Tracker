@@ -8,9 +8,19 @@ import javafx.scene.Node;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class statsController {
+
+    @FXML
+    private Button busyButton;
+
+    @FXML
+    private Button generalUsage;
+
+    @FXML
+    private Button userList;
 
     private Stage stage;
     public void setStage(Stage stage) {
