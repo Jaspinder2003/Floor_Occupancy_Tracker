@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 public class data {
     private Integer id;
     private String name;
-    private Integer floor;
+    private Integer ufloor;
  
     public static HashMap<Integer, Integer> floor_vacancy = new HashMap<Integer, Integer>();//stores and manages availability on each floor.
     
@@ -20,7 +20,7 @@ public class data {
     public data(String name,int id, int floor){
         this.name=name;
         this.id=id;
-        this.floor=floor;
+        this.ufloor=floor;
 
     }
 
@@ -61,20 +61,19 @@ public class data {
                 String elementType = values[0];
                 int id = Integer.parseInt(values[1]);
                 String name = values[2];
-                int floor = Integer.parseInt(values[3]);
+                int ufloor = Integer.parseInt(values[3]);
 
                 switch (elementType) {
                     case "Data":
-                     data userData = new data(name, id, floor);
-                     data.AddUser(userData);
+                        data userData = new data(name, id, ufloor);
+                        data.AddUser(userData);
                         break;
                     case "Floor":
-                        floor userFloor = new floor(name, id, floor);
+                        floor userFloor = new floor(name, id, ufloor);
                         floor.AddUser(userFloor);
-
                         break;
                     case "Computers":
-                        Computers userComputer = new Computers(name, id, floor);
+                        Computers userComputer = new Computers(name, id, ufloor);
                         Computers.AddUser(userComputer);
                         break;
                 }
@@ -96,7 +95,7 @@ public class data {
     }
 
     public int getfloor(){
-        return floor;
+        return ufloor;
     }
 
     public Integer getID(){
