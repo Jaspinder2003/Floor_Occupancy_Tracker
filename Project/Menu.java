@@ -1,73 +1,71 @@
-import java.util.Scanner;
+public class SignIn extends Menu {
+    private final Integer[] floorInfo; // Array containing floor and area selections
 
-public abstract class Menu {
-    protected Scanner scanner;
-    
-    public enum Area {
-        STUDY_CUBICLES, OPEN_STUDY_AREA, GROUP_STUDY_ROOMS, PRINT_COPY_CENTER, BOOKSHELVES_AREA, COMPUTER_STATIONS, 
-        TFDL_2ND_FLR_EAST_GROUP_STUDY, TFDL_2ND_FLR_GROUP_AND_QUIET_STUDY, 
-        TFDL_3RD_FLR_NE_CORNER, STUDY_ROOMS, SCHOLARS_LOUNGE,NONE
-    }
-     
-    public enum Floor {
-        GROUND_FLOOR, SECOND_FLOOR, THIRD_FLOOR, EXIT
+    public SignIn(Integer[] floorInfo) {
+        this.floorInfo = floorInfo;
     }
 
+    @Override
+    public Integer[] execute() {
+        System.out.println("Please enter your full name:");
+        String name = scanner.nextLine();
 
+        System.out.println("Please enter your UCID:");
+        int studentID = getIntegerInput();
 
-    public Menu() {
-        this.scanner = new Scanner(System.in);
-    }
+        // Create a data object for the user
+        data userData = new data(name, studentID, floorInfo[0]);
+        data.AddUser(userData);
+        data.writer(data.dataObjects, "ProjectDB.csv", "Data");
 
-    protected int getIntegerInput() {
-        while (!scanner.hasNextInt()) {
-            scanner.next(); // consume the non-integer input
-            System.out.println("Invalid input. Please enter a number.");
-        }
-        int input = scanner.nextInt();
-        scanner.nextLine(); // consume the newline
-        return input;
-    }
+        // Update floor availability
+        floor userFloor = new floor(name, studentID, floorInfo[0]);
+        floor.AddUser(userFloor);
+        data.writer(floor.floorObjects, "ProjectDB.csv", "Floor");
 
-    // Abstract method to be implemented by subclasses
-    // This replaces the need for a separate MenuAction interface
-    public abstract Integer[] execute();
+        int currentFloorAvailability = userFloor.getFloorAvailability(floorInfo[0], userData);
+        userFloor.new_flr_ava(floorInfo[0], currentFloorAvailability - 1, userData); // Assuming each sign-in reduces availability by 1
 
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        boolean running = true;
-        
-        while (running) {
-            System.out.println("Welcome to TFDL Library!\nHere is list of free spaces in the building;\nTotal free spaces on each floor:\n" + stats.show_vacancy("all floors") + "\nFree computer spaces on each floor;\n" + stats.show_vacancy("all comps"));
-            System.out.println("Do your want to:\n1.Check In\n2. Check Out\n3. Exit\n4. Load");
-            int selected = input.nextInt();
-            
-            switch (selected) {
-                case 1: // Check In
-                    InitialMenu initialMenu = new InitialMenu();
-                    Integer[] floorInfo = initialMenu.execute();
-                    SignIn signIn = new SignIn(floorInfo);
-                    signIn.execute();
-                    break;
-                case 2: // Check Out
-                    SignOut signOut = new SignOut();
-                    signOut.execute();
+        // Check for computer usage and update accordingly
+        if (askForComputerUsage()) {
+            Computers userComputer = new Computers(name, studentID, floorInfo[0]);
+            Computers.AddUser(userComputer);
+            data.writer(Computers.ComputerObjects, "ProjectDB.csv", "Computers");
 
-                    break;
-                case 3: // Exit
-                    running = false;
-                    break;
-          
-
-
-                default:
-                    System.out.println("Invalid option, please try again.");
-                    break;
+            int currentComputerAvailability = userComputer.getComputerAvailability(floorInfo[0], userData);
+            if(currentComputerAvailability > 0){
+            userComputer.new_computer_ava(floorInfo[0], currentComputerAvailability - 1, userData); 
+            System.out.println("Computer usage has been confirmed.");}
+            else{
+                System.out.println("No Computer is currently available to use.");
             }
         }
-        
-        input.close();
-        System.out.println("Thank you for using the system.");
+     
+        System.out.println("You have successfully signed in.");
+
+        return null;
     }
 
+
+    private boolean askForComputerUsage() {
+        // Logic to determine if the selected area has computer stations
+        boolean willUseComputer = false;
+        System.out.println("Are you planning to use the computers at the Computer Stations?\n1. Yes\n2. No\n3. Exit");
+        int choice = getIntegerInput();
+
+        switch (choice) {
+            case 1:
+            willUseComputer = true;
+            break;
+            case 2:
+            willUseComputer = false;
+            break;
+            case 3:
+                break;
+            default:
+                System.out.println("Invalid input, please try again.");
+                return askForComputerUsage();
+        }
+        return willUseComputer;
+    }
 }
