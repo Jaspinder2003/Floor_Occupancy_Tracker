@@ -10,8 +10,8 @@ public Integer[] execute() {
     Floor floorSelection = getFloorSelection();
     Area areaSelection = getAreaSelection(floorSelection);
  
-    FloorAndAreaSelection[0] = floorSelection.ordinal();
-    FloorAndAreaSelection[1] = areaSelection.ordinal();
+    FloorAndAreaSelection[0] = floorSelection.ordinal() +1;
+    FloorAndAreaSelection[1] = areaSelection.ordinal() +1;
 
     return FloorAndAreaSelection;
 }
