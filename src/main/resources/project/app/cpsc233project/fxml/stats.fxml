@@ -32,17 +32,19 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.control.Button?>
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.MainController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -83,17 +85,19 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane fx:id="welcomePage" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="157.0" layoutY="24.0" style="&#10;" text="Wecome to TFDL Library" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+        <Label alignment="CENTER" layoutX="251.0" layoutY="23.0" style="&#10;" text="STATISTICS" textAlignment="CENTER" wrapText="false">
           <font>
-            <Font size="30.0" />
+            <Font size="26.0" />
           </font>
         </Label>
-            <Label layoutX="220.0" layoutY="119.0" text="Please choose of the following option" />
-            <Button fx:id="welcomePageSignIn" layoutX="177.0" layoutY="175.0" mnemonicParsing="false" onAction="#SignInButton" text="SIGN IN" />
-            <Button fx:id="welcomePageSignOut" layoutX="420.0" layoutY="175.0" mnemonicParsing="false" onAction="#SignOutButton" text="SIGN OUT" />
-            <Button fx:id="welcomePageSignIn1" layoutX="290.0" layoutY="230.0" mnemonicParsing="false" onAction="#SignInButton" text="STATISTICS" />
+            <Label layoutX="20.0" layoutY="102.0" text="UCID" />
+            <Label layoutX="248.0" layoutY="102.0" text="FLOOR" />
+            <Label layoutX="486.0" layoutY="102.0" text="Computer Users" />
+            <RadioButton layoutX="587.0" layoutY="102.0" mnemonicParsing="false" />
+            <ComboBox layoutX="295.0" layoutY="98.0" prefWidth="150.0" />
+            <TextField layoutX="58.0" layoutY="99.0" />
       </children>
     </AnchorPane>
   </children>
