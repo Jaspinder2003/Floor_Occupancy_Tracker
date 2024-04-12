@@ -98,29 +98,26 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="41.0" layoutY="119.0" text="Label" />
-            <Label layoutX="41.0" layoutY="136.0" text="Label" />
-            <Label layoutX="41.0" layoutY="153.0" text="Label" />
+            <Label fx:id="floorVacancyLabel" layoutX="41.0" layoutY="127.0" text="Label" />
             <Label layoutX="41.0" layoutY="187.0" text="Computer Availability" textFill="#9f9f9f">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="41.0" layoutY="214.0" text="Label" />
-            <Label layoutX="41.0" layoutY="231.0" text="Label" />
-            <Label layoutX="41.0" layoutY="248.0" text="Label" />
+            <Label fx:id="computerVacancyLabel" layoutX="41.0" layoutY="222.0" text="Label" />
+            <Label layoutX="41.0" layoutY="248.0" />
             <ComboBox fx:id="floorComboBox" layoutX="255.0" layoutY="93.0" prefWidth="150.0" />
             <ComboBox fx:id="areaCombobox" layoutX="255.0" layoutY="157.0" prefWidth="150.0" />
             <Label layoutX="255.0" layoutY="72.0" text="Floor" />
             <Label layoutX="256.0" layoutY="136.0" text="Area" />
             <Label layoutX="255.0" layoutY="205.0" text="Computer" />
             <ComboBox fx:id="ComputerUsage" layoutX="255.0" layoutY="227.0" prefWidth="150.0" />
-            <Button layoutX="502.0" layoutY="289.0" mnemonicParsing="false" text="Submit " onAction="#handleSubmit"/>
+            <Button layoutX="502.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit " />
             <Label layoutX="428.0" layoutY="72.0" text="Name" />
-            <TextField layoutX="428.0" layoutY="93.0" fx:id="name"/>
+            <TextField fx:id="name" layoutX="428.0" layoutY="93.0" />
             <Label layoutX="428.0" layoutY="136.0" text="UCID" />
-            <TextField layoutX="428.0" layoutY="157.0" fx:id="ucid" />
-            <Label layoutX="255.0" layoutY="281.0" visible="false" fx:id="errorLabel"/>
+            <TextField fx:id="ucid" layoutX="428.0" layoutY="157.0" />
+            <Label fx:id="errorLabel" layoutX="255.0" layoutY="281.0" visible="false" />
       </children>
     </AnchorPane>
   </children>
