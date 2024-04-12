@@ -2,7 +2,7 @@ package project.app.cpsc233project;
 public class SignOut extends Menu {
 
     @Override
-    public void execute() {
+    public void execute(String name, int studentID, boolean ComputerUsage) {
         System.out.println("Please enter your UCID to sign out:");
         int ucid = getIntegerInput();
 
