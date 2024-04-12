@@ -1,70 +1,50 @@
 package project.app.cpsc233project;
-public class SignIn extends Menu {
-    private final Integer[] floorInfo; // Array containing floor and area selections
 
-    public SignIn(Integer[] floorInfo) {
-        this.floorInfo = floorInfo;
-    }
+import java.util.Objects;
+
+public class SignIn extends Menu {
+    private int floorNumber;
+
+    
 
     @Override
-    public Integer[] execute() {
-        System.out.println("Please enter your full name:");
-        String name = scanner.nextLine();
+    public void execute(String name, int studentID, boolean computerUsage, String floorN, String area) {
 
-        System.out.println("Please enter your UCID:");
-        int studentID = getIntegerInput();
+        System.out.println("Executing sign-in sequence...");
+        if (Objects.equals(floorN, "GROUND_FLOOR")){
+            floorNumber = 1;
+        }
+        else if(Objects.equals(floorN, "SECOND_FLOOR")){
+            floorNumber = 2;
+        }
+        else{
+            floorNumber = 3;
+        }
 
         // Create a data object for the user
-        data userData = new data(name, studentID, floorInfo[0]);
+        data userData = new data(name, studentID, floorNumber);
         data.AddUser(userData);
         data.writer(data.dataObjects, "ProjectDB.csv", "Data");
 
         // Update floor availability
-        floor userFloor = new floor(name, studentID, floorInfo[0]);
+        floor userFloor = new floor(name, studentID, floorNumber, area);
         floor.AddUser(userFloor);
         data.writer(floor.floorObjects, "ProjectDB.csv", "Floor");
 
-        int currentFloorAvailability = userFloor.getFloorAvailability(floorInfo[0], userData);
-        userFloor.new_flr_ava(floorInfo[0], currentFloorAvailability - 1, userData); // Assuming each sign-in reduces availability by 1
+        int currentFloorAvailability = userFloor.getFloorAvailability(floorNumber, userData);
+        userFloor.new_flr_ava(floorNumber, currentFloorAvailability - 1, userData); // Assuming each sign-in reduces availability by 1
 
         // Check for computer usage and update accordingly
-        if (askForComputerUsage()) {
-            Computers userComputer = new Computers(name, studentID, floorInfo[0]);
+        if (computerUsage) {
+            Computers userComputer = new Computers(name, studentID, floorNumber);
             Computers.AddUser(userComputer);
             data.writer(Computers.ComputerObjects, "ProjectDB.csv", "Computers");
 
-            int currentComputerAvailability = userComputer.getComputerAvailability(floorInfo[0], userData);
+            int currentComputerAvailability = userComputer.getComputerAvailability(floorNumber, userData);
             if(currentComputerAvailability > 0){
-            userComputer.new_computer_ava(floorInfo[0], currentComputerAvailability - 1, userData); 
-            System.out.println("Computer usage has been confirmed.");}
-            else{
-                System.out.println("No Computer is currently available to use.");
+            userComputer.new_computer_ava(floorNumber, currentComputerAvailability - 1, userData); 
             }
+
         }
-     
-        System.out.println("You have successfully signed in.");
-
-        return null;
-    }
-
-
-    private boolean askForComputerUsage() {
-        // Logic to determine if the selected area has computer stations
-        boolean willUseComputer = false;
-        System.out.println("Are you planning to use the computers at the Computer Stations?\n1. Yes\n2. No\n3. Exit");
-        int choice = getIntegerInput();
-
-        switch (choice) {
-            case 1:
-            willUseComputer = true;
-            case 2:
-            willUseComputer = false;
-            case 3:
-                break;
-            default:
-                System.out.println("Invalid input, please try again.");
-                return askForComputerUsage();
-        }
-        return willUseComputer;
     }
 }
