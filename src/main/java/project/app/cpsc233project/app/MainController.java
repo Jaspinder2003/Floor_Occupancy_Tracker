@@ -9,9 +9,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import project.app.cpsc233project.data;
 
+import java.io.File;
 import java.io.IOException;
+
+import static project.app.cpsc233project.data.reader;
 
 public class MainController {
     @FXML
@@ -19,6 +26,9 @@ public class MainController {
 
     @FXML
     private Button welcomePageSignIn;
+
+    @FXML
+    private MenuItem open;
 
     private Stage stage;
     public void setStage(Stage stage) {
@@ -70,4 +80,34 @@ public class MainController {
             // Handle the exception here
         }
     }
+
+    @FXML
+    private void MenuOpen(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open CSV File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("CSV Files", "*.csv"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            // Read the content of the file
+
+            String fileContent = reader(selectedFile.getAbsolutePath());
+
+            // Create and display the content in a TextArea within an Alert or a new Stage
+            TextArea textArea = new TextArea(fileContent);
+            textArea.setEditable(false); // Make it read-only
+            textArea.setWrapText(true);
+
+            Stage stage = new Stage(); // Create a new stage for the popup
+            stage.setTitle("CSV File Content");
+
+            // Create a scene with the text area and set it on the stage
+            Scene scene = new Scene(textArea, 600, 400);
+            stage.setScene(scene);
+            stage.show();
+        } 
+    }
+
 }
