@@ -1,5 +1,6 @@
 package project.app.cpsc233project;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class stats {
     /**
@@ -137,6 +138,33 @@ public class stats {
         return output;
     }
 
+    static HashSet<Integer> floor1 = new HashSet<Integer>();
+    static HashSet<Integer> floor2 = new HashSet<Integer>();
+    static HashSet<Integer> floor3 = new HashSet<Integer>();
+
+
+    public static int num_comp_user() {
+        int num_comp_user = Computers.ComputerObjects.size();
+        return num_comp_user;
+    }
+
+    public static int floor1_occupant_size() {
+        int floor1_occupant_size = floor1.size();
+        return floor1_occupant_size;
+
+    }
+
+    public static int floor2_occupant_size() {
+        int floor2_occupant_size = floor2.size();
+        return floor2_occupant_size;
+
+    }
+
+    public static int floor3_occupant_size() {
+        int floor3_occupant_size = floor3.size();
+        return floor3_occupant_size;
+
+    }
 
 
         public String formatAsGrid(ArrayList<data> names) {
