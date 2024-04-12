@@ -1,198 +1,189 @@
-package project.app.cpsc233project;
-import java.util.ArrayList;
-import java.util.HashSet;
+package project.app.cpsc233project.app;
 
-public class stats {
-    /**
-     * This class is designed to handle and display vacancy information in a building. It supports querying
-     * for vacancies across different areas such as floors and computer stations.
-     */
-    
-    /**
-     * Displays vacancy information for a specified area.
-     * 
-     * @param area Specifies the area to query. Valid options include "all floors", "all comps", or a specific 
-     * floor/computer station (e.g., "floor1", "comp1").
-     * @return A formatted string containing the number of vacancies for the specified area.
-     */
-    public static String show_vacancy(String area) {
-        String output = ""; // Used to accumulate the vacancy information to be returned.
-        int vacant = 0; // Holds the vacancy count for the current area being processed.
-        
-        // Process the request based on the specified area.
-        switch (area) {
-            case "all floors":
-                // Aggregate vacancy info across all floors.
-                for (int floor : data.floor_vacancy.keySet()) {
-                    vacant = data.floor_vacancy.get(floor);
-                    output += ("Floor " + floor + ": " + vacant + "\n");
-                }
-                break;
-            case "all comps":
-                // Aggregate vacancy info for all computer stations.
-                for (int floor : data.computer_vacancy.keySet()) {
-                    vacant = data.computer_vacancy.get(floor);
-                    output += ("Floor " + floor + ": " + vacant + "\n");
-                }
-                break;
-            // The following cases handle specific floors or computer stations.
-            case "floor1":
-                vacant = data.floor_vacancy.get(1);
-                output += ("Floor 1: " + vacant);
-                break;
-            case "floor2":
-                vacant = data.floor_vacancy.get(2);
-                output += ("Floor 2: " + vacant);
-                break;
-            case "floor3":
-                vacant = data.floor_vacancy.get(3);
-                output += ("Floor 3: " + vacant);
-                break;
-            case "comp1":
-                vacant = data.computer_vacancy.get(1);
-                output += ("Floor 1: " + vacant);
-                break;
-            case "comp2":
-                vacant = data.computer_vacancy.get(2);
-                output += ("Floor 2: " + vacant);
-                break;
-            case "comp3":
-                vacant = data.computer_vacancy.get(3);
-                output += ("Floor 3: " + vacant);
-                break;
-        }
+import java.io.IOException;
 
-        // Return the output string containing vacancy information for all floors
-        return output;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import project.app.cpsc233project.data;
+import project.app.cpsc233project.stats;
+import javafx.scene.chart.BarChart;
+
+
+public class statsController {
+
+    @FXML
+    private ComboBox<String> statsChoice;
+
+    @FXML
+    private Button busyButton;
+
+    @FXML
+    private Button generalUsage;
+
+    @FXML
+    private Button userList;
+
+    private Stage stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
-    /**
-     * Determines the floors or computer stations with the maximum and minimum vacancies.
-     * 
-     * @param area Specifies whether to query "floors" or "computers".
-     * @return An array containing two integers, the first represents the floor/station with the maximum vacancies, 
-     * and the second with the minimum vacancies.
-     */
-    public static double[] max_min(String area) {
-        // Initialize the output array
-        double[] output = new double[4];
-
-        double floor_1 = 0;
-        double floor_2 = 0;
-        double floor_3 = 0;
-
-        switch (area) {
-            case "floors":
-                for (int floor : data.floor_vacancy.keySet()) {
-                    if (floor == 1) {
-                        floor_1 = (87 - data.floor_vacancy.get(floor))/100;
-                    } else if (floor == 2) {
-                        floor_2 = (134 - data.floor_vacancy.get(floor))/100;
-                    } else {
-                        floor_3 = (200 - data.floor_vacancy.get(floor))/100;
-                    }
-                }
-                break;
-        
-            case "computers":
-                for (int floor : data.floor_vacancy.keySet()) {
-                    if (floor == 1) {
-                        floor_1 = (30 - data.floor_vacancy.get(floor))/100;
-                    } else if (floor == 2) {
-                        floor_2 = (60 - data.floor_vacancy.get(floor))/100;
-                    } else {
-                        floor_3 = (75 - data.floor_vacancy.get(floor))/100;
-                    }
-                }
-                break;
-        }
-
-        // Initialize the maximum and minimum vacancies
-        double max = Math.max(Math.max(floor_1, floor_2), floor_3);
-        double min = Math.min(Math.min(floor_1, floor_2), floor_3);
-
-        int busy = 0;
-        int  least_busy = 0;
-
-        if (max == floor_1) {
-            busy = 1;
-        } else if (max == floor_2) {
-            busy = 2;
-        } else {
-            busy = 3;
-        }
-
-        if (min == floor_1) {
-            least_busy = 1;
-        } else if (min == floor_2) {
-            least_busy = 2;
-        } else {
-            least_busy = 3;
-        }
-
-        output[0] = max;
-        output[1] = min;
-        output[2] = busy;
-        output[3] = least_busy;
-
-        return output;
+    @FXML
+    public void initialize() {
+        // Populate the ComboBox items
+        statsChoice.setItems(FXCollections.observableArrayList("General Usage", "Busy floors"));
     }
 
-    static HashSet<Integer> floor1 = new HashSet<Integer>();
-    static HashSet<Integer> floor2 = new HashSet<Integer>();
-    static HashSet<Integer> floor3 = new HashSet<Integer>();
+    @FXML
+    private void userListButton() {
+        // Create a new stage (window) for the pop-up
+        Stage popUpStage = new Stage();
+        popUpStage.initModality(Modality.APPLICATION_MODAL);
+        popUpStage.setTitle("Busy Button Clicked");
 
+        // Set up the content of the pop-up
+        VBox layout = new VBox(20);
+        layout.setAlignment(Pos.CENTER);
+        Label messageLabel = new Label("Choose an option to view list of users.");
+        Label displayUser = new Label(data.reader("/Users/yadi/Desktop/gp/cpsc-233-group-proeject-w24-master/ProjectDB.csv"));
+        //System.out.println(data.reader("/Users/yadi/Desktop/gp/cpsc-233-group-proeject-w24-master/src/main/java/project/app/cpsc233project/ProjectDB.csv"));
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(e -> popUpStage.close());
 
-    public static int num_comp_user() {
-        int num_comp_user = Computers.ComputerObjects.size();
-        return num_comp_user;
+        // Add bar chart and other components to the layout
+        layout.getChildren().addAll(messageLabel, displayUser, closeButton);
+        layout.setPadding(new Insets(10));
+
+        // Displaying the pop-up window
+        Scene scene = new Scene(layout, 400, 300);
+        popUpStage.setScene(scene);
+        popUpStage.showAndWait();
     }
 
-    public static int floor1_occupant_size() {
-        int floor1_occupant_size = floor1.size();
-        return floor1_occupant_size;
+    @FXML
+    private void statsChoice() {
+        String selected = statsChoice.getSelectionModel().getSelectedItem();
 
-    }
+        if (selected.equals("General Usage")) {
+            // Create axes for the bar chart
+            CategoryAxis xAxis = new CategoryAxis();
+            xAxis.setLabel("Floors");
 
-    public static int floor2_occupant_size() {
-        int floor2_occupant_size = floor2.size();
-        return floor2_occupant_size;
+            NumberAxis yAxis = new NumberAxis();
+            yAxis.setLabel("No. of Seats");
 
-    }
+            // Create the bar chart
+            BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+            barChart.setTitle("TFDL Floor Vacancy Bar Chart");
 
-    public static int floor3_occupant_size() {
-        int floor3_occupant_size = floor3.size();
-        return floor3_occupant_size;
+            // Add data to the bar chart
+            XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+            series1.setName("Vacancy"); // Name the series
 
-    }
+            int floor1_occupants = stats.floor1_occupant_size();
+            int floor2_occupants = stats.floor2_occupant_size();
+            int floor3_occupants = stats.floor3_occupant_size();
 
 
-        public String formatAsGrid(ArrayList<data> names) {
-        String nm="";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < names.size(); i++) {
+            // Add data points
+            series1.getData().add(new XYChart.Data<>("Floor 1", 87 - floor1_occupants));
+            series1.getData().add(new XYChart.Data<>("Floor 2", 134 - floor2_occupants));
+            series1.getData().add(new XYChart.Data<>("Floor 3", 200 - floor3_occupants));
 
-            data data = names.get(i);
-            String[] n=data.getName().split(" ");
-            if(n.length>1){
-            char f=n[0].charAt(0);
-            String l=n[n.length-1];
-             nm=f+"."+l;//First initial.Last Name
-            } else if (n.length==1) {
-                 nm=n[0];//one length name
+            barChart.getData().add(series1);
+
+            // Create a new stage (window) for the pop-up
+            Stage popUpStage = new Stage();
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.setTitle("Busy Button Clicked");
+
+            // Set up the content of the pop-up
+            VBox layout = new VBox(20);
+            layout.setAlignment(Pos.CENTER);
+            Label messageLabel = new Label("The Busy Button has been clicked!");
+            Button closeButton = new Button("Close");
+            closeButton.setOnAction(e -> popUpStage.close());
+
+            // Add bar chart and other components to the layout
+            layout.getChildren().addAll(messageLabel, barChart, closeButton);
+            layout.setPadding(new Insets(10));
+
+            // Displaying the pop-up window
+            Scene scene = new Scene(layout, 300, 300);
+            popUpStage.setScene(scene);
+            popUpStage.showAndWait();
+        } else if (selected.equals("Busy floors")) {
+            // Create a new stage (window) for the pop-up
+            Stage popUpStage = new Stage();
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.setTitle("Busy floors Clicked");
+
+            // Set up the content of the pop-up
+            VBox layout = new VBox(20);
+            layout.setAlignment(Pos.CENTER);
+            Label messageLabel = new Label("Busiest and the least busiesty floors.");
+
+            double busy_percentage = stats.max_min("floors")[0];
+            double least_percentage = stats.max_min("floors")[1];
+            double busy = stats.max_min("floors")[2];
+            double least = stats.max_min("floors")[3];
+
+            String messageString = "";
+            PieChart pieChart = new PieChart();
+
+            if (busy_percentage == 0) {
+                messageString = "Current all floors are empty!";
+            } else {
+                messageString = "Busiest floor: " + busy + "\nLeast busiest floor: " + least;
+
+
+                double compUsers = stats.num_comp_user();
+
+                // Create a PieChart and add some data
+                pieChart.getData().add(new PieChart.Data("Computer users", compUsers));
+                pieChart.getData().add(new PieChart.Data("Non-computer users", 25.0));
+                pieChart.getData().add(new PieChart.Data("Empty computers", 45.0));
+
+                // Optional: customize chart properties
+                pieChart.setTitle("Computer Usage distribution");
+
+                // Create a layout, add the chart to it
+                BorderPane root = new BorderPane();
+                root.setCenter(pieChart);
             }
-            else{
-                 nm="Unknown";//no name given
-            }
+            Label displayUser = new Label(messageString);
 
-            sb.append("[").append(nm).append("]");
-            if ((i + 1) % 4 == 0) sb.append("\n"); // Break line after every 4 names
-            else sb.append(" "); // Add a space between names on the same line
+            Button closeButton = new Button("Close");
+                closeButton.setOnAction(e -> popUpStage.close());
+
+                // Add bar chart and other components to the layout
+                layout.getChildren().addAll(messageLabel, displayUser, pieChart, closeButton);
+                layout.setPadding(new Insets(10));
+
+            // Displaying the pop-up window
+            Scene scene = new Scene(layout, 400, 300);
+            popUpStage.setScene(scene);
+            popUpStage.showAndWait();
         }
-        return sb.toString().trim(); // Trim to remove the last space or newline
 
     }
-/**
- * this method is used to convert a grid into a string to better visualize the data that we have
- */
 }
