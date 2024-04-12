@@ -29,22 +29,15 @@ public class data {
         dataObjects.add(data);
     }
 
-    public static <T> void writer(HashSet<T> set, String fileName, String ElementType) {
-        try (FileWriter writer = new FileWriter(fileName, true)) { // true for appending to the file
+    public String toCsvString() {
+        return "Data," + id + "," + name;
+    }
+
+    public static <T extends data> void writer(HashSet<T> set, String fileName, String ElementType) {
+        try (FileWriter writer = new FileWriter(fileName, true)) {
             for (T element : set) {
-                if (element instanceof data) {
-                    data d = (data) element;
-                    String line = ElementType + "," + d.getID() + "," + d.getName();
-                    writer.write(line + "\n");
-                } else if (element instanceof floor) {
-                    floor f = (floor) element;
-                    String line = ElementType + "," + f.getID() + "," + f.getName() + "," + f.getFloor();
-                    writer.write(line + "\n");
-                } else if (element instanceof Computers) {
-                    Computers c = (Computers) element;
-                    String line = ElementType + "," + c.getID() + "," + c.getName() + "," + c.getFloor();
-                    writer.write(line + "\n");
-                }
+                String line = element.toCsvString();
+                writer.write(line + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
