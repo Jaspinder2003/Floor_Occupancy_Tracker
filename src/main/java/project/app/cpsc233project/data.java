@@ -1,5 +1,6 @@
 package project.app.cpsc233project;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap; //Imports the hashmap class.
 import java.util.HashSet;
 import java.io.FileReader;
@@ -28,12 +29,14 @@ public class data {
 
     }
 
+
+
     public static void AddUser(data data) {
         dataObjects.add(data);
     }
 
     public String toCsvString() {
-        return "Data," + id + "," + name + ","+ area;
+        return "Data," + id + "," + name + ","+ ufloor+","+area;
     }
 
     public static <T extends data> void writer(HashSet<T> set, String fileName, String ElementType) {
@@ -46,14 +49,16 @@ public class data {
             e.printStackTrace();
         }
     }
-    
 
-    public static void reader(String fileName) {
 
+    public static String reader(String fileName) {
+        StringBuilder contentBuilder = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+
             String line;
             br.readLine(); // Skip header line
             while ((line = br.readLine()) != null) {
+                contentBuilder.append(line).append("\n");
                 String[] values = line.split(",");
                 String elementType = values[0];
                 int id = Integer.parseInt(values[1]);
@@ -79,6 +84,7 @@ public class data {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return contentBuilder.toString();
     }
     public static boolean ucidExists(String fileName, int searchUcid) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
