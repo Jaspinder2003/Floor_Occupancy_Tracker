@@ -8,6 +8,8 @@ class Computers extends data{
     private int id;
     private int floor;
 
+    private String area;
+
     static HashSet<Computers> ComputerObjects = new HashSet<Computers>(); // Set to store reported fighter spaceships
 
     public Computers(String name,int id,int floor, String area){
@@ -15,6 +17,7 @@ class Computers extends data{
         this.name=name;
         this.id=id;
         this.floor=floor;
+        this.area=area;
 
     }
 
@@ -27,7 +30,7 @@ class Computers extends data{
         ComputerObjects.add(computers);
     }
     public String toCsvString() {
-        return "Computer," + id + "," + name + "," + floor;
+        return "Computer," + id + "," + name + "," + floor + "," + area;
     }
 
     public int getComputerAvailability(Integer floor,data data){
