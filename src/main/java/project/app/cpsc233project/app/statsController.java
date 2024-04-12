@@ -26,9 +26,6 @@ import javafx.stage.Stage;
 import project.app.cpsc233project.data;
 import project.app.cpsc233project.stats;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 
 
 public class statsController {
@@ -53,7 +50,7 @@ public class statsController {
     @FXML
     public void initialize() {
         // Populate the ComboBox items
-        statsChoice.setItems(FXCollections.observableArrayList("General Usage", "Busy floors", "Computer Usage"));
+        statsChoice.setItems(FXCollections.observableArrayList("General Usage", "Busy floors"));
     }
 
     @FXML
@@ -101,10 +98,16 @@ public class statsController {
             // Add data to the bar chart
             XYChart.Series<String, Number> series1 = new XYChart.Series<>();
             series1.setName("Vacancy"); // Name the series
+
+            int floor1_occupants = stats.floor1_occupant_size();
+            int floor2_occupants = stats.floor2_occupant_size();
+            int floor3_occupants = stats.floor3_occupant_size();
+
+
             // Add data points
-            series1.getData().add(new XYChart.Data<>("Floor 1", data.floor_vacancy.get(1)));
-            series1.getData().add(new XYChart.Data<>("Floor 2", data.floor_vacancy.get(2)));
-            series1.getData().add(new XYChart.Data<>("Floor 3", data.floor_vacancy.get(3)));
+            series1.getData().add(new XYChart.Data<>("Floor 1", 87 - floor1_occupants));
+            series1.getData().add(new XYChart.Data<>("Floor 2", 134 - floor2_occupants));
+            series1.getData().add(new XYChart.Data<>("Floor 3", 200 - floor3_occupants));
 
             barChart.getData().add(series1);
 
@@ -137,7 +140,7 @@ public class statsController {
             // Set up the content of the pop-up
             VBox layout = new VBox(20);
             layout.setAlignment(Pos.CENTER);
-            Label messageLabel = new Label("Busiest and the leadst busiesty floors.");
+            Label messageLabel = new Label("Busiest and the least busiesty floors.");
 
             double busy_percentage = stats.max_min("floors")[0];
             double least_percentage = stats.max_min("floors")[1];
@@ -145,34 +148,36 @@ public class statsController {
             double least = stats.max_min("floors")[3];
 
             String messageString = "";
+            PieChart pieChart = new PieChart();
 
             if (busy_percentage == 0) {
                 messageString = "Current all floors are empty!";
             } else {
                 messageString = "Busiest floor: " + busy + "\nLeast busiest floor: " + least;
-            }
 
+
+                double compUsers = stats.num_comp_user();
+
+                // Create a PieChart and add some data
+                pieChart.getData().add(new PieChart.Data("Computer users", compUsers));
+                pieChart.getData().add(new PieChart.Data("Non-computer users", 25.0));
+                pieChart.getData().add(new PieChart.Data("Empty computers", 45.0));
+
+                // Optional: customize chart properties
+                pieChart.setTitle("Computer Usage distribution");
+
+                // Create a layout, add the chart to it
+                BorderPane root = new BorderPane();
+                root.setCenter(pieChart);
+            }
             Label displayUser = new Label(messageString);
 
-            // Create a PieChart and add some data
-            PieChart pieChart = new PieChart();
-            pieChart.getData().add(new PieChart.Data("Floor 1", 30.0));
-            pieChart.getData().add(new PieChart.Data("Floor 2", 25.0));
-            pieChart.getData().add(new PieChart.Data("Floor 3", 45.0));
-
-            // Optional: customize chart properties
-            pieChart.setTitle("Computer Usage distribution");
-
-            // Create a layout, add the chart to it
-            BorderPane root = new BorderPane();
-            root.setCenter(pieChart);
-            
             Button closeButton = new Button("Close");
-            closeButton.setOnAction(e -> popUpStage.close());
+                closeButton.setOnAction(e -> popUpStage.close());
 
-            // Add bar chart and other components to the layout
-            layout.getChildren().addAll(messageLabel, displayUser, pieChart, closeButton);
-            layout.setPadding(new Insets(10));
+                // Add bar chart and other components to the layout
+                layout.getChildren().addAll(messageLabel, displayUser, pieChart, closeButton);
+                layout.setPadding(new Insets(10));
 
             // Displaying the pop-up window
             Scene scene = new Scene(layout, 400, 300);
