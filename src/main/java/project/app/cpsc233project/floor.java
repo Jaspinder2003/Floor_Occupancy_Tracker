@@ -8,21 +8,29 @@ class floor extends data{
     private int id;
     private int floor;
 
+    private String area;
+
     static HashSet<floor> floorObjects = new HashSet<floor>(); 
 
 
-    public floor(String name,int id,int floor){
+    public floor(String name,int id,int floor, String area){
         super(name,id, floor);
+        this.name=name;
+        this.id=id;
         this.floor=floor;
+        this.area=area;
     }
 
     public Integer getFloor(){
-        System.out.println(floor);
         return floor;
     }
 
     public static void AddUser(floor floor) {
         floorObjects.add(floor);
+    }
+
+    public String toCsvString() {
+        return "Floor," + id + "," + name + "," + floor + "," + area;
     }
 
     public int getFloorAvailability(Integer floor,data data){
