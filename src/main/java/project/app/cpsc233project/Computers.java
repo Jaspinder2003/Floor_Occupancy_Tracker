@@ -10,8 +10,8 @@ class Computers extends data{
 
     static HashSet<Computers> ComputerObjects = new HashSet<Computers>(); // Set to store reported fighter spaceships
 
-    public Computers(String name,int id,int floor){
-        super(name,id, floor);
+    public Computers(String name,int id,int floor, String area){
+        super(name,id, floor, area);
         this.name=name;
         this.id=id;
         this.floor=floor;
