@@ -74,6 +74,14 @@ public class data {
                     case "Floor":
                         floor userFloor = new floor(name, id, ufloor, area);
                         floor.AddUser(userFloor);
+                        if (ufloor == 1) {
+                            stats.floor1.add(ufloor);
+                        } else if (ufloor == 2) {
+                            stats.floor2.add(ufloor);
+                        } else if (ufloor == 3) {
+                            stats.floor3.add(ufloor);
+                        }
+
                         break;
                     case "Computers":
                         Computers userComputer = new Computers(name, id, ufloor, area);
