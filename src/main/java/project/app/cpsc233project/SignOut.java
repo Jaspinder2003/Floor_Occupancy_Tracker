@@ -35,7 +35,10 @@ public class SignOut extends Menu {
             }
 
             clearFile("C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv");
-
+            data.writer(Computers.ComputerObjects, "ProjectDB.csv", "Computers");
+            data.writer(floor.floorObjects, "ProjectDB.csv", "Floor");
+            data.writer(data.dataObjects, "ProjectDB.csv", "Data");
+            
             // Further logic to update floor and computer availability can be added here
 
         }
