@@ -21,6 +21,7 @@ class Computers extends data{
     public Integer getFloor(){
         return floor;
     }
+        public Integer getID(){return id;}
 
     public static void AddUser(Computers computers) {
         ComputerObjects.add(computers);
