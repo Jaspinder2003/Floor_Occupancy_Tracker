@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import project.app.cpsc233project.SignOut;
 import project.app.cpsc233project.data;
 
 import java.net.URL;
@@ -48,12 +49,12 @@ public class SignOutController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-String filename="C:\\Users\\jaspi\\OneDrive\\Desktop\\cpsc-233-group-proeject-w24-main\\ProjectDB.csv";
+String filename="C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv";
     @FXML
     private void handleSubmit() {
         int ucid = Integer.parseInt(UCID.getText()); // Get UCID from TextField
         String fileName = "path/to/ProjectDB.csv"; // Adjust path as necessary
-        if (!data.ucidExists("C:\\Users\\jaspi\\OneDrive\\Desktop\\cpsc-233-group-proeject-w24-main\\ProjectDB.csv", ucid)) {
+        if (!data.ucidExists("C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv", ucid)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Sign Out Error");
@@ -75,6 +76,8 @@ String filename="C:\\Users\\jaspi\\OneDrive\\Desktop\\cpsc-233-group-proeject-w2
             if (result.isPresent() && result.get() == buttonTypeYes) {
                 // User chose YES
                 signOutSuccess();
+                SignOut signout = new SignOut();
+                signout.executeS(ucid);
             } else {
                 // User chose NO or closed the dialog
                 exitPage();
