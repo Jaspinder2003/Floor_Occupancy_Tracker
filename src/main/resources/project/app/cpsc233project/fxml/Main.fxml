@@ -38,11 +38,19 @@
       </Label>
       <Label styleClass="white-text" text="Please choose one of the following options:" />
       <HBox alignment="CENTER" spacing="20">
-        <Button fx:id="welcomePageSignIn" styleClass="white-button" text="SIGN IN" />
-        <Button fx:id="welcomePageSignOut" styleClass="white-button" text="SIGN OUT" />
-        <Button fx:id="welcomePageSignIn1" styleClass="white-button" text="STATISTICS" />
+        <Button fx:id="welcomePageSignIn" styleClass="button" onAction="#SignInButton" text="SIGN IN" />
+        <Button fx:id="welcomePageSignOut" styleClass="button" onAction="#SignOutButton" text="SIGN OUT" />
+        <Button fx:id="welcomePageSignIn1" styleClass="button" onAction="#statsButton" text="STATISTICS" />
       </HBox>
+    </VBox>
+    <VBox fx:id="aboutLibraryBox" VBox.vgrow="ALWAYS" alignment="TOP_CENTER" styleClass="about-library-section">
+      <children>
+        <Label fx:id="aboutTitle" styleClass="about-title-text" text="About TFDL Library"/>
+        <Label fx:id="aboutDescription" styleClass="about-content-text" text="The Taylor Family Digital Library (TFDL) is the heart of the University of Calgary's campus. Offering a wealth of resources and services to support our students, faculty, and the community." wrapText="true"/>
+      </children>
     </VBox>
   </VBox>
  </children>
 </VBox>
+
+

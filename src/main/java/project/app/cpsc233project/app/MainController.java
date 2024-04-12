@@ -51,13 +51,14 @@ public class MainController {
     private AnchorPane welcomePage; // This field name should match the fx:id in FXML
 
     @FXML
-    private ImageView imageView;
+    private ImageView backgroundImage;
 
 
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 
     @FXML
     private void SignInButton(ActionEvent event) {
@@ -128,7 +129,7 @@ public class MainController {
             stage.setTitle("CSV File Content");
 
             // Create a scene with the text area and set it on the stage
-            Scene scene = new Scene(textArea, 600, 400);
+            Scene scene = new Scene(textArea, 645, 600);
             stage.setScene(scene);
             stage.show();
         } else {

@@ -5,7 +5,7 @@
 }
 
 .maroon-box {
-    -fx-background-color: #800000; /* Maroon color */
+    -fx-background-color:#a8324a; /* Maroon color */
     -fx-padding: 20px;
 }
 
@@ -26,4 +26,52 @@
     -fx-border-color: white;
     -fx-border-width: 2;
     -fx-padding: 10px 20px;
+}
+
+.white-text {
+    -fx-font-size: 24px;
+    -fx-text-fill: white; /* White text color */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.button {
+    -fx-background-radius: 15; /* Adjusts the radius of the button corners */
+    -fx-padding: 10px 20px;
+}
+
+.maroon-box-footer {
+    -fx-background-color: #a0522d; /* Same lighter shade of maroon */
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+.about-library-button {
+    -fx-background-color: white;
+    -fx-text-fill: #800000; /* Maroon text to contrast the white button */
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15; /* Rounded edges */
+}
+.about-library-section {
+    -fx-background-color: white;
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+    -fx-alignment: center; /* Ensures the children of VBox are center-aligned */
+}
+
+.about-title-text {
+    -fx-font-size: 18px;
+    -fx-text-fill: #800000; /* Maroon color for the title */
+    -fx-font-weight: bold;
+    -fx-alignment: center; /* Ensures the text within the Label is center-aligned */
+}
+
+.about-content-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: black;
+    -fx-alignment: center;
+    -fx-text-alignment: center; /* Ensures the text within the Label is center-aligned */
+    -fx-padding: 10px;
 }
