@@ -37,6 +37,7 @@ public abstract class Menu {
 
     // Abstract method to be implemented by subclasses
     // This replaces the need for a separate MenuAction interface
-    public abstract void execute(String name, int studentID, boolean ComputerUsage);
+     public abstract void execute(String name, int studentID, boolean ComputerUsage, String floor, String area);
+
 
 }
