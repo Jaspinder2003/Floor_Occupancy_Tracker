@@ -33,7 +33,7 @@ public class data {
     }
 
     public String toCsvString() {
-        return "Data," + id + "," + name;
+        return "Data," + id + "," + name + ","+ area;
     }
 
     public static <T extends data> void writer(HashSet<T> set, String fileName, String ElementType) {
@@ -59,20 +59,21 @@ public class data {
                 int id = Integer.parseInt(values[1]);
                 String name = values[2];
                 int ufloor = Integer.parseInt(values[3]);
+                String area = values[4];
 
                 switch (elementType) {
                     case "Data":
-                        //data userData = new data(name, id, ufloor, area);
-                        //data.AddUser(userData);
+                        data userData = new data(name, id, ufloor, area);
+                        data.AddUser(userData);
                         break;
                     case "Floor":
-                       // floor userFloor = new floor(name, id, ufloor, area);
-                        //floor.AddUser(userFloor);
-                       // break;
+                        floor userFloor = new floor(name, id, ufloor, area);
+                        floor.AddUser(userFloor);
+                        break;
                     case "Computers":
-                        //Computers userComputer = new Computers(name, id, ufloor, area);
-                       // Computers.AddUser(userComputer);
-                      //  break;
+                        Computers userComputer = new Computers(name, id, ufloor, area);
+                        Computers.AddUser(userComputer);
+                        break;
                 }
             }
         } catch (IOException e) {
