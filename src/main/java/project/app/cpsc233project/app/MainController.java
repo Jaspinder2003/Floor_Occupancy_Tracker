@@ -11,6 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import project.app.cpsc233project.data;
@@ -22,6 +26,14 @@ import static project.app.cpsc233project.data.reader;
 
 public class MainController {
     @FXML
+    private VBox mainContainer;
+
+    @FXML
+    private VBox contentBox;
+
+
+
+    @FXML
     private Button welcomePageSignOut;
 
     @FXML
@@ -31,6 +43,18 @@ public class MainController {
     private MenuItem open;
 
     private Stage stage;
+
+    @FXML
+    private Pane splitBackgroundPane;
+
+    @FXML
+    private AnchorPane welcomePage; // This field name should match the fx:id in FXML
+
+    @FXML
+    private ImageView imageView;
+
+
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -107,7 +131,9 @@ public class MainController {
             Scene scene = new Scene(textArea, 600, 400);
             stage.setScene(scene);
             stage.show();
-        } 
+        } else {
+            // No file was selected, handle this case if needed
+        }
     }
 
 }
