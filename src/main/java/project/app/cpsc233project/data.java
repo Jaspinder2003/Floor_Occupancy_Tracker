@@ -52,11 +52,10 @@ public class data {
     }
     
 
-    public static String reader(String fileName) {
+    public static void reader(String fileName) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
-            String printer = "";
             br.readLine(); // Skip header line
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -79,13 +78,28 @@ public class data {
                         Computers.AddUser(userComputer);
                         break;
                 }
-                printer += line; 
             }
-            return printer;
-
         } catch (IOException e) {
-            return "Error: " + e.getMessage();
+            e.printStackTrace();
         }
+    }
+    public static boolean ucidExists(String fileName, int searchUcid) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            br.readLine(); // Skip header line
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values.length > 1) { // Ensure there are enough columns
+                    int id = Integer.parseInt(values[1]);
+                    if (id == searchUcid) {
+                        return true; // UCID found
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false; // UCID not found
     }
     
 
