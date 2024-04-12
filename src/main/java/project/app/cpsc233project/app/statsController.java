@@ -14,14 +14,17 @@ import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import project.app.cpsc233project.data;
+import project.app.cpsc233project.stats;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -50,7 +53,7 @@ public class statsController {
     @FXML
     public void initialize() {
         // Populate the ComboBox items
-        statsChoice.setItems(FXCollections.observableArrayList("General Usage", "Busiest floor", "Least busiest floor", "Computer Usage"));
+        statsChoice.setItems(FXCollections.observableArrayList("General Usage", "Busy floors", "Computer Usage"));
     }
 
     @FXML
@@ -64,8 +67,8 @@ public class statsController {
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
         Label messageLabel = new Label("Choose an option to view list of users.");
-        Label displayUser = new Label(data.reader("/Users/yadi/Desktop/UCalgary/1Y2S/CPSC-233/GroupProject/cpsc-233-group-proeject-w24/src/main/java/project/app/cpsc233project/ProjectDB.csv"));
-        System.out.println(data.reader("/Users/yadi/Desktop/UCalgary/1Y2S/CPSC-233/GroupProject/cpsc-233-group-proeject-w24/src/main/java/project/app/cpsc233project/ProjectDB.csv"));
+        Label displayUser = new Label(data.reader("/Users/yadi/Desktop/gp/cpsc-233-group-proeject-w24-master/ProjectDB.csv"));
+        //System.out.println(data.reader("/Users/yadi/Desktop/gp/cpsc-233-group-proeject-w24-master/src/main/java/project/app/cpsc233project/ProjectDB.csv"));
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> popUpStage.close());
 
@@ -125,9 +128,57 @@ public class statsController {
             Scene scene = new Scene(layout, 300, 300);
             popUpStage.setScene(scene);
             popUpStage.showAndWait();
+        } else if (selected.equals("Busy floors")) {
+            // Create a new stage (window) for the pop-up
+            Stage popUpStage = new Stage();
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.setTitle("Busy floors Clicked");
+
+            // Set up the content of the pop-up
+            VBox layout = new VBox(20);
+            layout.setAlignment(Pos.CENTER);
+            Label messageLabel = new Label("Busiest and the leadst busiesty floors.");
+
+            double busy_percentage = stats.max_min("floors")[0];
+            double least_percentage = stats.max_min("floors")[1];
+            double busy = stats.max_min("floors")[2];
+            double least = stats.max_min("floors")[3];
+
+            String messageString = "";
+
+            if (busy_percentage == 0) {
+                messageString = "Current all floors are empty!";
+            } else {
+                messageString = "Busiest floor: " + busy + "\nLeast busiest floor: " + least;
+            }
+
+            Label displayUser = new Label(messageString);
+
+            // Create a PieChart and add some data
+            PieChart pieChart = new PieChart();
+            pieChart.getData().add(new PieChart.Data("Floor 1", 30.0));
+            pieChart.getData().add(new PieChart.Data("Floor 2", 25.0));
+            pieChart.getData().add(new PieChart.Data("Floor 3", 45.0));
+
+            // Optional: customize chart properties
+            pieChart.setTitle("Computer Usage distribution");
+
+            // Create a layout, add the chart to it
+            BorderPane root = new BorderPane();
+            root.setCenter(pieChart);
+            
+            Button closeButton = new Button("Close");
+            closeButton.setOnAction(e -> popUpStage.close());
+
+            // Add bar chart and other components to the layout
+            layout.getChildren().addAll(messageLabel, displayUser, pieChart, closeButton);
+            layout.setPadding(new Insets(10));
+
+            // Displaying the pop-up window
+            Scene scene = new Scene(layout, 400, 300);
+            popUpStage.setScene(scene);
+            popUpStage.showAndWait();
         }
 
     }
-
- 
 }
