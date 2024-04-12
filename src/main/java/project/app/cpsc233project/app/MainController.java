@@ -56,8 +56,18 @@ public class MainController {
         }
     }
 
+    @FXML
+    private void statsButton(ActionEvent event) {
+        try {
+            Parent statsParent = FXMLLoader.load(getClass().getResource("/project/app/cpsc233project/fxml/stats.fxml"));
+            Scene statsScene = new Scene(statsParent);
 
-
-
-
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(statsScene);
+            window.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Handle the exception here
+        }
+    }
 }

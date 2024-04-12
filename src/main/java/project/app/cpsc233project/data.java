@@ -52,10 +52,11 @@ public class data {
     }
     
 
-    public static void reader(String fileName) {
+    public static String reader(String fileName) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
+            String printer = "";
             br.readLine(); // Skip header line
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
@@ -78,9 +79,12 @@ public class data {
                         Computers.AddUser(userComputer);
                         break;
                 }
+                printer += line; 
             }
+            return printer;
+
         } catch (IOException e) {
-            e.printStackTrace();
+            return "Error: " + e.getMessage();
         }
     }
     

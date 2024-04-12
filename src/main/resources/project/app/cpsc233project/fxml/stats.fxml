@@ -42,7 +42,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.statsController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -90,8 +90,8 @@
             <Font size="26.0" />
           </font>
         </Label>
-            <Button layoutX="63.0" layoutY="91.0" mnemonicParsing="false" text="Busiest/Least Busiest" />
-            <Button layoutX="63.0" layoutY="206.0" mnemonicParsing="false" text="User List" />
+            <Button layoutX="63.0" layoutY="91.0" mnemonicParsing="false" text="Busiest/Least Busiest" fx:id="busyButton" onAction="#busyButtonAction" />
+            <Button layoutX="63.0" layoutY="206.0" mnemonicParsing="false" text="User List" fx:id="userList" onAction="#userListButton"/>
             <Label alignment="CENTER" layoutX="31.0" layoutY="58.0" style="&#10;" text="General Statistics" textAlignment="CENTER" wrapText="false">
                <font>
                   <Font size="18.0" />

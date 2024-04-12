@@ -93,7 +93,7 @@
             <Label layoutX="220.0" layoutY="119.0" text="Please choose of the following option" />
             <Button fx:id="welcomePageSignIn" layoutX="177.0" layoutY="175.0" mnemonicParsing="false" onAction="#SignInButton" text="SIGN IN" />
             <Button fx:id="welcomePageSignOut" layoutX="420.0" layoutY="175.0" mnemonicParsing="false" onAction="#SignOutButton" text="SIGN OUT" />
-            <Button fx:id="welcomePageSignIn1" layoutX="290.0" layoutY="230.0" mnemonicParsing="false" onAction="#SignInButton" text="STATISTICS" />
+            <Button fx:id="welcomePageSignIn1" layoutX="290.0" layoutY="230.0" mnemonicParsing="false" onAction="#statsButton" text="STATISTICS" />
       </children>
     </AnchorPane>
   </children>
