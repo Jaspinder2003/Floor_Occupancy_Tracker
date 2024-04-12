@@ -9,11 +9,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import project.app.cpsc233project.SignOut;
 import project.app.cpsc233project.data;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class SignOutController {
     @FXML
@@ -49,12 +54,17 @@ public class SignOutController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-String filename="C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv";
+
+    /**
+     * we use this filename as a stering path when we need to remove the
+     * object from the csv file
+     */
+    String filename="C:\\Users\\jaspi\\OneDrive\\Desktop\\cpsc-233-group-proeject-w24-main\\cpsc-233-group-proeject-w24-master\\ProjectDB.csv";
     @FXML
     private void handleSubmit() {
         int ucid = Integer.parseInt(UCID.getText()); // Get UCID from TextField
         String fileName = "path/to/ProjectDB.csv"; // Adjust path as necessary
-        if (!data.ucidExists("C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv", ucid)) {
+        if (!data.ucidExists("C:\\Users\\jaspi\\OneDrive\\Desktop\\cpsc-233-group-proeject-w24-main\\cpsc-233-group-proeject-w24-master\\ProjectDB.csv", ucid)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Sign Out Error");
@@ -76,14 +86,24 @@ String filename="C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/Proje
             if (result.isPresent() && result.get() == buttonTypeYes) {
                 // User chose YES
                 signOutSuccess();
-                SignOut signout = new SignOut();
-                signout.executeS(ucid);
+                try {
+                    removeUcidFromCsv(filename, ucid);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    showAlert("Error", "Failed to update the database.");
+                    return;
+                }
             } else {
                 // User chose NO or closed the dialog
                 exitPage();
             }
         }
     }
+
+    /**
+     * this handles the sing out process and checks that the UCID entered is a positive integer
+     * and it throws a pop up alert if it is not
+     */
 
     private void signOutSuccess() {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -92,8 +112,7 @@ String filename="C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/Proje
         infoAlert.setContentText("You have successfully signed out and released the space.");
         infoAlert.showAndWait();
         returnToHomepage();
-        // Additional logic to clear data, redirect user, etc.
-    }
+    }// this is the method that is used to shows if the sign out process was successful
 
     private void exitPage() {
         Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -104,6 +123,14 @@ String filename="C:/Users/Randh/Desktop/cpsc-233-group-proeject-w24-master/Proje
 
         returnToHomepage();
     }
+    private void removeUcidFromCsv(String filePath, int ucid) throws IOException {
+        File inputFile = new File(filePath);
+        List<String> lines = Files.readAllLines(inputFile.toPath());
+        List<String> updatedLines = lines.stream()
+                .filter(line -> !line.contains(String.valueOf(ucid)))
+                .collect(Collectors.toList());
+        Files.write(Paths.get(filePath), updatedLines);
+    }// this removes object from the csv file
     private void returnToHomepage(){
         Platform.runLater(() -> {
             try {
