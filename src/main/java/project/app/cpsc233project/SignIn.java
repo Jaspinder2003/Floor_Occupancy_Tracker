@@ -22,7 +22,7 @@ public class SignIn extends Menu {
         }
 
         // Create a data object for the user
-        data userData = new data(name, studentID, floorNumber);
+        data userData = new data(name, studentID, floorNumber, area);
         data.AddUser(userData);
         data.writer(data.dataObjects, "ProjectDB.csv", "Data");
 
@@ -36,7 +36,7 @@ public class SignIn extends Menu {
 
         // Check for computer usage and update accordingly
         if (computerUsage) {
-            Computers userComputer = new Computers(name, studentID, floorNumber);
+            Computers userComputer = new Computers(name, studentID, floorNumber,area);
             Computers.AddUser(userComputer);
             data.writer(Computers.ComputerObjects, "ProjectDB.csv", "Computers");
 
