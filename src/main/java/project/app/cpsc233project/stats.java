@@ -72,65 +72,73 @@ public class stats {
      * @return An array containing two integers, the first represents the floor/station with the maximum vacancies, 
      * and the second with the minimum vacancies.
      */
-    public static int[] max_min(String area) {
-        int max = 0; // Track the floor with the maximum vacancy.
-        int min = 0; // Track the floor with the minimum vacancy.
+    public static double[] max_min(String area) {
+        // Initialize the output array
+        double[] output = new double[4];
 
-        int max_value = Integer.MIN_VALUE; // To compare value with different floors to find maximum.
-        int min_value = Integer.MAX_VALUE; // To compare value with different floors to find minimum.
+        double floor_1 = 0;
+        double floor_2 = 0;
+        double floor_3 = 0;
 
-        int[] output = new int[2]; // Holds the result [max, min].
-        // Switch statement to decide the operation based on the area specified
         switch (area) {
             case "floors":
-                // Initialize max and min to 0 for the 'floors' case
-                max = 0;
-                min = 0;
-                // Variable compare_value is not initialized in this snippet, it should hold the comparison value for vacancy counts
-
-                // Iterate through each floor in the data.floor_vacancy HashMap
                 for (int floor : data.floor_vacancy.keySet()) {
-                    // If current floor's vacancy is higher than the last compared value, update compare_value and max floor
-                    if (max_value < data.floor_vacancy.get(floor)) {
-                        max_value = data.floor_vacancy.get(floor); // Update max to the new highest vacancy count
-                        max = floor; // Update max to the current floor
-                    }
-                    // If current floor's vacancy is lower than the last compared value, update min floor
-                    else if (min_value > data.floor_vacancy.get(floor)) {
-                        min_value = data.floor_vacancy.get(floor); // Update min to the new least vacancy count
-                        min = floor; // Update min to the current floor
+                    if (floor == 1) {
+                        floor_1 = (87 - data.floor_vacancy.get(floor))/100;
+                    } else if (floor == 2) {
+                        floor_2 = (134 - data.floor_vacancy.get(floor))/100;
+                    } else {
+                        floor_3 = (200 - data.floor_vacancy.get(floor))/100;
                     }
                 }
                 break;
+        
             case "computers":
-                // Initialize max and min to 0 for the 'computers' case
-                max = 0;
-                min = 0;
-
-                // Iterate through each floor in the data.computer_vacancy HashMap
-                for (int floor : data.computer_vacancy.keySet()) {
-                    // If current floor's computer vacancy is higher than the last compared value, update compare_value and max floor
-                    if (max_value < data.computer_vacancy.get(floor)) {
-                        max_value = data.computer_vacancy.get(floor); // Update max to the new highest computer vacancy count
-                        max = floor; // Update max to the current floor
-                    }
-                    // If current floor's computer vacancy is lower than the last compared value, update min floor
-                    else if (min_value > data.computer_vacancy.get(floor)) {
-                        min_value = data.floor_vacancy.get(floor); // Update min to the new least vacancy count
-                        min = floor; // Update min to the current floor
+                for (int floor : data.floor_vacancy.keySet()) {
+                    if (floor == 1) {
+                        floor_1 = (30 - data.floor_vacancy.get(floor))/100;
+                    } else if (floor == 2) {
+                        floor_2 = (60 - data.floor_vacancy.get(floor))/100;
+                    } else {
+                        floor_3 = (75 - data.floor_vacancy.get(floor))/100;
                     }
                 }
                 break;
         }
 
-        // Assign the max floor to the first element and min floor to the second element of the output array
+        // Initialize the maximum and minimum vacancies
+        double max = Math.max(Math.max(floor_1, floor_2), floor_3);
+        double min = Math.min(Math.min(floor_1, floor_2), floor_3);
+
+        int busy = 0;
+        int  least_busy = 0;
+
+        if (max == floor_1) {
+            busy = 1;
+        } else if (max == floor_2) {
+            busy = 2;
+        } else {
+            busy = 3;
+        }
+
+        if (min == floor_1) {
+            least_busy = 1;
+        } else if (min == floor_2) {
+            least_busy = 2;
+        } else {
+            least_busy = 3;
+        }
+
         output[0] = max;
         output[1] = min;
+        output[2] = busy;
+        output[3] = least_busy;
 
-        // Return the output array containing the floors with the maximum and minimum vacancies
         return output;
-
     }
+
+
+
         public String formatAsGrid(ArrayList<data> names) {
         String nm="";
         StringBuilder sb = new StringBuilder();
