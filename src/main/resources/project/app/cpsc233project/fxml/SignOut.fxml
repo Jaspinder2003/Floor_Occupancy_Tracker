@@ -110,7 +110,7 @@
                   <Font size="9.0" />
                </font>
             </Label>
-            <Button layoutX="479.0" layoutY="182.0" mnemonicParsing="false" text="Submit" />
+            <Button fx:id="submit" layoutX="479.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
       </children>
     </AnchorPane>
   </children>
