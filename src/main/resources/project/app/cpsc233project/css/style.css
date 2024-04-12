@@ -1,0 +1,29 @@
+/* styles.css */
+.image-view {
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+}
+
+.maroon-box {
+    -fx-background-color: #800000; /* Maroon color */
+    -fx-padding: 20px;
+}
+
+.title-text {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.option-text {
+    -fx-text-fill: white;
+}
+
+.maroon-button {
+    -fx-background-color: white;
+    -fx-text-fill: #800000;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-padding: 10px 20px;
+}
