@@ -11,6 +11,8 @@ public class data {
     private Integer id;
     private String name;
     private Integer ufloor;
+
+    private String area;
  
     public static HashMap<Integer, Integer> floor_vacancy = new HashMap<Integer, Integer>();//stores and manages availability on each floor.
     
@@ -18,10 +20,11 @@ public class data {
     static HashSet<data> dataObjects = new HashSet<data>(); // Set to store objects
 
 
-    public data(String name,int id, int floor){
+    public data(String name,int id, int floor, String area){
         this.name=name;
         this.id=id;
         this.ufloor=floor;
+        this.area=area;
 
     }
 
@@ -59,17 +62,17 @@ public class data {
 
                 switch (elementType) {
                     case "Data":
-                        data userData = new data(name, id, ufloor);
-                        data.AddUser(userData);
+                        //data userData = new data(name, id, ufloor, area);
+                        //data.AddUser(userData);
                         break;
                     case "Floor":
-                        floor userFloor = new floor(name, id, ufloor);
-                        floor.AddUser(userFloor);
-                        break;
+                       // floor userFloor = new floor(name, id, ufloor, area);
+                        //floor.AddUser(userFloor);
+                       // break;
                     case "Computers":
-                        Computers userComputer = new Computers(name, id, ufloor);
-                        Computers.AddUser(userComputer);
-                        break;
+                        //Computers userComputer = new Computers(name, id, ufloor, area);
+                       // Computers.AddUser(userComputer);
+                      //  break;
                 }
             }
         } catch (IOException e) {
@@ -105,6 +108,13 @@ public class data {
     public String getName(){
         return name;
     }
+
+    public String getarea(){
+        return area;
+    }
+
+
+
 
     public int getfloor(){
         return ufloor;
