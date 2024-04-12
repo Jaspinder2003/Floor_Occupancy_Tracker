@@ -14,7 +14,7 @@ class floor extends data{
 
 
     public floor(String name,int id,int floor, String area){
-        super(name,id, floor);
+        super(name,id, floor, area);
         this.name=name;
         this.id=id;
         this.floor=floor;
