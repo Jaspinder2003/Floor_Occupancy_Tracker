@@ -2,12 +2,19 @@ package project.app.cpsc233project.app;
 
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import project.app.cpsc233project.Menu;
 import project.app.cpsc233project.SignIn;
+
+import java.net.URL;
 
 public class SignInController {
 
@@ -75,15 +82,11 @@ public class SignInController {
             SignIn signin = new SignIn();
 
             signin.execute(NametextFieldValue, Integer.parseInt(UcidtextFieldValue), stringToBoolean(ComputerComboBoxValue), floorComboBoxValue, AreaComboBoxValue);
-            errorLabel.setVisible(true);
+            exitPage();
 
         } else {
             // Data is invalid, show error message
             showErrorDialog("Please enter all data before submitting.");
-
-            // Alternatively, you could set an error message in a label on the screen
-            errorLabel.setText("Please fill in all fields.");
-            errorLabel.setVisible(true);
         }
     }
 
@@ -112,8 +115,33 @@ public class SignInController {
         alert.showAndWait();
     }
 
+    private void exitPage() {
+        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
+        infoAlert.setTitle("Sign In Successful");
+        infoAlert.setHeaderText(null);
+        infoAlert.setContentText("Sign In Was successful. Returning to the homepage.");
+        infoAlert.showAndWait();
+
+        returnToHomepage();
+    }
+
+
+    private void returnToHomepage() {
+        Platform.runLater(() -> {
+            try {
+                URL url = getClass().getResource("/project/app/cpsc233project/fxml/Main.fxml");
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) name.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
 
 
 }
-
-
