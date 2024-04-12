@@ -1,4 +1,6 @@
 package project.app.cpsc233project.app;
+import project.app.cpsc233project.stats;
+
 
 
 
@@ -38,6 +40,14 @@ public class SignInController {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private Label floorVacancyLabel; // Label to display floor vacancy info
+
+    @FXML
+    private Label computerVacancyLabel; // Label to display computer vacancy info
+
+
+
 
     @FXML
     public void initialize() {
@@ -59,8 +69,22 @@ public class SignInController {
                 }
             }
         });
+        updateVacancyLabels();
 
     }
+
+    private void updateVacancyLabels() {
+        // Call stats methods to get the vacancy information
+        String floorVacancy = stats.show_vacancy("all floors");
+        String computerVacancy = stats.show_vacancy("all comps");
+
+        // Update the labels on the JavaFX Application Thread
+        Platform.runLater(() -> {
+            floorVacancyLabel.setText(floorVacancy);
+            computerVacancyLabel.setText(computerVacancy);
+        });
+    }
+
 
     @FXML
     private void handleSubmit(ActionEvent event) {
@@ -76,19 +100,32 @@ public class SignInController {
         String NametextFieldValue = name.getText();
         String UcidtextFieldValue = ucid.getText();
 
+        // Check if UCID contains only digits
+        if (!UcidtextFieldValue.matches("\\d+")) {
+            showErrorDialog("UCID must contain only numbers.");
+            return; // Stop processing since the UCID is not valid
+        }
+
         // Check if both fields have been filled
         if (floorComboBoxValue != null && AreaComboBoxValue != null && !NametextFieldValue.trim().isEmpty() && !UcidtextFieldValue.trim().isEmpty()) {
-            // Data is valid, process the submission
-            SignIn signin = new SignIn();
+            try {
+                // Attempt to parse UCID as integer
+                int ucidNumber = Integer.parseInt(UcidtextFieldValue.trim());
 
-            signin.execute(NametextFieldValue, Integer.parseInt(UcidtextFieldValue), stringToBoolean(ComputerComboBoxValue), floorComboBoxValue, AreaComboBoxValue);
-            exitPage();
-
+                // Data is valid, process the submission
+                SignIn signin = new SignIn();
+                signin.execute(NametextFieldValue, ucidNumber, stringToBoolean(ComputerComboBoxValue), floorComboBoxValue, AreaComboBoxValue);
+                exitPage();
+            } catch (NumberFormatException e) {
+                showErrorDialog("UCID must be a valid number.");
+            }
         } else {
             // Data is invalid, show error message
             showErrorDialog("Please enter all data before submitting.");
         }
     }
+
+
 
     public static boolean stringToBoolean(String str) {
         if (str == null) {
