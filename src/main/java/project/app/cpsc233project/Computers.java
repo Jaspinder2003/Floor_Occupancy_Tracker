@@ -26,6 +26,9 @@ class Computers extends data{
     public static void AddUser(Computers computers) {
         ComputerObjects.add(computers);
     }
+    public String toCsvString() {
+        return "Computer," + id + "," + name + "," + floor;
+    }
 
     public int getComputerAvailability(Integer floor,data data){
         HashMap<Integer,Integer> m =data.getFloor_vacancy();
