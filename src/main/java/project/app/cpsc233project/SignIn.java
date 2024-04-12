@@ -8,7 +8,6 @@ public class SignIn extends Menu {
     
 
     @Override
-<<<<<<< HEAD
     public void execute(String name, int studentID, boolean computerUsage, String floorN, String area) {
 
         System.out.println("Executing sign-in sequence...");
@@ -24,26 +23,11 @@ public class SignIn extends Menu {
 
         // Create a data object for the user
         data userData = new data(name, studentID, floorNumber);
-=======
-    public void execute(String name, int studentID, boolean ComputerUsage) {
-        System.out.println("Please enter your full name:");
-        String n = scanner.nextLine();
-
-        System.out.println("Please enter your UCID:");
-        int id = getIntegerInput();
-
-        // Create a data object for the user
-        data userData = new data(n, id, floorInfo[0]);
->>>>>>> 36ded6f (Made some correction in code for contrtoller and fxml.)
         data.AddUser(userData);
         data.writer(data.dataObjects, "ProjectDB.csv", "Data");
 
         // Update floor availability
-<<<<<<< HEAD
         floor userFloor = new floor(name, studentID, floorNumber, area);
-=======
-        floor userFloor = new floor(n, id, floorInfo[0]);
->>>>>>> 36ded6f (Made some correction in code for contrtoller and fxml.)
         floor.AddUser(userFloor);
         data.writer(floor.floorObjects, "ProjectDB.csv", "Floor");
 
@@ -51,13 +35,8 @@ public class SignIn extends Menu {
         userFloor.new_flr_ava(floorNumber, currentFloorAvailability - 1, userData); // Assuming each sign-in reduces availability by 1
 
         // Check for computer usage and update accordingly
-<<<<<<< HEAD
         if (computerUsage) {
             Computers userComputer = new Computers(name, studentID, floorNumber);
-=======
-        if (askForComputerUsage()) {
-            Computers userComputer = new Computers(n, id, floorInfo[0]);
->>>>>>> 36ded6f (Made some correction in code for contrtoller and fxml.)
             Computers.AddUser(userComputer);
             data.writer(Computers.ComputerObjects, "ProjectDB.csv", "Computers");
 
@@ -67,10 +46,5 @@ public class SignIn extends Menu {
             }
 
         }
-<<<<<<< HEAD
-=======
-     
-        System.out.println("You have successfully signed in.");
->>>>>>> 36ded6f (Made some correction in code for contrtoller and fxml.)
     }
 }
