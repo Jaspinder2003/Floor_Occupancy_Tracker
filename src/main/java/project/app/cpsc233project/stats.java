@@ -74,6 +74,7 @@ public class stats {
      * and the second with the minimum vacancies.
      */
     public static double[] max_min(String area) {
+
         // Initialize the output array
         double[] output = new double[4];
 
@@ -81,27 +82,31 @@ public class stats {
         double floor_2 = 0;
         double floor_3 = 0;
 
+        double comp_1 = 0;
+        double comp_2 = 0;
+        double comp_3 = 0;
+
         switch (area) {
             case "floors":
                 for (int floor : data.floor_vacancy.keySet()) {
                     if (floor == 1) {
-                        floor_1 = (87 - data.floor_vacancy.get(floor))/100;
+                        floor_1 = ((87 - data.floor_vacancy.get(floor))/87)*100;
                     } else if (floor == 2) {
-                        floor_2 = (134 - data.floor_vacancy.get(floor))/100;
+                        floor_2 = ((134 - data.floor_vacancy.get(floor))/134)*100;
                     } else {
-                        floor_3 = (200 - data.floor_vacancy.get(floor))/100;
+                        floor_3 = ((200 - data.floor_vacancy.get(floor))/200)*100;
                     }
                 }
                 break;
         
             case "computers":
-                for (int floor : data.floor_vacancy.keySet()) {
+                for (int floor : data.computer_vacancy.keySet()) {
                     if (floor == 1) {
-                        floor_1 = (30 - data.floor_vacancy.get(floor))/100;
+                        comp_1 = (30 - data.computer_vacancy.get(floor))/100;
                     } else if (floor == 2) {
-                        floor_2 = (60 - data.floor_vacancy.get(floor))/100;
+                        comp_2 = (60 - data.computer_vacancy.get(floor))/100;
                     } else {
-                        floor_3 = (75 - data.floor_vacancy.get(floor))/100;
+                        comp_3 = (75 - data.computer_vacancy.get(floor))/100;
                     }
                 }
                 break;
@@ -109,63 +114,35 @@ public class stats {
 
         // Initialize the maximum and minimum vacancies
         double max = Math.max(Math.max(floor_1, floor_2), floor_3);
+        //System.out.println(floor_1 + "" + floor_2 + "" + floor_3);
         double min = Math.min(Math.min(floor_1, floor_2), floor_3);
 
-        int busy = 0;
-        int  least_busy = 0;
-
         if (max == floor_1) {
-            busy = 1;
+            output[2] = 1;
         } else if (max == floor_2) {
-            busy = 2;
+            output[2] = 1;
         } else {
-            busy = 3;
+            output[2] = 1;
         }
 
         if (min == floor_1) {
-            least_busy = 1;
+            output[3] = 1;
         } else if (min == floor_2) {
-            least_busy = 2;
+            output[3] = 2;
         } else {
-            least_busy = 3;
+            output[3] = 3;
         }
 
         output[0] = max;
         output[1] = min;
-        output[2] = busy;
-        output[3] = least_busy;
 
         return output;
     }
-
-    static HashSet<Integer> floor1 = new HashSet<Integer>();
-    static HashSet<Integer> floor2 = new HashSet<Integer>();
-    static HashSet<Integer> floor3 = new HashSet<Integer>();
-
 
     public static int num_comp_user() {
         int num_comp_user = Computers.ComputerObjects.size();
         return num_comp_user;
     }
-
-    public static int floor1_occupant_size() {
-        int floor1_occupant_size = floor1.size();
-        return floor1_occupant_size;
-
-    }
-
-    public static int floor2_occupant_size() {
-        int floor2_occupant_size = floor2.size();
-        return floor2_occupant_size;
-
-    }
-
-    public static int floor3_occupant_size() {
-        int floor3_occupant_size = floor3.size();
-        return floor3_occupant_size;
-
-    }
-
 
         public String formatAsGrid(ArrayList<data> names) {
         String nm="";
