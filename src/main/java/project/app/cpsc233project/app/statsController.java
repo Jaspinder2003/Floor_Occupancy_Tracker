@@ -53,6 +53,8 @@ public class statsController {
         statsChoice.setItems(FXCollections.observableArrayList("General Usage", "Busy floors"));
     }
 
+    private String message = data.reader("/Users/yadi/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv");
+
     @FXML
     private void userListButton() {
         // Create a new stage (window) for the pop-up
@@ -64,8 +66,7 @@ public class statsController {
         VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
         Label messageLabel = new Label("Choose an option to view list of users.");
-        Label displayUser = new Label(data.reader("/Users/yadi/Desktop/gp/cpsc-233-group-proeject-w24-master/ProjectDB.csv"));
-        //System.out.println(data.reader("/Users/yadi/Desktop/gp/cpsc-233-group-proeject-w24-master/src/main/java/project/app/cpsc233project/ProjectDB.csv"));
+        Label displayUser = new Label(message);
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> popUpStage.close());
 
@@ -99,15 +100,10 @@ public class statsController {
             XYChart.Series<String, Number> series1 = new XYChart.Series<>();
             series1.setName("Vacancy"); // Name the series
 
-            int floor1_occupants = stats.floor1_occupant_size();
-            int floor2_occupants = stats.floor2_occupant_size();
-            int floor3_occupants = stats.floor3_occupant_size();
-
-
             // Add data points
-            series1.getData().add(new XYChart.Data<>("Floor 1", 87 - floor1_occupants));
-            series1.getData().add(new XYChart.Data<>("Floor 2", 134 - floor2_occupants));
-            series1.getData().add(new XYChart.Data<>("Floor 3", 200 - floor3_occupants));
+            series1.getData().add(new XYChart.Data<>("Floor 1\n" + data.floor_vacancy.get(1), data.floor_vacancy.get(1)));
+            series1.getData().add(new XYChart.Data<>("Floor 2\n" + data.floor_vacancy.get(2), data.floor_vacancy.get(2)));
+            series1.getData().add(new XYChart.Data<>("Floor 3\n" + data.floor_vacancy.get(3), data.floor_vacancy.get(3)));
 
             barChart.getData().add(series1);
 
@@ -143,7 +139,6 @@ public class statsController {
             Label messageLabel = new Label("Busiest and the least busiesty floors.");
 
             double busy_percentage = stats.max_min("floors")[0];
-            double least_percentage = stats.max_min("floors")[1];
             double busy = stats.max_min("floors")[2];
             double least = stats.max_min("floors")[3];
 
@@ -154,7 +149,6 @@ public class statsController {
                 messageString = "Current all floors are empty!";
             } else {
                 messageString = "Busiest floor: " + busy + "\nLeast busiest floor: " + least;
-
 
                 double compUsers = stats.num_comp_user();
 
@@ -170,6 +164,7 @@ public class statsController {
                 BorderPane root = new BorderPane();
                 root.setCenter(pieChart);
             }
+
             Label displayUser = new Label(messageString);
 
             Button closeButton = new Button("Close");
