@@ -16,7 +16,20 @@ public class data {
     private String area;
  
     public static HashMap<Integer, Integer> floor_vacancy = new HashMap<Integer, Integer>();//stores and manages availability on each floor.
+
+    static {
+        floor_vacancy.put(1, 87);
+        floor_vacancy.put(2, 134);
+        floor_vacancy.put(3, 200);
+    }
+
+    public static HashMap<Integer, Integer> computer_vacancy = new HashMap<Integer, Integer>();//stores and manages availability of computers on each floor.
     
+    static{
+        computer_vacancy.put(1, 30);
+        computer_vacancy.put(2, 60);
+        computer_vacancy.put(3, 75);
+    }
  
     static HashSet<data> dataObjects = new HashSet<data>(); // Set to store objects
 
@@ -75,13 +88,12 @@ public class data {
                         floor userFloor = new floor(name, id, ufloor, area);
                         floor.AddUser(userFloor);
                         if (ufloor == 1) {
-                            stats.floor1.add(ufloor);
+                            floor_vacancy.put(1, floor_vacancy.get(1) - 1);
                         } else if (ufloor == 2) {
-                            stats.floor2.add(ufloor);
+                            floor_vacancy.put(2, floor_vacancy.get(2) - 1);
                         } else if (ufloor == 3) {
-                            stats.floor3.add(ufloor);
+                            floor_vacancy.put(3, floor_vacancy.get(3) - 1);
                         }
-
                         break;
                     case "Computers":
                         Computers userComputer = new Computers(name, id, ufloor, area);
@@ -112,13 +124,6 @@ public class data {
         }
         return false; // UCID not found
     }
-    
-
-    static {
-        floor_vacancy.put(1, 87);
-        floor_vacancy.put(2, 134);
-        floor_vacancy.put(3, 200);
-    }
 
     public String getName(){
         return name;
@@ -148,13 +153,6 @@ public class data {
         floor_vacancy.put(key,value);//putting the new value in place of the given key
     }
 
-
-    public static HashMap<Integer, Integer> computer_vacancy = new HashMap<Integer, Integer>();//stores and manages availability of computers on each floor.
-    static{
-        computer_vacancy.put(1, 30);
-        computer_vacancy.put(2, 60);
-        computer_vacancy.put(3, 75);
-    }
     public HashMap<Integer, Integer> getComputer_vacancy() {
         return computer_vacancy;
     }
