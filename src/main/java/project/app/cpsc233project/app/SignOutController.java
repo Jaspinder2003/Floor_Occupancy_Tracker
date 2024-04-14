@@ -59,18 +59,30 @@ public class SignOutController {
      * we use this filename as a stering path when we need to remove the
      * object from the csv file
      */
-    String filename="C:\\Users\\jaspi\\OneDrive\\Desktop\\cpsc-233-group-proeject-w24-main\\cpsc-233-group-proeject-w24-master\\ProjectDB.csv";
+    String filename="C:\\Users\\jaspi\\OneDrive\\Desktop\\Group Project 233\\ProjectDB.csv";
     @FXML
     private void handleSubmit() {
+        String input=UCID.getText();
+        if (!input.matches("\\d+")) {
+            showAlert("invalid input","UCID must contain only numbers.");
+            return; // Stop processing since the UCID is not valid
+        }
         int ucid = Integer.parseInt(UCID.getText()); // Get UCID from TextField
         String fileName = "path/to/ProjectDB.csv"; // Adjust path as necessary
-        if (!data.ucidExists("C:\\Users\\jaspi\\OneDrive\\Desktop\\cpsc-233-group-proeject-w24-main\\cpsc-233-group-proeject-w24-master\\ProjectDB.csv", ucid)) {
+        if (ucid<=0) {
+
+            showAlert("Invalid input", "Please enter a valid number for UCID.");
+
+        }if (!input.matches("\\d+")) {
+            showAlert("invalid input","UCID must contain only numbers.");
+            return; // Stop processing since the UCID is not valid
+        } else if (!data.ucidExists("C:\\Users\\jaspi\\OneDrive\\Desktop\\Group Project 233\\ProjectDB.csv", ucid)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Sign Out Error");
             alert.setContentText("UCID does not exist. Please ensure you have signed in.");
             alert.showAndWait();
-        }else {
+        } else {
             // UCID exists, ask for confirmation to release space
             Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmAlert.setTitle("Confirm Sign Out");
