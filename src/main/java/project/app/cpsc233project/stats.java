@@ -1,6 +1,5 @@
 package project.app.cpsc233project;
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class stats {
     /**
@@ -82,19 +81,18 @@ public class stats {
         double floor_2 = 0;
         double floor_3 = 0;
 
-        double comp_1 = 0;
-        double comp_2 = 0;
-        double comp_3 = 0;
-
         switch (area) {
             case "floors":
                 for (int floor : data.floor_vacancy.keySet()) {
                     if (floor == 1) {
-                        floor_1 = ((87 - data.floor_vacancy.get(floor))/87)*100;
+                        double f1 = 87 - data.floor_vacancy.get(floor);
+                        floor_1 = (f1/87)*100;
                     } else if (floor == 2) {
-                        floor_2 = ((134 - data.floor_vacancy.get(floor))/134)*100;
+                        double f2 = 134 - data.floor_vacancy.get(floor);
+                        floor_2 = (f2/134)*100;
                     } else {
-                        floor_3 = ((200 - data.floor_vacancy.get(floor))/200)*100;
+                        double f3 = 200 - data.floor_vacancy.get(floor);
+                        floor_3 = (f3/200)*100;
                     }
                 }
                 break;
@@ -102,11 +100,14 @@ public class stats {
             case "computers":
                 for (int floor : data.computer_vacancy.keySet()) {
                     if (floor == 1) {
-                        comp_1 = (30 - data.computer_vacancy.get(floor))/100;
+                        double f1 = 30 - data.computer_vacancy.get(floor);
+                        floor_1 = (f1/30)*100;
                     } else if (floor == 2) {
-                        comp_2 = (60 - data.computer_vacancy.get(floor))/100;
+                        double f2 = 60 - data.computer_vacancy.get(floor);
+                        floor_2 = (f2/60)*100;
                     } else {
-                        comp_3 = (75 - data.computer_vacancy.get(floor))/100;
+                        double f3 = 75 - data.computer_vacancy.get(floor);
+                        floor_3 = (f3/75)*100;
                     }
                 }
                 break;
@@ -114,15 +115,14 @@ public class stats {
 
         // Initialize the maximum and minimum vacancies
         double max = Math.max(Math.max(floor_1, floor_2), floor_3);
-        //System.out.println(floor_1 + "" + floor_2 + "" + floor_3);
         double min = Math.min(Math.min(floor_1, floor_2), floor_3);
 
         if (max == floor_1) {
             output[2] = 1;
         } else if (max == floor_2) {
-            output[2] = 1;
+            output[2] = 2;
         } else {
-            output[2] = 1;
+            output[2] = 3;
         }
 
         if (min == floor_1) {
