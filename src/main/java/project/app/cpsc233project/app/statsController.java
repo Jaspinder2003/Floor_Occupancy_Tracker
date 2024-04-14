@@ -1,18 +1,11 @@
 package project.app.cpsc233project.app;
 
-import java.io.IOException;
-
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
@@ -42,7 +35,9 @@ public class statsController {
     @FXML
     private Button userList;
 
+    @SuppressWarnings("unused")
     private Stage stage;
+    @SuppressWarnings("exports")
     public void setStage(Stage stage) {
         this.stage = stage;
     }
@@ -50,7 +45,7 @@ public class statsController {
     @FXML
     public void initialize() {
         // Populate the ComboBox items
-        statsChoice.setItems(FXCollections.observableArrayList("General Usage", "Busy floors"));
+        statsChoice.setItems(FXCollections.observableArrayList("General Usage and Busy Floors", "Computer Usage Distribution"));
     }
 
     private String message = data.reader("/Users/yadi/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv");
@@ -84,7 +79,7 @@ public class statsController {
     private void statsChoice() {
         String selected = statsChoice.getSelectionModel().getSelectedItem();
 
-        if (selected.equals("General Usage")) {
+        if (selected.equals("General Usage and Busy Floors")) {
             // Create axes for the bar chart
             CategoryAxis xAxis = new CategoryAxis();
             xAxis.setLabel("Floors");
@@ -94,7 +89,7 @@ public class statsController {
 
             // Create the bar chart
             BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-            barChart.setTitle("TFDL Floor Vacancy Bar Chart");
+            String message = "TFDL Floor Vacancy Bar Chart";
 
             // Add data to the bar chart
             XYChart.Series<String, Number> series1 = new XYChart.Series<>();
@@ -107,6 +102,18 @@ public class statsController {
 
             barChart.getData().add(series1);
 
+            double busy_percentage = stats.max_min("floors")[0];
+            double busy = stats.max_min("floors")[2];
+            double least = stats.max_min("floors")[3];
+
+            if (busy_percentage == 0) {
+                message += "\n\nCurrent all floors are empty!";
+            } else {
+                message += "\n\nBusiest floor: " + busy + "\nLeast busiest floor: " + least;
+            }
+
+            barChart.setTitle(message);
+
             // Create a new stage (window) for the pop-up
             Stage popUpStage = new Stage();
             popUpStage.initModality(Modality.APPLICATION_MODAL);
@@ -115,7 +122,7 @@ public class statsController {
             // Set up the content of the pop-up
             VBox layout = new VBox(20);
             layout.setAlignment(Pos.CENTER);
-            Label messageLabel = new Label("The Busy Button has been clicked!");
+            Label messageLabel = new Label("Per floor data of TFDL");
             Button closeButton = new Button("Close");
             closeButton.setOnAction(e -> popUpStage.close());
 
@@ -124,19 +131,19 @@ public class statsController {
             layout.setPadding(new Insets(10));
 
             // Displaying the pop-up window
-            Scene scene = new Scene(layout, 300, 300);
+            Scene scene = new Scene(layout, 400, 500);
             popUpStage.setScene(scene);
             popUpStage.showAndWait();
-        } else if (selected.equals("Busy floors")) {
+        } else if (selected.equals("Computer Usage Distribution")) {
             // Create a new stage (window) for the pop-up
             Stage popUpStage = new Stage();
             popUpStage.initModality(Modality.APPLICATION_MODAL);
-            popUpStage.setTitle("Busy floors Clicked");
+            popUpStage.setTitle("Computer Usage Distribution");
 
             // Set up the content of the pop-up
             VBox layout = new VBox(20);
             layout.setAlignment(Pos.CENTER);
-            Label messageLabel = new Label("Busiest and the least busiesty floors.");
+            Label messageLabel = new Label("Computer usage distribution in TFDL.");
 
             double busy_percentage = stats.max_min("floors")[0];
             double busy = stats.max_min("floors")[2];
@@ -150,12 +157,15 @@ public class statsController {
             } else {
                 messageString = "Busiest floor: " + busy + "\nLeast busiest floor: " + least;
 
-                double compUsers = stats.num_comp_user();
+                double compUsers = 165 - (data.computer_vacancy.get(1) + data.computer_vacancy.get(2) + data.computer_vacancy.get(3));
+                double compUsers_percent = (compUsers/165) * 100;
+                double non_compUsers = (421 - (data.floor_vacancy.get(1) + data.floor_vacancy.get(2) + data.floor_vacancy.get(3))) - compUsers;
+                double non_compUsers_percent = (non_compUsers/165)*100;
 
                 // Create a PieChart and add some data
-                pieChart.getData().add(new PieChart.Data("Computer users", compUsers));
-                pieChart.getData().add(new PieChart.Data("Non-computer users", 25.0));
-                pieChart.getData().add(new PieChart.Data("Empty computers", 45.0));
+                pieChart.getData().add(new PieChart.Data("Computer users", compUsers_percent));
+                pieChart.getData().add(new PieChart.Data("Non-computer users", non_compUsers_percent));
+                pieChart.getData().add(new PieChart.Data("Empty computers", (100 - (compUsers + non_compUsers_percent))));
 
                 // Optional: customize chart properties
                 pieChart.setTitle("Computer Usage distribution");
