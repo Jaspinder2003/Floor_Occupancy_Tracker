@@ -34,7 +34,7 @@ class Computers extends data{
     }
 
     public int getComputerAvailability(Integer floor,data data){
-        HashMap<Integer,Integer> m =data.getFloor_vacancy();
+        HashMap<Integer,Integer> m =data.getComputer_vacancy();
         if (!m.containsKey(floor)) {
             throw new IllegalArgumentException("Floor does not exist.");
         }
