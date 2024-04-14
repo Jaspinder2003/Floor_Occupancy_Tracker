@@ -1,124 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.SignInController">
-    
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.MainController">
+ <children>
+   <MenuBar VBox.vgrow="NEVER">
+     <menus>
+       <Menu mnemonicParsing="false" text="File">
+         <items>
+           <MenuItem mnemonicParsing="false" text="Open…" fx:id="open" onAction="#MenuOpen" />
+           <SeparatorMenuItem mnemonicParsing="false" />
+           <MenuItem mnemonicParsing="false" text="Save" />
+           <SeparatorMenuItem mnemonicParsing="false" />
+           <MenuItem mnemonicParsing="false" text="Quit" />
+         </items>
+       </Menu>
+       <Menu mnemonicParsing="false" text="Help">
+         <items>
+           <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+         </items>
+       </Menu>
+     </menus>
+   </MenuBar>
+  <VBox fx:id="contentBox" VBox.vgrow="ALWAYS" styleClass="content-box">
+    <ImageView fitWidth="640" fitHeight="200">
+      <Image url="@../fxml/TFDL_011A6775_1_F.jpg"/> <!-- Update this to the correct path for your image -->
+    </ImageView>
+    <VBox styleClass="maroon-box" alignment="CENTER" spacing="10">
+      <Label alignment="CENTER" styleClass="white-text" text="Welcome to TFDL Library" textAlignment="CENTER" wrapText="true">
+        <font>
+          <Font size="24.0" />
+        </font>
+      </Label>
+      <Label styleClass="white-text" text="Please choose one of the following options:" />
+      <HBox alignment="CENTER" spacing="20">
+        <Button fx:id="welcomePageSignIn" styleClass="button" onAction="#SignInButton" text="SIGN IN" />
+        <Button fx:id="welcomePageSignOut" styleClass="button" onAction="#SignOutButton" text="SIGN OUT" />
+        <Button fx:id="welcomePageSignIn1" styleClass="button" onAction="#statsButton" text="STATISTICS" />
+      </HBox>
+    </VBox>
+    <VBox fx:id="aboutLibraryBox" VBox.vgrow="ALWAYS" alignment="TOP_CENTER" styleClass="about-library-section">
       <children>
-        <Label alignment="CENTER" layoutX="41.0" layoutY="92.0" style="&#10;" text="Floor Availability" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="18.0" />
-          </font>
-        </Label>
-            <Label layoutX="41.0" layoutY="36.0" text="SIGN IN">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label fx:id="floorVacancyLabel" layoutX="41.0" layoutY="127.0" text="Label" />
-            <Label layoutX="41.0" layoutY="187.0" text="Computer Availability" textFill="#9f9f9f">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="computerVacancyLabel" layoutX="41.0" layoutY="222.0" text="Label" />
-            <Label layoutX="41.0" layoutY="248.0" />
-            <ComboBox fx:id="floorComboBox" layoutX="255.0" layoutY="93.0" prefWidth="150.0" />
-            <ComboBox fx:id="areaCombobox" layoutX="255.0" layoutY="157.0" prefWidth="150.0" />
-            <Label layoutX="255.0" layoutY="72.0" text="Floor" />
-            <Label layoutX="256.0" layoutY="136.0" text="Area" />
-            <Label layoutX="255.0" layoutY="205.0" text="Computer" />
-            <ComboBox fx:id="ComputerUsage" layoutX="255.0" layoutY="227.0" prefWidth="150.0" />
-            <Button layoutX="502.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit " />
-            <Label layoutX="428.0" layoutY="72.0" text="Name" />
-            <TextField fx:id="name" layoutX="428.0" layoutY="93.0" />
-            <Label layoutX="428.0" layoutY="136.0" text="UCID" />
-            <TextField fx:id="ucid" layoutX="428.0" layoutY="157.0" />
-            <Label fx:id="errorLabel" layoutX="255.0" layoutY="281.0" visible="false" />
+        <Label fx:id="aboutTitle" styleClass="about-title-text" text="About TFDL Library"/>
+        <Label fx:id="aboutDescription" styleClass="about-content-text" text="The Taylor Family Digital Library (TFDL) is the heart of the University of Calgary's campus. Offering a wealth of resources and services to support our students, faculty, and the community." wrapText="true"/>
       </children>
-    </AnchorPane>
-  </children>
+    </VBox>
+  </VBox>
+ </children>
 </VBox>
+
+

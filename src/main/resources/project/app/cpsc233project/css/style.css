@@ -75,3 +75,82 @@
     -fx-text-alignment: center; /* Ensures the text within the Label is center-aligned */
     -fx-padding: 10px;
 }
+
+/* styles.css */
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-alignment: center-left;
+    -fx-padding: 10px;
+}
+
+.sub-header-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #666;
+    -fx-alignment: center-left;
+    -fx-padding: 5px 10px;
+}
+
+/* You may also want to style your ComboBoxes, TextFields, and Button */
+.SIcombo-box, .SItext-field {
+
+}
+
+
+/* Style the HBox to have equal width sections and padding */
+.hbox {
+    -fx-spacing: 0px; /* Adjust spacing between VBox containers inside the HBox */
+}
+
+/* For left section to have a maroon background */
+.left-section {
+    -fx-background-color: #a8324a;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+    -fx-pref-height: 100%;
+}
+
+.right-section {
+
+    -fx-background-image: url('../fxml/TFDL_2.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+    -fx-background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../fxml/TFDL_2.jpg');
+}
+
+.signin-white-text {
+    -fx-font-size: 16px;
+    -fx-text-fill: white; /* White text color */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+.signin-label-white-text {
+    -fx-font-size: 9px;
+    -fx-text-fill: white; /* White text color */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.signin-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+    -fx-padding: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Add a shadow to the text */
+}
+.Signin-button {
+    -fx-background-color: #a8324a;
+    -fx-text-fill: white;
+    -fx-border-width: 2;
+    -fx-padding: 10px 20px;
+}
+
+.signin-banner-text{
+    -fx-font-size: 30px;
+    -fx-text-fill: white; /* White text color */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
