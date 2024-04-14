@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import project.app.cpsc233project.data;
 
 import java.io.IOException;
 
@@ -19,6 +20,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
+    @SuppressWarnings("unused")
+    private String message = data.reader("/Users/yadi/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv");
+
 
     public static void main(String[] args) {
         launch();
