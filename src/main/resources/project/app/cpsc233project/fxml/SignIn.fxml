@@ -1,54 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.MainController">
- <children>
-   <MenuBar VBox.vgrow="NEVER">
-     <menus>
-       <Menu mnemonicParsing="false" text="File">
-         <items>
-           <MenuItem mnemonicParsing="false" text="Open…" fx:id="open" onAction="#MenuOpen" />
-           <SeparatorMenuItem mnemonicParsing="false" />
-           <MenuItem mnemonicParsing="false" text="Save" />
-           <SeparatorMenuItem mnemonicParsing="false" />
-           <MenuItem mnemonicParsing="false" text="Quit" />
-         </items>
-       </Menu>
-       <Menu mnemonicParsing="false" text="Help">
-         <items>
-           <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-         </items>
-       </Menu>
-     </menus>
-   </MenuBar>
-  <VBox fx:id="contentBox" VBox.vgrow="ALWAYS" styleClass="content-box">
-    <ImageView fitWidth="640" fitHeight="200">
-      <Image url="@../fxml/TFDL_011A6775_1_F.jpg"/> <!-- Update this to the correct path for your image -->
-    </ImageView>
-    <VBox styleClass="maroon-box" alignment="CENTER" spacing="10">
-      <Label alignment="CENTER" styleClass="white-text" text="Welcome to TFDL Library" textAlignment="CENTER" wrapText="true">
-        <font>
-          <Font size="24.0" />
-        </font>
-      </Label>
-      <Label styleClass="white-text" text="Please choose one of the following options:" />
-      <HBox alignment="CENTER" spacing="20">
-        <Button fx:id="welcomePageSignIn" styleClass="button" onAction="#SignInButton" text="SIGN IN" />
-        <Button fx:id="welcomePageSignOut" styleClass="button" onAction="#SignOutButton" text="SIGN OUT" />
-        <Button fx:id="welcomePageSignIn1" styleClass="button" onAction="#statsButton" text="STATISTICS" />
-      </HBox>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.SignInController">
+
+
+  <MenuBar VBox.vgrow="NEVER">
+    <menus>
+      <Menu mnemonicParsing="false" text="File">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Quit" />
+        </items>
+      </Menu>
+      <Menu mnemonicParsing="false" text="Help">
+        <items>
+          <MenuItem mnemonicParsing="false" text="About" />
+        </items>
+      </Menu>
+    </menus>
+  </MenuBar>
+
+  <HBox prefHeight="600.0" prefWidth="640.0" stylesheets="@../css/style.css">
+    <VBox prefWidth="400.0" styleClass="right-section" HBox.hgrow="ALWAYS">
+      <AnchorPane>
+        <!-- Row for Floor input -->
+
+        <Label layoutX="254.0" layoutY="45.0" styleClass="signin-label" text="Floor" />
+        <Label layoutX="425.0" layoutY="45.0" styleClass="signin-label" text="Name" />
+
+        <ComboBox fx:id="floorComboBox" layoutX="252.0" layoutY="72.0" prefWidth="150.0" />
+        <TextField fx:id="name" layoutX="427.0" layoutY="72.0" />
+
+        <Label layoutX="255.0" layoutY="121.0" styleClass="signin-label" text="Area" />
+        <Label layoutX="428.0" layoutY="121.0" styleClass="signin-label" text="UCID" />
+
+        <ComboBox fx:id="areaCombobox" layoutX="255.0" layoutY="144.0" prefWidth="150.0" />
+        <TextField fx:id="ucid" layoutX="427.0" layoutY="144.0" />
+
+        <Label layoutX="256.0" layoutY="189.0" styleClass="signin-label" text="Computer" />
+
+
+
+        <ComboBox fx:id="ComputerUsage" layoutX="255.0" layoutY="216.0" prefWidth="150.0" />
+
+        <Label fx:id="errorLabel" layoutX="255.0" layoutY="281.0" visible="false" />
+        <Button layoutX="502.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleSubmit" styleClass="Signin-button " text="Submit " />
+        <VBox layoutX="-20.0" layoutY="-18.0" prefWidth="247.0" styleClass="left-section" VBox.vgrow="ALWAYS">
+          <AnchorPane>
+            <Label layoutX="-12.0" text="SIGN IN" styleClass="signin-banner-text">
+              <font>
+                <Font size="30.0" />
+              </font>
+            </Label>
+
+            <Label alignment="CENTER" layoutX="45.0" layoutY="64.0" style="&#10;" styleClass="signin-white-text" text="Floor Availability" textAlignment="CENTER" wrapText="false">
+              <font>
+                <Font size="18.0" />
+              </font>
+            </Label>
+            <Label fx:id="floorVacancyLabel" layoutX="45.0" layoutY="89.0" styleClass="signin-label-white-text" text="Label" />
+            <Label layoutX="45.0" layoutY="139.0" styleClass="signin-white-text" text="Computer Availability">
+              <font>
+                <Font size="18.0" />
+              </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="248.0" />
+            <Label fx:id="computerVacancyLabel" layoutX="45.0" layoutY="164.0" styleClass="signin-label-white-text" text="Label" />
+          </AnchorPane>
+        </VBox>
+            <Button layoutX="340.0" layoutY="289.0" mnemonicParsing="false" prefWidth="81.3333" text="Back" styleClass="Signin-button" onAction="#returnToHomepage" />
+      </AnchorPane>
     </VBox>
-    <VBox fx:id="aboutLibraryBox" VBox.vgrow="ALWAYS" alignment="TOP_CENTER" styleClass="about-library-section">
-      <children>
-        <Label fx:id="aboutTitle" styleClass="about-title-text" text="About TFDL Library"/>
-        <Label fx:id="aboutDescription" styleClass="about-content-text" text="The Taylor Family Digital Library (TFDL) is the heart of the University of Calgary's campus. Offering a wealth of resources and services to support our students, faculty, and the community." wrapText="true"/>
-      </children>
-    </VBox>
-  </VBox>
- </children>
+  </HBox>
 </VBox>
-
-
