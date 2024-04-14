@@ -19,12 +19,12 @@
     <menus>
       <Menu mnemonicParsing="false" text="File">
         <items>
-          <MenuItem mnemonicParsing="false" text="Quit" />
+          <MenuItem mnemonicParsing="false" text="Quit" fx:id="quit" onAction="#handleQuit" />
         </items>
       </Menu>
       <Menu mnemonicParsing="false" text="Help">
         <items>
-          <MenuItem mnemonicParsing="false" text="About" />
+          <MenuItem mnemonicParsing="false" text="About" onAction="#showAboutDialog" fx:id="about" />
         </items>
       </Menu>
     </menus>
