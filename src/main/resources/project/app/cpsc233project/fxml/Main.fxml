@@ -14,12 +14,12 @@
            <SeparatorMenuItem mnemonicParsing="false" />
            <MenuItem mnemonicParsing="false" text="Save" />
            <SeparatorMenuItem mnemonicParsing="false" />
-           <MenuItem mnemonicParsing="false" text="Quit" />
+           <MenuItem mnemonicParsing="false" text="Quit" fx:id="quit" onAction="#handleQuit"  />
          </items>
        </Menu>
        <Menu mnemonicParsing="false" text="Help">
          <items>
-           <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+           <MenuItem mnemonicParsing="false" text="About"  onAction="#showAboutDialog" fx:id="about"/>
          </items>
        </Menu>
      </menus>

@@ -46,6 +46,14 @@ public class SignInController {
     @FXML
     private Label computerVacancyLabel; // Label to display computer vacancy info
 
+    @FXML
+    private MenuItem quit;
+
+    @FXML
+    private MenuItem about;
+
+
+
 
 
 

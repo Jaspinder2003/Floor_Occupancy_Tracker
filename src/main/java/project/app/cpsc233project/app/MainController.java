@@ -53,6 +53,14 @@ public class MainController {
     @FXML
     private ImageView backgroundImage;
 
+    @FXML
+    private MenuItem quit;
+
+    @FXML
+    private MenuItem about;
+
+
+
 
 
     public void setStage(Stage stage) {
@@ -135,6 +143,22 @@ public class MainController {
         } else {
             // No file was selected, handle this case if needed
         }
+    }
+
+    @FXML
+    private void showAboutDialog() {
+        Alert aboutDialog = new Alert(Alert.AlertType.INFORMATION);
+        aboutDialog.setTitle("About");
+        aboutDialog.setHeaderText("About TFDL Occupancy Tracker");
+        aboutDialog.setContentText("TFDL Occupancy Tracker v1.0\nDeveloped by: Jaspinder Singh, Navpreet Singh & Yadwinder Singh\n© 2024 All rights reserved.\n For any inquires please reach us \nout @ JaspinderSingh.maan@ucalgary.ca");
+
+
+        aboutDialog.showAndWait();
+    }
+
+    @FXML
+    private void handleQuit() {
+        Platform.exit();
     }
 
 }
