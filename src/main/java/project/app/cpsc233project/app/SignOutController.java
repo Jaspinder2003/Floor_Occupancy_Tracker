@@ -34,6 +34,8 @@ public class SignOutController {
     @FXML
     private Button submit;
     @FXML
+    private MenuItem back;
+    @FXML
     private void validateAndProcess() {
         try {
             int ucid = Integer.parseInt(UCID.getText());
@@ -68,8 +70,7 @@ public class SignOutController {
             return; // Stop processing since the UCID is not valid
         }
         int ucid = Integer.parseInt(UCID.getText()); // Get UCID from TextField
-        String fileName = "path/to/ProjectDB.csv"; // Adjust path as necessary
-        if (ucid<=0) {
+         if (ucid<=0) {
 
             showAlert("Invalid input", "Please enter a valid number for UCID.");
 
@@ -162,6 +163,10 @@ public class SignOutController {
                 e.printStackTrace();
             }
         });
+    }
+    @FXML
+    private void backButton(){
+        returnToHomepage();
     }
 
 
