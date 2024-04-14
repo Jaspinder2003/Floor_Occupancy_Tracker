@@ -38,7 +38,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -47,62 +46,36 @@
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
         <Menu mnemonicParsing="false" text="Help">
           <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+            <MenuItem mnemonicParsing="false" text="About" />
           </items>
         </Menu>
       </menus>
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" layoutX="251.0" layoutY="14.0" style="&#10;" text="STATISTICS" textAlignment="CENTER" wrapText="false">
+        <Label alignment="CENTER" prefHeight="51.0" prefWidth="640.0" style="-fx-background-color: #a8324a;" text="STATISTICS" textAlignment="CENTER" textFill="WHITE" wrapText="false">
           <font>
-            <Font size="26.0" />
+            <Font name="Arial Bold" size="33.0" />
           </font>
         </Label>
-            <Button fx:id="userList" layoutX="53.0" layoutY="173.0" mnemonicParsing="false" onAction="#userListButton" text="User List" />
-            <Label alignment="CENTER" layoutX="31.0" layoutY="58.0" style="&#10;" text="General Statistics" textAlignment="CENTER" wrapText="false">
+            <Button fx:id="userList" layoutX="53.0" layoutY="173.0" mnemonicParsing="false" onAction="#userListButton" style="-fx-border-color: #a8324a; -fx-border-radius: 15; -fx-border-width: 2; -fx-background-color: #ffffff;" text="User List" />
+            <Label alignment="CENTER" layoutX="31.0" layoutY="58.0" style="&#10;" text="General Statistics" textAlignment="CENTER" textFill="#a8324a" wrapText="false">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="32.0" layoutY="144.0" style="&#10;" text="Administrative Tools" textAlignment="CENTER" wrapText="false">
+            <Label alignment="CENTER" layoutX="32.0" layoutY="144.0" style="&#10;" text="Administrative Tools" textAlignment="CENTER" textFill="#a8324a" wrapText="false">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
-            <ComboBox fx:id="statsChoice" onAction="#statsChoice" layoutX="52.0" layoutY="88.0" prefWidth="150.0" />
+            <ComboBox fx:id="statsChoice" layoutX="52.0" layoutY="90.0" onAction="#statsChoice" prefWidth="150.0" style="-fx-background-radius: 15; -fx-background-color: #ffffff; -fx-border-color: #a8324a; -fx-border-radius: 10; -fx-border-width: 2;" />
+            <Button layoutX="444.0" layoutY="294.0" mnemonicParsing="false" onAction="#returnToHomepage" style="-fx-background-color: #a8324a;" text="Return to Homepage" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font></Button>
       </children>
     </AnchorPane>
   </children>
