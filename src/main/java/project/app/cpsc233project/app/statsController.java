@@ -1,190 +1,215 @@
 package project.app.cpsc233project.app;
 
-
+import java.net.URL;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import project.app.cpsc233project.data;
+import project.app.cpsc233project.stats;
+import javafx.scene.chart.BarChart;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-public class SignOutController {
-    @FXML
-    private Button welcomePageSignOut;
+public class statsController {
 
     @FXML
-    private Button welcomePageSignIn;
+    private ComboBox<String> statsChoice;
 
     @FXML
-    private TextField UCID;
+    private Button busyButton;
+
     @FXML
-    private TextArea Feedback;
+    private Button generalUsage;
+
     @FXML
-    private Button submit;
+    private Button userList;
+
     @FXML
-    private MenuItem back;
-    @FXML
-    private void validateAndProcess() {
-        try {
-            int ucid = Integer.parseInt(UCID.getText());
-            if (ucid <= 0) {
-                throw new IllegalArgumentException("UCID must be a positive number.");
-            }
-            // Proceed with processing if UCID is valid
-        } catch (NumberFormatException e) {
-            showAlert("Invalid input", "Please enter a valid number for UCID.");
-        } catch (IllegalArgumentException e) {
-            showAlert("Invalid UCID", e.getMessage());
-        }
-    }
-/**
- * used to show alerts at multiple places
- */
-    private void showAlert(String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-        alert.showAndWait();
+    private Button returnHome;
+
+    private Stage stage;
+    @SuppressWarnings("exports")
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
-    /**
-     * we use this filename as a stering path when we need to remove the
-     * object from the csv file
-     */
-    String filename="ProjectDB.csv";
     @FXML
-    private void handleSubmit() {
-        String input=UCID.getText();
-        if (!input.matches("\\d+")) {
-            showAlert("invalid input","UCID must contain only numbers.");
-            return; // Stop processing since the UCID is not valid
-        }
-        int ucid = Integer.parseInt(UCID.getText()); // Get UCID from TextField
-         if (ucid<=0) {
+    public void initialize() {
+        // Populate the ComboBox items
+        statsChoice.setItems(FXCollections.observableArrayList("General Usage and Busy Floors", "Computer Usage Distribution"));
+    }
 
-            showAlert("Invalid input", "Please enter a valid number for UCID.");
+    private String message = data.reader("ProjectDB.csv");
+    @FXML
+    private void userListButton() {
+        // Create a new stage (window) for the pop-up
+        Stage popUpStage = new Stage();
+        popUpStage.initModality(Modality.APPLICATION_MODAL);
+        popUpStage.setTitle("Busy Button Clicked");
 
-        }if (!input.matches("\\d+")) {
-            showAlert("invalid input","UCID must contain only numbers.");
-            return; // Stop processing since the UCID is not valid
-        } else if (!data.ucidExists("ProjectDB.csv", ucid)) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Sign Out Error");
-            alert.setContentText("UCID does not exist. Please ensure you have signed in.");
-            alert.showAndWait();
-        } else {
-            // UCID exists, ask for confirmation to release space
-            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Confirm Sign Out");
-            confirmAlert.setHeaderText("Release Reserved Space");
-            confirmAlert.setContentText("Do you want to release the reserved space and sign out?");
+        // Set up the content of the pop-up
+        VBox layout = new VBox(20);
+        layout.setAlignment(Pos.CENTER);
+        Label messageLabel = new Label("Choose an option to view list of users.");
+        Label displayUser = new Label(message);
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(e -> popUpStage.close());
 
-            ButtonType buttonTypeYes = new ButtonType("Yes");
-            ButtonType buttonTypeNo = new ButtonType("No");
+        // Add bar chart and other components to the layout
+        layout.getChildren().addAll(messageLabel, displayUser, closeButton);
+        layout.setPadding(new Insets(10));
 
-            confirmAlert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+        // Displaying the pop-up window
+        Scene scene = new Scene(layout, 400, 300);
+        popUpStage.setScene(scene);
+        popUpStage.showAndWait();
+    }
 
-            Optional<ButtonType> result = confirmAlert.showAndWait();
-            if (result.isPresent() && result.get() == buttonTypeYes) {
-                // User chose YES
-                signOutSuccess();
-                try {
-                    removeUcidFromCsv(filename, ucid);
-                    // Update the floor and computer availability
-                    int floor_num = data.ucid_track.get(ucid);
-                    data.floor_vacancy.put(floor_num, data.floor_vacancy.get(floor_num) + 1);
-                    System.out.println(data.floor_vacancy.get(floor_num));
-                    data.ucid_track.remove(ucid);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    showAlert("Error", "Failed to update the database.");
-                    return;
-                }
+    @FXML
+    private void statsChoice() {
+        String selected = statsChoice.getSelectionModel().getSelectedItem();
+
+        if (selected.equals("General Usage and Busy Floors")) {
+            // Create axes for the bar chart
+            CategoryAxis xAxis = new CategoryAxis();
+            xAxis.setLabel("Floors");
+
+            NumberAxis yAxis = new NumberAxis();
+            yAxis.setLabel("No. of Seats");
+
+            // Create the bar chart
+            BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+            String message = "TFDL Floor Vacancy Bar Chart";
+
+            // Add data to the bar chart
+            XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+            series1.setName("Vacancy"); // Name the series
+
+            // Add data points
+            series1.getData().add(new XYChart.Data<>("Floor 1\n" + data.floor_vacancy.get(1), data.floor_vacancy.get(1)));
+            series1.getData().add(new XYChart.Data<>("Floor 2\n" + data.floor_vacancy.get(2), data.floor_vacancy.get(2)));
+            series1.getData().add(new XYChart.Data<>("Floor 3\n" + data.floor_vacancy.get(3), data.floor_vacancy.get(3)));
+
+            barChart.getData().add(series1);
+
+            double busy_percentage = stats.max_min("floors")[0];
+            double busy = stats.max_min("floors")[2];
+            double least = stats.max_min("floors")[3];
+
+            if (busy_percentage == 0) {
+                message += "\n\nCurrent all floors are empty!";
             } else {
-                // User chose NO or closed the dialog
-                exitPage();
+                message += "\n\nBusiest floor: " + busy + "\nLeast busiest floor: " + least;
             }
+
+            barChart.setTitle(message);
+
+            // Create a new stage (window) for the pop-up
+            Stage popUpStage = new Stage();
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.setTitle("Busy Button Clicked");
+
+            // Set up the content of the pop-up
+            VBox layout = new VBox(20);
+            layout.setAlignment(Pos.CENTER);
+            Label messageLabel = new Label("Per floor data of TFDL");
+            Button closeButton = new Button("Close");
+            closeButton.setOnAction(e -> popUpStage.close());
+
+            // Add bar chart and other components to the layout
+            layout.getChildren().addAll(messageLabel, barChart, closeButton);
+            layout.setPadding(new Insets(10));
+
+            // Displaying the pop-up window
+            Scene scene = new Scene(layout, 400, 500);
+            popUpStage.setScene(scene);
+            popUpStage.showAndWait();
+        } else if (selected.equals("Computer Usage Distribution")) {
+            // Create a new stage (window) for the pop-up
+            Stage popUpStage = new Stage();
+            popUpStage.initModality(Modality.APPLICATION_MODAL);
+            popUpStage.setTitle("Computer Usage Distribution");
+
+            // Set up the content of the pop-up
+            VBox layout = new VBox(20);
+            layout.setAlignment(Pos.CENTER);
+            Label messageLabel = new Label("Computer usage distribution in TFDL.");
+
+            double busy_percentage = stats.max_min("floors")[0];
+            double busy = stats.max_min("floors")[2];
+            double least = stats.max_min("floors")[3];
+
+            String messageString = "";
+            PieChart pieChart = new PieChart();
+
+            if (busy_percentage == 0) {
+                messageString = "Current all floors are empty!";
+            } else {
+                messageString = "Busiest floor: " + busy + "\nLeast busiest floor: " + least;
+
+                double compUsers = 165 - (data.computer_vacancy.get(1) + data.computer_vacancy.get(2) + data.computer_vacancy.get(3));
+                double compUsers_percent = (compUsers/165) * 100;
+                double non_compUsers = (421 - (data.floor_vacancy.get(1) + data.floor_vacancy.get(2) + data.floor_vacancy.get(3))) - compUsers;
+                double non_compUsers_percent = (non_compUsers/165)*100;
+
+                // Create a PieChart and add some data
+                pieChart.getData().add(new PieChart.Data("Computer users", compUsers_percent));
+                pieChart.getData().add(new PieChart.Data("Non-computer users", non_compUsers_percent));
+                pieChart.getData().add(new PieChart.Data("Empty computers", (100 - (compUsers + non_compUsers_percent))));
+
+                // Optional: customize chart properties
+                pieChart.setTitle("Computer Usage distribution");
+
+                // Create a layout, add the chart to it
+                BorderPane root = new BorderPane();
+                root.setCenter(pieChart);
+            }
+
+            Label displayUser = new Label(messageString);
+
+            Button closeButton = new Button("Close");
+                closeButton.setOnAction(e -> popUpStage.close());
+
+                // Add bar chart and other components to the layout
+                layout.getChildren().addAll(messageLabel, displayUser, pieChart, closeButton);
+                layout.setPadding(new Insets(10));
+
+            // Displaying the pop-up window
+            Scene scene = new Scene(layout, 400, 300);
+            popUpStage.setScene(scene);
+            popUpStage.showAndWait();
         }
     }
 
-    /**
-     * this handles the sing out process and checks that the UCID entered is a positive integer
-     * and it throws a pop up alert if it is not
-     */
-
-    private void signOutSuccess() {
-        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
-        infoAlert.setTitle("Sign Out Successful");
-        infoAlert.setHeaderText(null);
-        infoAlert.setContentText("You have successfully signed out and released the space.");
-        infoAlert.showAndWait();
-        returnToHomepage();
-    }// this is the method that is used to shows if the sign out process was successful
-
-    private void exitPage() {
-        Alert infoAlert = new Alert(Alert.AlertType.INFORMATION);
-        infoAlert.setTitle("Sign Out Cancelled");
-        infoAlert.setHeaderText(null);
-        infoAlert.setContentText("Sign out cancelled. Returning to the homepage.");
-        infoAlert.showAndWait();
-
-        returnToHomepage();
-    }
-    /**
-     * this method comse into play when
-     * the user cancels out the sign out and returns the user to the homepage automaticallt
-     */
-
-    private void removeUcidFromCsv(String filePath, int ucid) throws IOException {
-        File inputFile = new File(filePath);
-        List<String> lines = Files.readAllLines(inputFile.toPath());
-        List<String> updatedLines = lines.stream()
-                .filter(line -> !line.contains(String.valueOf(ucid)))
-                .collect(Collectors.toList());
-        Files.write(Paths.get(filePath), updatedLines);
-    }// this removes object from the csv file
-
-    private void returnToHomepage(){
+    public void returnToHomepage() {
         Platform.runLater(() -> {
             try {
                 URL url = getClass().getResource("/project/app/cpsc233project/fxml/Main.fxml");
-                System.out.println("Resource URL: " + url); // Check the URL
-                if (url == null) {
-                    System.out.println("Check if Main.fxml is placed in src/main/resources and path is correct.");
-                    throw new RuntimeException("Cannot find FXML file");
-                }
                 FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();//retrieve the parent root
+                Parent root = loader.load();
                 Scene scene = new Scene(root);
-                Stage stage = (Stage) UCID.getScene().getWindow();
+                Stage stage = (Stage) statsChoice.getScene().getWindow();
                 stage.setScene(scene);
                 stage.show();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
-        /**
-         * this is used to return to the homepage and is not assigned to any on action
-         * it is used in all 3 controllers for sign in,sign out and stats
-         */
     }
-    @FXML
-    private void backButton(){
-        returnToHomepage();
-    }//this is used to go back to the homepage
-
-
 }
