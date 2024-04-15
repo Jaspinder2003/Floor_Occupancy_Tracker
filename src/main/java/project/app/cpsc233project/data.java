@@ -30,6 +30,8 @@ public class data {
         computer_vacancy.put(2, 60);
         computer_vacancy.put(3, 75);
     }//static because it needs to be used multiple times
+
+    public static HashMap<Integer, Integer> ucid_track = new HashMap<Integer, Integer>();
  
     static HashSet<data> dataObjects = new HashSet<data>(); // Set to store objects
 
@@ -89,13 +91,7 @@ public class data {
                     case "Floor":
                         floor userFloor = new floor(name, id, ufloor, area);
                         floor.AddUser(userFloor);
-                        if (ufloor == 1) {
-                            floor_vacancy.put(1, floor_vacancy.get(1) - 1);
-                        } else if (ufloor == 2) {
-                            floor_vacancy.put(2, floor_vacancy.get(2) - 1);
-                        } else if (ufloor == 3) {
-                            floor_vacancy.put(3, floor_vacancy.get(3) - 1);
-                        }
+                        ucid_track.put(id, ufloor);
                         break;
                     case "Computers":
                         Computers userComputer = new Computers(name, id, ufloor, area);
