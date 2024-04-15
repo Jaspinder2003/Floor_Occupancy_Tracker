@@ -55,8 +55,7 @@ public class statsController {
         statsChoice.setItems(FXCollections.observableArrayList("General Usage and Busy Floors", "Computer Usage Distribution"));
     }
 
-    private String message = data.reader("/Users/yadi/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv");
-
+    private String message = data.reader("ProjectDB.csv");
     @FXML
     private void userListButton() {
         // Create a new stage (window) for the pop-up
