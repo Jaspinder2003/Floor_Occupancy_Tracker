@@ -36,6 +36,10 @@ public class SignOutController {
     @FXML
     private MenuItem back;
     @FXML
+    private TextArea feedback;
+    @FXML
+    private MenuItem about;
+    @FXML
     private void validateAndProcess() {
         try {
             int ucid = Integer.parseInt(UCID.getText());
@@ -49,9 +53,7 @@ public class SignOutController {
             showAlert("Invalid UCID", e.getMessage());
         }
     }
-/**
- * used to show alerts at multiple places
- */
+
     private void showAlert(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(header);
@@ -138,11 +140,6 @@ public class SignOutController {
 
         returnToHomepage();
     }
-    /**
-     * this method comse into play when
-     * the user cancels out the sign out and returns the user to the homepage automaticallt
-     */
-
     private void removeUcidFromCsv(String filePath, int ucid) throws IOException {
         File inputFile = new File(filePath);
         List<String> lines = Files.readAllLines(inputFile.toPath());
@@ -151,7 +148,6 @@ public class SignOutController {
                 .collect(Collectors.toList());
         Files.write(Paths.get(filePath), updatedLines);
     }// this removes object from the csv file
-
     private void returnToHomepage(){
         Platform.runLater(() -> {
             try {
@@ -162,7 +158,7 @@ public class SignOutController {
                     throw new RuntimeException("Cannot find FXML file");
                 }
                 FXMLLoader loader = new FXMLLoader(url);
-                Parent root = loader.load();//retrieve the parent root
+                Parent root = loader.load();
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) UCID.getScene().getWindow();
                 stage.setScene(scene);
@@ -171,15 +167,19 @@ public class SignOutController {
                 e.printStackTrace();
             }
         });
-        /**
-         * this is used to return to the homepage and is not assigned to any on action
-         * it is used in all 3 controllers for sign in,sign out and stats
-         */
     }
     @FXML
     private void backButton(){
         returnToHomepage();
-    }//this is used to go back to the homepage
+    }
+    @FXML
+    private void showAboutDialog() {
+        Alert aboutDialog = new Alert(Alert.AlertType.INFORMATION);
+        aboutDialog.setTitle("About");
+        aboutDialog.setHeaderText("About TFDL Occupancy Tracker");
+        aboutDialog.setContentText("TFDL Occupancy Tracker v1.0\nDeveloped by: Jaspinder Singh, Navpreet Singh & Yadwinder Singh\n© 2024 All rights reserved.\n For any inquires please reach us \nout @ JaspinderSingh.maan@ucalgary.ca");
 
+        aboutDialog.showAndWait();
+    }
 
 }
