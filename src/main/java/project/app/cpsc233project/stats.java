@@ -66,11 +66,11 @@ public class stats {
     }
 
     /**
-     * Determines the floors or computer stations with the maximum and minimum vacancies.
+     * Determines the floors or computer stations with the maximum and minimum occupancies.
      * 
      * @param area Specifies whether to query "floors" or "computers".
-     * @return An array containing two integers, the first represents the floor/station with the maximum vacancies, 
-     * and the second with the minimum vacancies.
+     * @return An array containing two integers, the first represents the floor/station with the maximum occupancies, 
+     * and the second with the minimum occupancies.
      */
     public static double[] max_min(String area) {
 
