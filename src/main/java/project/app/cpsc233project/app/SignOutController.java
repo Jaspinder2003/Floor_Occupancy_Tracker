@@ -61,7 +61,7 @@ public class SignOutController {
      * we use this filename as a stering path when we need to remove the
      * object from the csv file
      */
-    String filename="C:\\Users\\jaspi\\OneDrive\\Desktop\\Group Project 233\\ProjectDB.csv";
+    String filename="ProjectDB.csv";
     @FXML
     private void handleSubmit() {
         String input=UCID.getText();
@@ -77,7 +77,7 @@ public class SignOutController {
         }if (!input.matches("\\d+")) {
             showAlert("invalid input","UCID must contain only numbers.");
             return; // Stop processing since the UCID is not valid
-        } else if (!data.ucidExists("C:\\Users\\jaspi\\OneDrive\\Desktop\\Group Project 233\\ProjectDB.csv", ucid)) {
+        } else if (!data.ucidExists("ProjectDB.csv", ucid)) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Sign Out Error");
@@ -168,8 +168,6 @@ public class SignOutController {
     private void backButton(){
         returnToHomepage();
     }
-
-    
 
 
 }
