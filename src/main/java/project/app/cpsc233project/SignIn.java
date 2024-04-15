@@ -20,6 +20,9 @@ public class SignIn extends Menu {
         else{
             floorNumber = 3;
         }
+        /**
+         * used to check which floor the user has chosen
+         */
 
         // Create a data object for the user
         data userData = new data(name, studentID, floorNumber, area);
