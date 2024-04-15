@@ -22,7 +22,7 @@ public class Main extends Application {
     }
 
     @SuppressWarnings("unused")
-    private String message = data.reader("/Users/yadi/Desktop/cpsc-233-group-proeject-w24-master/ProjectDB.csv");
+    private String message = data.reader("ProjectDB.csv");
 
 
     public static void main(String[] args) {
