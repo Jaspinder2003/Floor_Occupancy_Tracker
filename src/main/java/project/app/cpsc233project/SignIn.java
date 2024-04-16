@@ -9,12 +9,27 @@ package project.app.cpsc233project;
  * 
  */
 
+
+
 import java.util.Objects;
+
+/**
+ * The SignIn class extends the Menu class to handle the sign-in logic
+ * for users in a system where floor and computer availability are tracked.
+ */
 
 public class SignIn extends Menu {
     private int floorNumber;
 
-    
+      /**
+     * Executes the sign-in process for a user based on their selected floor and computer usage.
+     *
+     * @param name         The name of the user signing in.
+     * @param studentID    The student ID of the user.
+     * @param computerUsage Indicates whether the user requires a computer.
+     * @param floorN       The name of the floor as selected by the user.
+     * @param area         The area within the floor where the user will be.
+     */
 
     @Override
     public void execute(String name, int studentID, boolean computerUsage, String floorN, String area) {
