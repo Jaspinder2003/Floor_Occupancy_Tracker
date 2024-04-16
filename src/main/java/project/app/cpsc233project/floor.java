@@ -2,6 +2,15 @@ package project.app.cpsc233project;
 import java.util.HashMap;
 import java.util.HashSet;
 
+/**
+ * 
+ * @author Yadwinder Singh Dhaliwal @tutorial T05
+ * @author Jaspinder Singh Maan @tutorial T15
+ * @author Navpreet Singh @tutorial T08
+ * @created 2024-04-15
+ * 
+ */
+
 class floor extends data{
     private int floor_availability;
     private String name;
