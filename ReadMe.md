@@ -32,7 +32,7 @@ The TFDL Occupancy Tracker is a JavaFX application designed for the management a
 ## Installation
 
 ### Prerequisites
-- Java 11 or above
+- Java 21 or above
 - JavaFX SDK
 - An IDE that supports Java (e.g., IntelliJ IDEA, Eclipse)
 
