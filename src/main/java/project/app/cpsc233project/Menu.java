@@ -1,6 +1,15 @@
 package project.app.cpsc233project;
 import java.util.Scanner;
 
+/**
+ * 
+ * @author Yadwinder Singh Dhaliwal @tutorial T05
+ * @author Jaspinder Singh Maan @tutorial T15
+ * @author Navpreet Singh @tutorial T08
+ * @created 2024-04-15
+ * 
+ */
+
 public abstract class Menu {
     protected Scanner scanner;
     
