@@ -10,6 +10,7 @@ package project.app.cpsc233project.app;
  */
 
 
+// Import necessary JavaFX and Java classes
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,16 +30,20 @@ import project.app.cpsc233project.data;
 import java.io.File;
 import java.io.IOException;
 
+// Import a static method from the data class
 import static project.app.cpsc233project.data.reader;
 
+/**
+ * Controller class for the main application window.
+ * Handles user interactions with the GUI and manages transitions between different scenes.
+ */
 public class MainController {
+    // FXML injected components
     @FXML
     private VBox mainContainer;
 
     @FXML
     private VBox contentBox;
-
-
 
     @FXML
     private Button welcomePageSignOut;
@@ -49,13 +54,13 @@ public class MainController {
     @FXML
     private MenuItem open;
 
-    private Stage stage;
+    private Stage stage; // Stage variable to keep track of the application window
 
     @FXML
     private Pane splitBackgroundPane;
 
     @FXML
-    private AnchorPane welcomePage; // This field name should match the fx:id in FXML
+    private AnchorPane welcomePage; // This field corresponds to an AnchorPane in the FXML file
 
     @FXML
     private ImageView backgroundImage;
@@ -66,19 +71,22 @@ public class MainController {
     @FXML
     private MenuItem about;
 
-
-
-
-
+    /**
+     * Sets the main stage of the application.
+     * @param stage the primary stage of the application
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-
+    /**
+     * Handles the action for the sign-in button click.
+     * Loads and displays the sign-in scene.
+     * @param event the event triggered by clicking the sign-in button
+     */
     @FXML
     private void SignInButton(ActionEvent event) {
         try {
-
             Parent signInParent = FXMLLoader.load(getClass().getResource("/project/app/cpsc233project/fxml/SignIn.fxml"));
             Scene signInScene = new Scene(signInParent);
 
@@ -86,11 +94,15 @@ public class MainController {
             window.setScene(signInScene);
             window.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception here (maybe show an error dialog)
+            e.printStackTrace(); // Print stack trace in case of IOException
         }
     }
 
+    /**
+     * Handles the action for the sign-out button click.
+     * Loads and displays the sign-out scene.
+     * @param event the event triggered by clicking the sign-out button
+     */
     @FXML
     private void SignOutButton(ActionEvent event) {
         try {
@@ -101,11 +113,15 @@ public class MainController {
             window.setScene(signOutScene);
             window.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception here
+            e.printStackTrace(); // Print stack trace in case of IOException
         }
     }
 
+    /**
+     * Handles the action for the statistics button click.
+     * Loads and displays the statistics scene.
+     * @param event the event triggered by clicking the statistics button
+     */
     @FXML
     private void statsButton(ActionEvent event) {
         try {
@@ -116,42 +132,41 @@ public class MainController {
             window.setScene(statsScene);
             window.show();
         } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the exception here
+            e.printStackTrace(); // Print stack trace in case of IOException
         }
     }
 
+    /**
+     * Handles the action to open a file through the menu.
+     * Opens a FileChooser to select and read a CSV file, displaying its contents in a non-editable text area.
+     * @param event the event triggered by selecting 'Open' from the menu
+     */
     @FXML
     private void MenuOpen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open CSV File");
+        fileChooser.setTitle("Open CSV File"); // Set the title of the FileChooser window
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("CSV Files", "*.csv"),
                 new FileChooser.ExtensionFilter("All Files", "*.*"));
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
-            // Read the content of the file
-
             String fileContent = reader(selectedFile.getAbsolutePath());
-
-            // Create and display the content in a TextArea within an Alert or a new Stage
             TextArea textArea = new TextArea(fileContent);
-            textArea.setEditable(false); // Make it read-only
+            textArea.setEditable(false);
             textArea.setWrapText(true);
 
-            Stage stage = new Stage(); // Create a new stage for the popup
+            Stage stage = new Stage(); // Create a new stage for displaying the file content
             stage.setTitle("CSV File Content");
-
-            // Create a scene with the text area and set it on the stage
             Scene scene = new Scene(textArea, 645, 600);
             stage.setScene(scene);
             stage.show();
-        } else {
-            // No file was selected, handle this case if needed
-        }
+        } 
     }
 
+    /**
+     * Displays an about dialog containing application information.
+     */
     @FXML
     private void showAboutDialog() {
         Alert aboutDialog = new Alert(Alert.AlertType.INFORMATION);
@@ -163,6 +178,9 @@ public class MainController {
         aboutDialog.showAndWait();
     }
 
+    /**
+     * Handles the action to quit the application from the menu.
+     */
     @FXML
     private void handleQuit() {
         Platform.exit();
