@@ -12,6 +12,9 @@ package project.app.cpsc233project;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -143,6 +146,19 @@ public class tests {
     data[] array = data.dataObjects.toArray(new data[0]);
     // Assert
     assertEquals(a, array[0].getFloorAvailability(1));
+  }
+  public void comparatorTest() {
+    data D1=new data("hi",1,2,"Library");
+    data D2=new data("hello",5,2,"Library");
+    data D3=new data("hey",6,3,"Library");
+    ArrayList<data> lst=new ArrayList<>();
+    lst.add(D3);
+    lst.add(D1);
+    lst.add(D2);
+    Collections.sort(lst,new dataidcomparator());
+    assertEquals(1,lst.get(0).getID());
+    assertEquals(5,lst.get(1).getID());
+    assertEquals(6,lst.get(2).getID());
   }
 
 }
