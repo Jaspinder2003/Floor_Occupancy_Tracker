@@ -46,7 +46,7 @@ The TFDL Occupancy Tracker is a JavaFX application designed for the management a
     - Ensure that the JavaFX library is added to your project settings.
     - Configure your run/debug configurations to include the necessary VM options:
       ```
-      --module-path /path/to/javafx-sdk/lib --add-modules javafx.controls,javafx.fxml, javafx.graphics
+      java --module-path "/path/to/javafx-sdk/lib" --add-modules javafx.controls,javafx.fxml,  javafx.graphics -jar CPSC-233-project.jar
       ```
 
 ## Usage
