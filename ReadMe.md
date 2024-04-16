@@ -8,7 +8,6 @@ Certainly! Here's a more detailed version of the README file that includes infor
 The TFDL Occupancy Tracker is a JavaFX application designed for the management and monitoring of occupancy and resource usage within the Taylor Family Digital Library at the University of Calgary. It allows users to sign in, select specific floors and areas, and check the availability of resources such as computers and study spaces.
 
 ## Features
-- **User Authentication**: Facilitates user sign-in and sign-out, ensuring secure and personalized usage of the application.
 - **Resource Management**: Tracks the availability of computers and seating areas across multiple floors of the library.
 - **Dynamic UI**: Updates the interface in real-time based on user interactions and resource availability.
 - **Data Handling**: Manages persistent storage and retrieval of user and resource data through CSV files.
@@ -40,7 +39,7 @@ The TFDL Occupancy Tracker is a JavaFX application designed for the management a
 ### Setup
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/TFDL-Occupancy-Tracker.git
+   git clone https://csgit.ucalgary.ca/yadwinder.dhaliwal/cpsc-233-group-proeject-w24.git
    ```
 2. Open the project in your IDE.
 3. Configure the JavaFX SDK:
@@ -56,14 +55,12 @@ Execute the `Main.java` class to run the application. Navigate through the appli
 ## Contributing
 Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Contact
 - **Jaspinder Singh** - JaspinderSingh.maan@ucalgary.ca
-- **Navpreet Singh** - [Navpreet.singh3@ucalgary.ca]
-- **Yadwinder Singh** - [Yadwinder.dhaliwal@ucalgary.ca]
+- **Navpreet Singh** - Navpreet.singh3@ucalgary.ca
+- **Yadwinder Singh** - Yadwinder.dhaliwal@ucalgary.ca
 
 ---
 
-This enhanced README provides a comprehensive overview of your application, detailing the functional roles of different classes and their interactions, and should serve as a useful guide for new users or developers.
+This enhanced README provides a comprehensive overview of our application, detailing the functional roles of different classes and their interactions, and should serve as a useful guide for new users or developers.
