@@ -120,7 +120,7 @@
     -fx-background-size: cover;
     -fx-padding: 20px;
     -fx-alignment: top-center;
-    -fx-background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../fxml/TFDL_2.jpg');
+
 }
 
 .signin-white-text {
@@ -153,4 +153,20 @@
     -fx-font-size: 30px;
     -fx-text-fill: white; /* White text color */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.hboxS{
+ -fx-background-color: #a8324a;
+  -fx-font-size: 30px;
+}
+
+.signout-right-section {
+
+    -fx-background-image: url('../fxml/TFDL_3.jpg');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+
 }

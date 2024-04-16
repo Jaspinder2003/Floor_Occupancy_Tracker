@@ -43,48 +43,46 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.SignOutController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="Back">
-               <items>
-                  <MenuItem fx:id="back" mnemonicParsing="false" onAction="#backButton" text="return to homepage" />
-               </items></Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
-      <children>
-        <Label alignment="CENTER" layoutX="271.0" layoutY="98.0" style="&#10;" text="Please enter the UCID you used to Sign in " textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
-            <Font size="9.0" />
-          </font>
-        </Label>
-            <Label layoutX="27.0" layoutY="41.0" text="SIGN OUT">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <Label layoutX="208.0" layoutY="121.0" text="UCID">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="UCID" layoutX="271.0" layoutY="118.0" onAction="#validateAndProcess" prefHeight="25.0" prefWidth="168.0" />
-            <TextArea fx:id="Feedback" layoutX="271.0" layoutY="179.0" prefHeight="168.0" prefWidth="168.0" />
-            <Label layoutX="172.0" layoutY="178.0" text="Feedback (If any)" />
-            <Label alignment="CENTER" layoutX="271.0" layoutY="164.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Button fx:id="submit" layoutX="479.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-      </children>
-    </AnchorPane>
-  </children>
+<VBox prefHeight="400.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.cpsc233project.app.SignOutController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Back">
+                    <items>
+                        <MenuItem fx:id="back" mnemonicParsing="false" onAction="#backButton" text="return to homepage" />
+                    </items></Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="signout-right-section" VBox.vgrow="ALWAYS">
+            <children>
+                <Label alignment="CENTER" layoutX="271.0" layoutY="98.0" style="&#10;" text="Please enter the UCID you used to Sign in " textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" styleClass="signin-label-white-text">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+
+                </Label>
+                <AnchorPane />
+                <Label layoutX="208.0" layoutY="121.0" text="UCID" styleClass="signin-label-white-text">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="UCID" layoutX="271.0" layoutY="118.0" onAction="#validateAndProcess" prefHeight="25.0" prefWidth="168.0" />
+                <TextArea fx:id="Feedback" layoutX="271.0" layoutY="179.0" prefHeight="168.0" prefWidth="168.0" />
+                <Label layoutX="172.0" layoutY="178.0" text="Feedback (If any)"  styleClass="signin-label-white-text"/>
+                <Label alignment="CENTER" layoutX="271.0" layoutY="164.0" style="&#10;" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Button fx:id="submit" layoutX="479.0" layoutY="182.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
+                 <Label fx:id="signOutLabel" layoutY="39.0" prefHeight="45.0" prefWidth="186.0" styleClass="hboxS" text="     SIGN OUT" AnchorPane.topAnchor="39.0" />
+            </children>
+        </AnchorPane>
+    </children>
 </VBox>
