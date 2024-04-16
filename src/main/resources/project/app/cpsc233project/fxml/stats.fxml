@@ -38,6 +38,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -55,7 +57,12 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label alignment="CENTER" prefHeight="51.0" prefWidth="640.0" style="-fx-background-color: #a8324a;" text="STATISTICS" textAlignment="CENTER" textFill="WHITE" wrapText="false">
+            <ImageView fitHeight="322.0" fitWidth="640.0" layoutX="1.0" layoutY="51.0">
+               <image>
+                  <Image url="@TFDLinside.jpeg" />
+               </image>
+            </ImageView>
+        <Label alignment="CENTER" prefHeight="51.0" prefWidth="641.0" style="-fx-background-color: #a8324a;" text="STATISTICS" textAlignment="CENTER" textFill="WHITE" wrapText="false">
           <font>
             <Font name="Arial Bold" size="33.0" />
           </font>
