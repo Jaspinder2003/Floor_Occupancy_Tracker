@@ -11,6 +11,7 @@ package project.app.cpsc233project;
 
 
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -51,11 +52,19 @@ public class SignIn extends Menu {
         // Create a data object for the user
         data userData = new data(name, studentID, floorNumber, area);
         data.AddUser(userData);
+        ArrayList<data> list =new ArrayList<>(data.dataObjects);
+        list.sort(new dataidcomparator());
+        data.dataObjects.clear();
+        data.dataObjects.addAll(list);
         data.writer(data.dataObjects, "ProjectDB.csv", "Data");
 
         // Update floor availability
         floor userFloor = new floor(name, studentID, floorNumber, area);
         floor.AddUser(userFloor);
+        ArrayList<floor> floist=new ArrayList<>(floor.floorObjects);
+        floist.sort(new dataidcomparator());
+        floor.floorObjects.clear();
+        floor.floorObjects.addAll(floist);
         data.writer(floor.floorObjects, "ProjectDB.csv", "Floor");
 
         int currentFloorAvailability = userFloor.getFloorAvailability(floorNumber, userData);
