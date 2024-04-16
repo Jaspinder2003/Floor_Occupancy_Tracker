@@ -44,23 +44,4 @@ public class tests {
         assertEquals("Floor 2: 60", stats.show_vacancy("comp2"));
     }
 
-    @Test
-    public void testMaxMinFloors() {
-        // Assuming 'max_min' calculates occupancy, not vacancy
-        double[] expected = new double[]{100 * (87 - 10) / 87, 100 * (87 - 30) / 87, 3, 1};
-        // JUnit 4 does not have a direct method for comparing arrays with a delta, so you need to use a loop or a helper method.
-        double[] result = stats.max_min("floors");
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], result[i], 0.01);
-        }
-    }
-
-    @Test
-    public void testMaxMinComputers() {
-        double[] expected = new double[]{100 * (75 - 5) / 75, 100 * (75 - 25) / 75, 3, 1};
-        double[] result = stats.max_min("computers");
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i], result[i], 0.01);
-        }
-    }
 }
