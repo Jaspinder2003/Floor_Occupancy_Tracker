@@ -9,7 +9,9 @@ package project.app.cpsc233project;
  * 
  */
 
+
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -111,12 +113,12 @@ public class tests {
 
     // Action
     data D1=new data("ja",123,1,"library");
-    int a =D1.getFloorAvailability(1);
+    int a =floor.getFloorAvailability(1,D1);
     signIn.execute("Library", 101, true, "GROUND_FLOOR", "STUDY_CUBICLES");
     System.out.println(data.dataObjects);
     data[] array = data.dataObjects.toArray(new data[0]);
     // Assert
-    assertEquals(a-1, array[0].getFloorAvailability(1));
+    assertEquals(a-1, floor.getFloorAvailability(1,D1));
   }
 
   @Test
@@ -128,7 +130,7 @@ public class tests {
     assertEquals(1, D1.getfloor());
 
     signIn.execute("Jane Doe", 12346, false, "SECOND_FLOOR", "Cafeteria");
-    assertEquals(133, f.getFloorAvailability(2));
+    assertEquals(133, f.getFloorAvailability(2,D1));
 
   }
   @Test
@@ -139,26 +141,13 @@ public class tests {
 
     // Action\
     data D1=new data("Library", 101, 1, "STUDY_CUBICLES");
-    int a =D1.getFloorAvailability(1);
+    int a =floor.getFloorAvailability(1,D1);
     signout.execute("Library", 101, true, "GROUND_FLOOR", "STUDY_CUBICLES");
 
     data.dataObjects.add(D1);
     data[] array = data.dataObjects.toArray(new data[0]);
     // Assert
-    assertEquals(a, array[0].getFloorAvailability(1));
-  }
-  public void comparatorTest() {
-    data D1=new data("hi",1,2,"Library");
-    data D2=new data("hello",5,2,"Library");
-    data D3=new data("hey",6,3,"Library");
-    ArrayList<data> lst=new ArrayList<>();
-    lst.add(D3);
-    lst.add(D1);
-    lst.add(D2);
-    Collections.sort(lst,new dataidcomparator());
-    assertEquals(1,lst.get(0).getID());
-    assertEquals(5,lst.get(1).getID());
-    assertEquals(6,lst.get(2).getID());
+    assertEquals(a, floor.getFloorAvailability(1,D1));
   }
 
 }
