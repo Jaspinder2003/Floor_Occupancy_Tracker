@@ -1,6 +1,3 @@
-Certainly! Here's a more detailed version of the README file that includes information about the classes and how the application components are interconnected:
-
----
 
 # TFDL Occupancy Tracker
 
